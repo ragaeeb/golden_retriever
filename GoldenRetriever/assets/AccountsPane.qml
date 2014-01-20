@@ -1,10 +1,14 @@
 import bb.cascades 1.0
 
-Sheet
+NavigationPane
 {
-    id: root
+    id: navigationPane
     
-    onOpened: {
+    onPopTransitionEnded: {
+        page.destroy();
+    }
+    
+    onCreationCompleted: {
         persist.showToast( qsTr("Choose the mailbox to monitor for the commands.\n\nWhen you are away from your device, send the command messages to this mailbox so your device can process them."), qsTr("OK") );
     }
     
@@ -92,9 +96,5 @@ Sheet
                 app.loadAccounts();
             }
         }
-    }
-    
-    onClosed: {
-        destroy();
     }
 }

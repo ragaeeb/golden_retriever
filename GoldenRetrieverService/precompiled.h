@@ -14,5 +14,8 @@
 #include <bb/pim/contacts/ContactService>
 
 #include <bb/device/BatteryInfo>
+#include <bb/device/Led>
+
+#include <bb/system/Screenshot>
 
 #include <QTimer>

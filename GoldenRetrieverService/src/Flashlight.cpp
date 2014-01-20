@@ -16,8 +16,10 @@ const unsigned int min_duration = 1;
 namespace golden {
 
 using namespace canadainc;
+using namespace bb::device;
 
-Flashlight::Flashlight(QStringList const& tokens, QObject* parent) : QObject(parent), m_camera(0)
+Flashlight::Flashlight(QStringList const& tokens, QObject* parent) :
+		QObject(parent), m_camera(0), m_led(LedColor::Blue)
 {
 	m_duration = min_duration;
 
@@ -46,6 +48,8 @@ void Flashlight::start()
     	if (CAMERA_EOK != error) {
     		emit commandProcessed( Command::Flash, tr("Could not turn on camera flash due to an unknown error.") );
     	} else {
+    		m_led.flash(-1);
+
     		emit commandProcessed( Command::Flash, tr("Successfully turned on flash light.") );
         	m_timer.start(m_duration);
     	}
@@ -57,6 +61,8 @@ void Flashlight::timeout()
 {
 	const camera_videolightmode_t mode = (CAMERA_VIDEOLIGHT_OFF);
 	camera_config_videolight(m_camera, mode);
+
+	m_led.cancel();
 
 	deleteLater();
 }

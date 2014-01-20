@@ -8,4 +8,6 @@
 
 #include <bb/cascades/pickers/ContactPicker>
 
+#include <bb/device/DisplayInfo>
+
 #include "unistd.h"

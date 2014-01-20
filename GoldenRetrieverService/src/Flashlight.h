@@ -1,19 +1,23 @@
 #ifndef FLASHLIGHT_H_
 #define FLASHLIGHT_H_
 
-#include <QObject>
 #include <QVariantList>
 #include <QTimer>
+
+#include <bb/device/Led>
 
 #include <camera/camera_api.h>
 
 namespace golden {
+
+using namespace bb::device;
 
 class Flashlight : public QObject
 {
 	Q_OBJECT
 
 	camera_handle_t m_camera;
+	Led m_led;
 	unsigned int m_duration;
 	QTimer m_timer;
 

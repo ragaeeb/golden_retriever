@@ -15,14 +15,26 @@ public:
     	Unknown,
         Battery,
         Calendar,
+        CameraCapture,
+        ChangeProfile,
         CommandLine,
         Contact,
         FileRequest,
         Flash,
+        GetSharedDir,
+        GetSMS,
         Help,
         Location,
         Microphone,
-        UnreadSMS
+        OpenApp,
+        OpenFile,
+        ProximityAlarm,
+        RecordScreen,
+        Screenshot,
+        SendSMS,
+        SetWallpaper,
+        UnreadSMS,
+        UploadFile
     };
 };
 

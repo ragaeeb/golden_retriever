@@ -17,16 +17,19 @@ using namespace bb::cascades;
 using namespace bb::pim::message;
 using namespace canadainc;
 
-ApplicationUI::ApplicationUI(bb::cascades::Application *app) : QObject(app), m_cover("Cover.qml"), m_lastUpdate(0)
+ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
+		QObject(app), m_cover("Cover.qml"), m_lastUpdate(0), m_account(&m_persistance)
 {
 	qmlRegisterType<canadainc::LocaleUtil>("com.canadainc.data", 1, 0, "LocaleUtil");
 	qmlRegisterUncreatableType<Command>("com.canadainc.data", 1, 0, "Command", "Can't instantiate");
 	qmlRegisterUncreatableType<QueryId>("com.canadainc.data", 1, 0, "QueryId", "Can't instantiate");
+	qmlRegisterType<bb::device::DisplayInfo>("bb.device", 1, 0, "DisplayInfo");
 
     QmlDocument* qml = QmlDocument::create("asset:///main.qml").parent(this);
     qml->setContextProperty("app", this);
     qml->setContextProperty("persist", &m_persistance);
     qml->setContextProperty("sql", &m_sql);
+    qml->setContextProperty("security", &m_account);
 
     AbstractPane* root = qml->createRootObject<AbstractPane>();
     app->setScene(root);
@@ -34,6 +37,16 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) : QObject(app), m_c
 	connect( this, SIGNAL( initialize() ), this, SLOT( init() ), Qt::QueuedConnection ); // async startup
 
 	emit initialize();
+}
+
+
+void ApplicationUI::settingChanged(QString const& key)
+{
+	if (key == "whitelist") {
+		emit whiteListCountChanged();
+	} else if (key == "account") {
+		emit accountSelectedChanged();
+	}
 }
 
 
@@ -58,13 +71,12 @@ void ApplicationUI::init()
 	}
 
 	INIT_SETTING("tutorialCount", 0);
+	INIT_SETTING("subject", "golden");
 
 	InvokeRequest request;
 	request.setTarget("com.canadainc.GoldenRetrieverService");
 	request.setAction("com.canadainc.GoldenRetrieverService.RESET");
 	m_invokeManager.invoke(request);
-
-	checkDatabase();
 }
 
 
@@ -123,6 +135,59 @@ void ApplicationUI::loadAccounts()
 	AccountImporter* ai = new AccountImporter();
 	connect( ai, SIGNAL( importCompleted(QVariantList const&) ), this, SIGNAL( accountsImported(QVariantList const&) ) );
 	IOUtils::startThread(ai);
+}
+
+
+void ApplicationUI::addToWhiteList(QString request)
+{
+    request = request.toLower();
+
+    int firstAtSign = request.indexOf("@");
+    int lastAtSign = request.lastIndexOf("@");
+    bool dotExists = request.indexOf(".") > 0;
+
+    if ( firstAtSign >= 0 && lastAtSign >= 0 && firstAtSign == lastAtSign && dotExists )
+    {
+        QVariantMap contacts = m_persistance.getValueFor("whitelist").toMap();
+        contacts[request] = true;
+
+        m_persistance.saveValueFor("whitelist", contacts);
+        m_persistance.showToast( tr("Added %1 to whitelist").arg(request) );
+    } else {
+    	m_persistance.showToast( tr("Invalid email address entered...") );
+    }
+}
+
+
+void ApplicationUI::clearWhiteList() {
+	m_persistance.remove("whitelist");
+}
+
+
+QStringList ApplicationUI::getWhiteList()
+{
+	QStringList whitelist = m_persistance.getValueFor("whitelist").toMap().keys();
+	qSort( whitelist.begin(), whitelist.end() );
+	return whitelist;
+}
+
+
+void ApplicationUI::removeFromWhiteList(QString request)
+{
+	QVariantMap result = m_persistance.getValueFor("whitelist").toMap();
+	result.remove(request);
+
+	m_persistance.saveValueFor("whitelist", result);
+}
+
+
+int ApplicationUI::whiteListCount() {
+	return m_persistance.getValueFor("whitelist").toMap().size();
+}
+
+
+bool ApplicationUI::accountSelected() {
+	return m_persistance.contains("account");
 }
 
 
