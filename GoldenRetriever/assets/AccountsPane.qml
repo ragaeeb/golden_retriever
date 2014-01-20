@@ -14,34 +14,6 @@ NavigationPane
     
     Page
     {
-        titleBar: TitleBar
-        {
-            title: qsTr("Active Account") + Retranslate.onLanguageChanged
-            
-            acceptAction: ActionItem {
-                id: saveAction
-                title: qsTr("Save") + Retranslate.onLanguageChanged
-                enabled: false
-                
-                onTriggered: {
-                    var selectedIndex = listView.selected();
-                    var selectedValue = adm.data(selectedIndex).accountId;
-                    
-                    persist.saveValueFor("account", selectedValue);
-                    
-                    root.close();
-                }
-            }
-            
-            dismissAction: ActionItem {
-                title: qsTr("Cancel") + Retranslate.onLanguageChanged
-                
-                onTriggered: {
-                    root.close();
-                }
-            }
-        }
-        
         ListView
         {
             id: listView
@@ -65,7 +37,8 @@ NavigationPane
                 clearSelection();
                 toggleSelection(indexPath);
                 
-                saveAction.enabled = true;
+                var selectedValue = adm.data(indexPath).accountId;
+                persist.saveValueFor("account", selectedValue);
             }
             
             function onAccountsImported(results)

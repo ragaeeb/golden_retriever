@@ -21,6 +21,8 @@ class Interpreter : public QObject
 
 	MessageManager* m_manager;
 	Message m_message;
+	qint64 m_sentId;
+	bool m_delRequest;
 
 	void fetchBatteryInfo(QStringList const& tokens);
 	void fetchHelp(QStringList const& tokens);
@@ -28,12 +30,13 @@ class Interpreter : public QObject
 private slots:
 	void reverseLookupFinished(QString const& location, QPointF point, bool error);
 	void onCommandProcessed(int command, QString const& replyBody, QVariantList const& attachments=QVariantList());
+	void messageSent(Message const& m, qint64 accountKey, QString const& conversationKey);
 
 signals:
 	void commandProcessed(int command, QString const& data);
 
 public:
-	Interpreter(MessageManager* manager, Message const& m);
+	Interpreter(MessageManager* manager, Message const& m, bool delRequest, bool delResponse);
 	virtual ~Interpreter();
 
 	void run();

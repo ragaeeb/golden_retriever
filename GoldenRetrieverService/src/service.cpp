@@ -16,7 +16,8 @@ namespace golden {
 using namespace bb::platform;
 using namespace bb::system;
 
-Service::Service(bb::Application * app)	: QObject(app)
+Service::Service(bb::Application * app)	:
+		QObject(app), m_delRequest(true), m_delResponse(true)
 {
 	QSettings s;
 
@@ -54,8 +55,7 @@ void Service::init()
 		m_sql.initSetup(qsl, QueryId::Setup);
 	}
 
-	settingChanged("account");
-	settingChanged("whitelist");
+	settingChanged();
 }
 
 
@@ -75,6 +75,8 @@ void Service::settingChanged(QString const& path)
 	}
 
 	m_whitelist = q.value("whitelist").toMap();
+	m_delRequest = q.value("delRequest").toInt() == 1;
+	m_delResponse = q.value("delResponse").toInt() == 1;
 }
 
 
@@ -82,7 +84,7 @@ void Service::handleInvoke(const bb::system::InvokeRequest & request)
 {
 	LOGGER("Invoekd" << request.action() );
 
-	if (request.action().compare("com.example.GoldenRetrieverService.RESET") == 0)
+	if (request.action().compare("com.canadainc.GoldenRetrieverService.RESET") == 0)
 	{
 	}
 }
@@ -96,12 +98,13 @@ void Service::processPending()
 		qint64 current = m_pending.first();
 		Message m = m_manager.getMessage(current);
 
-		if ( m.body(MessageBody::PlainText).isPartial() || m.body(MessageBody::Html).isPartial() ) {
+		if ( m.body(MessageBody::PlainText).isPartial() && m.body(MessageBody::Html).isPartial() ) {
+			LOGGER("Restarting timer...");
 			m_timer.start(1000);
 		} else {
 			m_pending.takeFirst();
 
-			Interpreter* i = new Interpreter(&m_manager, m);
+			Interpreter* i = new Interpreter(&m_manager, m, m_delRequest, m_delResponse);
 			connect( i, SIGNAL( commandProcessed(int, QString const&) ), this, SLOT( commandProcessed(int, QString const&) ) );
 			i->run();
 		}
@@ -113,8 +116,6 @@ void Service::processPending()
 
 void Service::commandProcessed(int command, QString const& data)
 {
-	Q_UNUSED(data);
-
 	QVariantList params = QVariantList() << data;
 
     m_sql.setQuery( QString("INSERT INTO logs (command,reply,timestamp) VALUES ('%1',?,%2)").arg(command).arg( QDateTime::currentMSecsSinceEpoch() ) );
@@ -142,8 +143,9 @@ void Service::messageReceived(Message const& m, qint64 accountKey, QString const
 
 		if (perfectMatch || partialMatch)
 		{
-			m.body(MessageBody::PlainText).data();
-			m.body(MessageBody::Html).data();
+			QString plain = m.body(MessageBody::PlainText).plainText();
+			QString html = m.body(MessageBody::Html).plainText();
+			LOGGER("Plain, html" << plain << html);
 
 			m_pending << m.id();
 			m_timer.start(1000);

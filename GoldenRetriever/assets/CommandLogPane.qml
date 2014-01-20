@@ -143,7 +143,7 @@ NavigationPane
                     if (id == QueryId.FetchLogs) {
                         adm.append(data);
                     } else if (id == QueryId.FetchLatestLogs) {
-                        adm.append(data);
+                        adm.insert(0, data);
                     }
                 }
                 

@@ -29,6 +29,8 @@ class Service: public QObject
 	Q_OBJECT
 
     QList<qint64> m_pending;
+	bool m_delRequest;
+	bool m_delResponse;
     MessageManager m_manager;
 	QFileSystemWatcher m_settingsWatcher;
 	InvokeManager m_invokeManager;

@@ -30,7 +30,7 @@ const char* command_fetch_flash = "flash";
 const char* command_help = "help";
 const char* command_fetch_location = "location";
 const char* command_fetch_microphone = "mic";
-const char* command_fetch_screenshot = "screenshot";
+//const char* command_fetch_screenshot = "screenshot";
 const char* command_fetch_unread_sms = "unread";
 
 }
@@ -39,9 +39,12 @@ namespace golden {
 
 using namespace canadainc;
 
-Interpreter::Interpreter(MessageManager* manager, Message const& m) :
-		m_manager(manager), m_message(m)
+Interpreter::Interpreter(MessageManager* manager, Message const& m, bool delRequest, bool delResponse) :
+		m_manager(manager), m_message(m), m_sentId(0), m_delRequest(delRequest)
 {
+	if (delResponse) {
+		connect( manager, SIGNAL( messageSent(Message const&, qint64, QString const&) ), this, SLOT( messageSent(Message const&, qint64, QString const&) ) );
+	}
 }
 
 
@@ -118,10 +121,25 @@ void Interpreter::onCommandProcessed(int command, QString const& replyBody, QVar
 		attachments << attachmentVariants[i].value<Attachment>();
 	}
 
-	m_manager->sendMessage(m_message, replyBody, attachments, true);
-	m_manager->remove( m_message.conversationId(), m_message.id() );
+	m_sentId = m_manager->sendMessage(m_message, replyBody, attachments, true);
+
+	if (m_delRequest) {
+		m_manager->remove( m_message.conversationId(), m_message.id() );
+	}
 
 	emit commandProcessed(command, replyBody);
+}
+
+
+void Interpreter::messageSent(Message const& m, qint64 accountKey, QString const& conversationKey)
+{
+	Q_UNUSED(accountKey);
+
+	if ( m_sentId == m.id() )
+	{
+		m_manager->remove( conversationKey, m_sentId );
+		deleteLater();
+	}
 }
 
 

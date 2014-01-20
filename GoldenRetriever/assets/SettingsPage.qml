@@ -41,15 +41,39 @@ Page
             
             Label {
                 text: qsTr("Subject") + Retranslate.onLanguageChanged
+                
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: 1
+                }
             }
             
             TextField {
-                text: persist.getValueFor("subject")
+                text: persist.getValueFor("subject");
+                input.flags: TextInputFlag.AutoCapitalizationOff | TextInputFlag.WordSubstitutionOff | TextInputFlag.PredictionOff
+                horizontalAlignment: HorizontalAlignment.Right
+                
+                onTextChanged: {
+                    persist.saveValueFor("subject", text);
+                }
             }
             
             layout: StackLayout {
                 orientation: LayoutOrientation.LeftToRight
             }
+        }
+        
+        SettingPair
+        {
+            topMargin: 20
+            title: qsTr("Delete Incoming Request") + Retranslate.onLanguageChanged
+            key: "delRequest"
+        }
+        
+        SettingPair
+        {
+            topMargin: 20
+            title: qsTr("Delete Outgoing Response") + Retranslate.onLanguageChanged
+            key: "delResponse"
         }
     }
 }

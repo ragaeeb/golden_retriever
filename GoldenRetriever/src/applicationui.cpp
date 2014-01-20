@@ -72,6 +72,8 @@ void ApplicationUI::init()
 
 	INIT_SETTING("tutorialCount", 0);
 	INIT_SETTING("subject", "golden");
+	INIT_SETTING("delRequest", 1);
+	INIT_SETTING("delResponse", 1);
 
 	InvokeRequest request;
 	request.setTarget("com.canadainc.GoldenRetrieverService");
@@ -102,7 +104,7 @@ void ApplicationUI::checkDatabase()
 		m_lastUpdate = QDateTime::currentMSecsSinceEpoch();
 
 		m_sql.setSource(database);
-		m_sql.setQuery("SELECT command,reply,timestamp FROM logs ORDER BY timestamp");
+		m_sql.setQuery("SELECT command,reply,timestamp FROM logs ORDER BY timestamp DESC");
 		m_sql.load(QueryId::FetchLogs);
 
 		connect( &m_updateWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( databaseUpdated(QString const&) ) );
