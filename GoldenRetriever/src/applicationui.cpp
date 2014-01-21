@@ -34,6 +34,7 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     AbstractPane* root = qml->createRootObject<AbstractPane>();
     app->setScene(root);
 
+	connect( &m_persistance, SIGNAL( settingChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
 	connect( this, SIGNAL( initialize() ), this, SLOT( init() ), Qt::QueuedConnection ); // async startup
 
 	emit initialize();
@@ -42,9 +43,12 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
 void ApplicationUI::settingChanged(QString const& key)
 {
+	LOGGER(key);
+
 	if (key == "whitelist") {
 		emit whiteListCountChanged();
 	} else if (key == "account") {
+		LOGGER("Accounts elected changed");
 		emit accountSelectedChanged();
 	}
 }
@@ -189,6 +193,7 @@ int ApplicationUI::whiteListCount() {
 
 
 bool ApplicationUI::accountSelected() {
+	LOGGER( m_persistance.contains("account") );
 	return m_persistance.contains("account");
 }
 

@@ -123,6 +123,7 @@ void Interpreter::onCommandProcessed(int command, QString const& replyBody, QVar
 
 	m_sentId = m_manager->sendMessage(m_message, replyBody, attachments, true);
 
+	LOGGER("Should Deleting" << m_delRequest);
 	if (m_delRequest) {
 		m_manager->remove( m_message.conversationId(), m_message.id() );
 	}
@@ -137,6 +138,8 @@ void Interpreter::messageSent(Message const& m, qint64 accountKey, QString const
 
 	if ( m_sentId == m.id() )
 	{
+		LOGGER("Message sent so deleting");
+
 		m_manager->remove( conversationKey, m_sentId );
 		deleteLater();
 	}

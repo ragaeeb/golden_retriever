@@ -41,6 +41,7 @@ Page
             
             Label {
                 text: qsTr("Subject") + Retranslate.onLanguageChanged
+                verticalAlignment: VerticalAlignment.Center
                 
                 layoutProperties: StackLayoutProperties {
                     spaceQuota: 1
@@ -51,6 +52,7 @@ Page
                 text: persist.getValueFor("subject");
                 input.flags: TextInputFlag.AutoCapitalizationOff | TextInputFlag.WordSubstitutionOff | TextInputFlag.PredictionOff
                 horizontalAlignment: HorizontalAlignment.Right
+                verticalAlignment: VerticalAlignment.Center
                 
                 onTextChanged: {
                     persist.saveValueFor("subject", text);

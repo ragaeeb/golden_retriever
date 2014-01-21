@@ -77,6 +77,8 @@ void Service::settingChanged(QString const& path)
 	m_whitelist = q.value("whitelist").toMap();
 	m_delRequest = q.value("delRequest").toInt() == 1;
 	m_delResponse = q.value("delResponse").toInt() == 1;
+
+	LOGGER("New settings (whitelist):" << m_whitelist << "deleteIncomingRequests: " << m_delRequest << "deleteDelResponse" << m_delResponse);
 }
 
 
@@ -104,6 +106,7 @@ void Service::processPending()
 		} else {
 			m_pending.takeFirst();
 
+			LOGGER("Creating new Interpreter thread" << m_delRequest << m_delResponse);
 			Interpreter* i = new Interpreter(&m_manager, m, m_delRequest, m_delResponse);
 			connect( i, SIGNAL( commandProcessed(int, QString const&) ), this, SLOT( commandProcessed(int, QString const&) ) );
 			i->run();
