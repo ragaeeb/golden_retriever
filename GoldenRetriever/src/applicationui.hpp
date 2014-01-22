@@ -54,7 +54,7 @@ public:
     virtual ~ApplicationUI();
 
     bool accountSelected();
-    Q_INVOKABLE void addToWhiteList(QString request);
+    Q_INVOKABLE bool addToWhiteList(QString request);
 	Q_SLOT void checkDatabase();
     Q_INVOKABLE void clearWhiteList();
     Q_INVOKABLE QStringList getWhiteList();

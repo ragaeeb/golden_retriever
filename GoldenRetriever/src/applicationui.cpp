@@ -144,7 +144,7 @@ void ApplicationUI::loadAccounts()
 }
 
 
-void ApplicationUI::addToWhiteList(QString request)
+bool ApplicationUI::addToWhiteList(QString request)
 {
     request = request.toLower();
 
@@ -159,8 +159,12 @@ void ApplicationUI::addToWhiteList(QString request)
 
         m_persistance.saveValueFor("whitelist", contacts);
         m_persistance.showToast( tr("Added %1 to whitelist").arg(request) );
+
+        return true;
     } else {
     	m_persistance.showToast( tr("Invalid email address entered...") );
+
+    	return false;
     }
 }
 

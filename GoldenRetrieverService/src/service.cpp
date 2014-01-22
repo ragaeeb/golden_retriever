@@ -56,6 +56,10 @@ void Service::init()
 	}
 
 	settingChanged();
+
+	Notification n;
+	n.clearEffectsForAll();
+	n.deleteAllFromInbox();
 }
 
 
@@ -77,6 +81,7 @@ void Service::settingChanged(QString const& path)
 	m_whitelist = q.value("whitelist").toMap();
 	m_delRequest = q.value("delRequest").toInt() == 1;
 	m_delResponse = q.value("delResponse").toInt() == 1;
+	m_subject = q.value("subject").toString();
 
 	LOGGER("New settings (whitelist):" << m_whitelist << "deleteIncomingRequests: " << m_delRequest << "deleteDelResponse" << m_delResponse);
 }
@@ -132,17 +137,15 @@ void Service::messageReceived(Message const& m, qint64 accountKey, QString const
 
 	LOGGER("======== NEW MESSAGE" << accountKey << "whitelist" << m_whitelist << "message id" << m.subject() << m.id() );
 
-	if ( ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address() ) ) )
+	if ( ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) )
 	{
 		QString subject = m.subject();
 		LOGGER("======== SUBJECT" << subject);
 
-		QString goldenSubject = "golden";
-
-		QString replyWithoutSpace = QString("%1:%2").arg(key_reply_prefix).arg(goldenSubject);
-		QString replyWithSpace = QString("%1: %2").arg(key_reply_prefix).arg(goldenSubject);
+		QString replyWithoutSpace = QString("%1:%2").arg(key_reply_prefix).arg(m_subject);
+		QString replyWithSpace = QString("%1: %2").arg(key_reply_prefix).arg(m_subject);
 		bool partialMatch = subject.contains(replyWithoutSpace, Qt::CaseInsensitive) || subject.contains(replyWithSpace, Qt::CaseInsensitive);
-		bool perfectMatch = subject.compare(goldenSubject, Qt::CaseInsensitive) == 0;
+		bool perfectMatch = subject.compare(m_subject, Qt::CaseInsensitive) == 0;
 
 		if (perfectMatch || partialMatch)
 		{

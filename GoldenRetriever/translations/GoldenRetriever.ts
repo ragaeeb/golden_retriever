@@ -15,21 +15,6 @@ When you are away from your device, send the command messages to this mailbox so
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../assets/AccountsPane.qml" line="19"/>
-        <source>Active Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/AccountsPane.qml" line="23"/>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/AccountsPane.qml" line="37"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CommandLogPane</name>
@@ -110,12 +95,12 @@ When you are away from your device, send the command messages to this mailbox so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="27"/>
-        <source>Step by Step</source>
+        <location filename="../assets/HelpPage.qml" line="34"/>
+        <source>Video Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="63"/>
+        <location filename="../assets/HelpPage.qml" line="57"/>
         <source>(c) 2013 %1. All Rights Reserved.
 %2 %3
 
@@ -179,14 +164,6 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
     </message>
 </context>
 <context>
-    <name>Instructions</name>
-    <message>
-        <location filename="../assets/Instructions.qml" line="6"/>
-        <source>Step by Step</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>LoginDialog</name>
     <message>
         <location filename="../assets/LoginDialog.qml" line="31"/>
@@ -202,33 +179,23 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="13"/>
-        <source>Add Contact</source>
+        <location filename="../assets/SettingsPage.qml" line="14"/>
+        <source>Change Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="24"/>
-        <source>Email Address</source>
+        <location filename="../assets/SettingsPage.qml" line="43"/>
+        <source>Subject</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="25"/>
-        <source>Enter the email address to whitelist:</source>
+        <location filename="../assets/SettingsPage.qml" line="70"/>
+        <source>Delete Incoming Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="26"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="27"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="74"/>
-        <source>You can restrict who is able to send commands to your device. There are currently no emails in your whitelist. To only accept commands from specific email addresses, click on the Add Contact action below and add them.</source>
+        <location filename="../assets/SettingsPage.qml" line="77"/>
+        <source>Delete Outgoing Response</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -265,47 +232,47 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="50"/>
+        <location filename="../assets/WhitelistPane.qml" line="53"/>
         <source>Clear List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="60"/>
+        <location filename="../assets/WhitelistPane.qml" line="63"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="61"/>
+        <location filename="../assets/WhitelistPane.qml" line="64"/>
         <source>Are you sure you want to clear the whitelist?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="62"/>
+        <location filename="../assets/WhitelistPane.qml" line="65"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="63"/>
+        <location filename="../assets/WhitelistPane.qml" line="66"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="88"/>
+        <location filename="../assets/WhitelistPane.qml" line="91"/>
         <source>You can restrict who is able to send commands to your device. There are currently no emails in your whitelist. To only accept commands from specific email addresses, click on the Add Contact action below and add them.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="88"/>
+        <location filename="../assets/WhitelistPane.qml" line="91"/>
         <source>Warning: The app will respond to anyone who issues a command in the active mailbox. In order to restrict this, choose &apos;Add Email&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="108"/>
+        <location filename="../assets/WhitelistPane.qml" line="111"/>
         <source>Removed %1 from white list!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="108"/>
+        <location filename="../assets/WhitelistPane.qml" line="111"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -313,39 +280,39 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
 <context>
     <name>golden::ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="57"/>
+        <location filename="../src/applicationui.cpp" line="61"/>
         <source>Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="61"/>
+        <location filename="../src/applicationui.cpp" line="65"/>
         <source>Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="65"/>
+        <location filename="../src/applicationui.cpp" line="69"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="68"/>
+        <location filename="../src/applicationui.cpp" line="72"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that the &apos;location&apos; command can be processed. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="127"/>
+        <location filename="../src/applicationui.cpp" line="134"/>
         <source>Error initializing link with service. Please restart your device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="154"/>
+        <location filename="../src/applicationui.cpp" line="161"/>
         <source>Added %1 to whitelist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="156"/>
+        <location filename="../src/applicationui.cpp" line="165"/>
         <source>Invalid email address entered...</source>
         <translation type="unfinished"></translation>
     </message>

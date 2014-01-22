@@ -10,7 +10,7 @@ namespace {
 QFileInfoList fetchFiles(QString const& dirPath, QString const& targetFile)
 {
 	QDir selectedDir(dirPath);
-	QFileInfoList result;
+	QMap<QString, QFileInfo> result;
 
 	if ( selectedDir.exists() )
 	{
@@ -20,11 +20,12 @@ QFileInfoList fetchFiles(QString const& dirPath, QString const& targetFile)
 	    QDirIterator it(selectedDir, QDirIterator::Subdirectories);
 
 	    while ( it.hasNext() ) {
-	        result << QFileInfo( it.next() );
+	    	QFileInfo qfi = QFileInfo( it.next() );
+	        result[ qfi.filePath() ] = qfi;
 	    }
 	}
 
-    return result;
+    return result.values();
 }
 
 }

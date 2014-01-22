@@ -43,7 +43,7 @@
     <image>splash_landscape.png</image>
     <image>splash_portrait.png</image>
  </splashScreens>
-	<platformVersion>10.2.0</platformVersion>
+	<platformVersion>10.2.1</platformVersion>
 
 	<!-- Fourth digit segment of the package version. First three segments are
 		taken from the <versionNumber> element. Must be an integer from 0 to 2^16-1 -->
@@ -97,17 +97,17 @@
 	</configuration>
 
 	<entryPoint id="GoldenRetriever">
-		<name>GoldenRetriever</name>
+		<name>Golden Retriever</name>
 	</entryPoint>
 
 	<entryPoint id="GoldenRetrieverService">
-		<name>GoldenRetriever Service</name>
+		<name>Golden Retriever Service</name>
 		<entryPointType>Qnx/Elf</entryPointType>
 	</entryPoint>
 
 	<invoke-target id="com.canadainc.GoldenRetrieverService">
 		<invoke-target-type>application.headless</invoke-target-type>
-		<invoke-target-name>GoldenRetriever Service</invoke-target-name>
+		<invoke-target-name>Golden Retriever Service</invoke-target-name>
 		<entry-point-id>GoldenRetrieverService</entry-point-id>
 		<filter>
 			<action>bb.action.system.STARTED</action>
@@ -123,7 +123,7 @@
 
 	<invoke-target id="com.canadainc.GoldenRetriever">
 		<invoke-target-type>application</invoke-target-type>
-		<invoke-target-name>GoldenRetriever</invoke-target-name>
+		<invoke-target-name>Golden Retriever</invoke-target-name>
 		<icon>
 			<image>icon.png</image>
 		</icon>
@@ -172,5 +172,7 @@
     <permission>read_geolocation</permission>
     <permission>record_audio</permission>
     <permission>use_camera</permission>
+    <permission>post_notification</permission>
 	<env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib" />
+	<env var="CASCADES_THEME" value="dark"/>
 </qnx>

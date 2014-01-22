@@ -37,6 +37,7 @@ class Service: public QObject
 	QTimer m_timer;
 	CustomSqlDataSource m_sql;
 	QVariantMap m_whitelist;
+	QString m_subject;
 
 	void triggerNotification();
 

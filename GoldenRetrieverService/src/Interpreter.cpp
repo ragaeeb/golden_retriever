@@ -23,7 +23,7 @@ using namespace bb::pim::message;
 const char* command_fetch_battery = "battery";
 const char* command_fetch_calendar = "calendar";
 //const char* command_fetch_camera = "camera";
-const char* command_fetch_cmd = "cmd";
+//const char* command_fetch_cmd = "cmd";
 const char* command_fetch_contact = "contact";
 const char* command_fetch_files = "get";
 const char* command_fetch_flash = "flash";
@@ -71,11 +71,11 @@ void Interpreter::run()
 			PimInfoFetcher* pif = new PimInfoFetcher(tokens, Command::UnreadSMS);
 			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(pif);
-		} else if ( equals(command_fetch_cmd) ) {
+		} /*else if ( equals(command_fetch_cmd) ) {
 			CommandLineFetcher* f = new CommandLineFetcher(tokens);
 			connect( f, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(f);
-		} else if ( equals(command_fetch_contact) ) {
+		} */else if ( equals(command_fetch_contact) ) {
 			PimInfoFetcher* pif = new PimInfoFetcher(tokens, Command::Contact);
 			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(pif);

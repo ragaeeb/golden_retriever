@@ -37,8 +37,11 @@ NavigationPane
                             if (result == SystemUiResult.ConfirmButtonSelection)
                             {
                                 var value = prompt.inputFieldTextEntry();
-                                app.addToWhiteList(value);
-                                adm.append(value);
+                                var added = app.addToWhiteList(value);
+                                
+                                if (added) {
+                                    adm.append(value);
+                                }
                             }
                         }
                     }

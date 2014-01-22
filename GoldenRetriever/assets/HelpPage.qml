@@ -23,22 +23,16 @@ Page
     }
     
     actions: [
-        ActionItem {
-            title: qsTr("Step by Step") + Retranslate.onLanguageChanged
-            imageSource: "images/ic_steps.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
-            
-            onTriggered: {
-                var page = instructionsDefinition.createObject();
-                properties.navPane.push(page);
+        InvokeActionItem {
+            query {
+                mimeType: "text/html"
+                uri: "http://www.youtube.com/watch?v=8hDCBJosXGQ"
+                invokeActionId: "bb.action.OPEN"
             }
             
-            attachedObjects: [
-                ComponentDefinition {
-                    id: instructionsDefinition
-                    source: "Instructions.qml"
-                }
-            ]
+            imageSource: "images/ic_steps.png"
+            title: qsTr("Video Tutorial") + Retranslate.onLanguageChanged
+            ActionBar.placement: ActionBarPlacement.OnBar
         }
     ]
 
