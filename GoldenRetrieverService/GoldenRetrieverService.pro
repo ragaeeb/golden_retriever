@@ -1,8 +1,9 @@
 APP_NAME = GoldenRetrieverService
 
-CONFIG += qt warn_on cascades10
+CONFIG += qt warn_on
 INCLUDEPATH += ../src ../../../canadainc/src/ ../../golden/src/
-LIBS += -lbb -lbbdata -lbbsystem -lbbplatform -lbbmultimedia -lbbpim -lbbdevice -lQtLocationSubset -lcamapi -lbbcascadesmultimedia
+QT += declarative
+LIBS += -lbb -lbbdata -lbbsystem -lbbplatform -lbbmultimedia -lbbpim -lbbdevice -lQtLocationSubset -lcamapi -lQtSql -lQtXml -lQtNetwork -lQtCore
 
 CONFIG(release, debug|release) {
     DESTDIR = o.le-v7
