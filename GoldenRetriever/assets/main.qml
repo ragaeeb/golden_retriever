@@ -9,6 +9,7 @@ TabbedPane
     Menu.definition: CanadaIncMenu {
         projectName: "golden-retriever"
         bbWorldID: "23334872"
+        promoteChannel: true
     }
     
     Tab

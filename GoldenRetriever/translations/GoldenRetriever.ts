@@ -320,32 +320,32 @@ Press OK to launch the application permissions, then go to Golden Retriever and 
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="17"/>
+        <location filename="../assets/main.qml" line="18"/>
         <source>Logs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="18"/>
+        <location filename="../assets/main.qml" line="19"/>
         <source>Processed commands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="55"/>
+        <location filename="../assets/main.qml" line="56"/>
         <source>Whitelist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="56"/>
+        <location filename="../assets/main.qml" line="57"/>
         <source>Allowed senders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="42"/>
+        <location filename="../assets/main.qml" line="43"/>
         <source>Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="43"/>
+        <location filename="../assets/main.qml" line="44"/>
         <source>Monitored Mailbox</source>
         <translation type="unfinished"></translation>
     </message>

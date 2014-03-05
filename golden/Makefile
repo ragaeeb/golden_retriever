@@ -5,10 +5,11 @@ TARGET        = $(QMAKE_TARGET)
 
 all: Makefile $(QMAKE_TARGET)
 
-clean:
+clean: FORCE
 	$(MAKE) -C ./arm -f Makefile sureclean	
 	$(MAKE) -C ./x86 -f Makefile sureclean	
-
+	rm -rf arm arm-p x86
+	rm -f $(I18N_DIR)/*.qm
 
 Makefile: FORCE	
 	$(QMAKE) -spec unsupported/blackberry-armv7le-qcc -o arm/Makefile $(QMAKE_TARGET).pro CONFIG+=device
