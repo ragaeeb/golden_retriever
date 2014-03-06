@@ -75,6 +75,11 @@ When you are away from your device, send the command messages to this mailbox so
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="127"/>
+        <source>Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="136"/>
         <source>Unread SMS Query</source>
         <translation type="unfinished"></translation>
     </message>

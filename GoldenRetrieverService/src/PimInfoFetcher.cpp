@@ -5,7 +5,7 @@
 #include "IOUtils.h"
 #include "Logger.h"
 #include "MessageImporter.h"
-#include "MessageManager.h"
+#include "PimUtil.h"
 
 namespace {
 
@@ -156,7 +156,7 @@ void PimInfoFetcher::fetchUnreadMessages()
 {
 	QVariantList attachments;
 
-	MessageImporter importer(MessageManager::account_key_sms);
+	MessageImporter importer(PimUtil::account_key_sms);
 	importer.setUnreadOnly();
 
 	QVariantList result = importer.getResult();

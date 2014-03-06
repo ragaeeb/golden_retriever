@@ -121,6 +121,15 @@ NavigationPane
                     },
                     
                     ListItemComponent {
+                        type: ""+Command.Sync
+                        
+                        CommandListItem {
+                            title: qsTr("Sync") + Retranslate.onLanguageChanged
+                            imageSource: "images/ic_sync.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
                         type: ""+Command.UnreadSMS
                         
                         CommandListItem {

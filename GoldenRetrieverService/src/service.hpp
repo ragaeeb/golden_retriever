@@ -6,15 +6,20 @@
 
 #include <bb/system/InvokeManager>
 
+#include <bb/pim/account/Account>
+#include <bb/pim/message/Conversation>
+#include <bb/pim/message/Message>
+
 #include "customsqldatasource.h"
-#include "MessageManager.h"
 
 namespace bb {
 	class Application;
 
-	namespace pim {
-		class Message;
-	}
+    namespace pim {
+        namespace message {
+            class MessageService;
+        }
+    }
 }
 
 namespace golden {
@@ -28,25 +33,25 @@ class Service: public QObject
 {
 	Q_OBJECT
 
-    QList<qint64> m_pending;
 	bool m_delRequest;
 	bool m_delResponse;
-    MessageManager m_manager;
+    MessageService* m_manager;
+    QHash<qint64,bool> m_sentIds;
+    QHash<qint64,bool> m_pendingDownload;
 	QFileSystemWatcher m_settingsWatcher;
 	InvokeManager m_invokeManager;
-	QTimer m_timer;
 	CustomSqlDataSource m_sql;
 	QVariantMap m_whitelist;
 	QString m_subject;
-
-	void triggerNotification();
+	qint64 m_accountId;
 
 private slots:
-	void commandProcessed(int command, QString const& data);
+    void bodyDownloaded(bb::pim::account::AccountKey accountId, bb::pim::message::MessageKey messageId);
+    void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments);
 	void handleInvoke(const bb::system::InvokeRequest &);
 	void init();
-	void messageReceived(Message const& m, qint64 accountKey, QString const& conversationKey);
-	void processPending();
+    void messageAdded(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey);
+    void messageUpdated(bb::pim::account::AccountKey accountId, bb::pim::message::ConversationKey conversationId, bb::pim::message::MessageKey messageId, bb::pim::message::MessageUpdate data);
 	void settingChanged(QString const& key=QString());
 
 Q_SIGNALS:

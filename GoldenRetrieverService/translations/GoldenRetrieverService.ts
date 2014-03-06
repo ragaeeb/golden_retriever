@@ -74,7 +74,7 @@ You entered only: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1, (latitude: %2, longitude: %3)</source>
+        <source>%1, %2, (latitude: %2, longitude: %3)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -132,6 +132,13 @@ calendar Doctor</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>golden::PimSyncer</name>
+    <message>
+        <source>Synced OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

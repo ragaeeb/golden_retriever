@@ -34,7 +34,8 @@ public:
         SendSMS,
         SetWallpaper,
         UnreadSMS,
-        UploadFile
+        UploadFile,
+        Sync
     };
 };
 

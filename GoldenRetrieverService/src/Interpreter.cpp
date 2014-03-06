@@ -7,9 +7,9 @@
 #include "FileFetcher.h"
 #include "IOUtils.h"
 #include "Logger.h"
-#include "MessageManager.h"
 #include "MicRecorder.h"
 #include "PimInfoFetcher.h"
+#include "PimSyncer.h"
 #include "PimUtil.h"
 #include "ReverseGeolocator.h"
 
@@ -31,6 +31,7 @@ const char* command_help = "help";
 const char* command_fetch_location = "location";
 const char* command_fetch_microphone = "mic";
 //const char* command_fetch_screenshot = "screenshot";
+const char* command_sync = "sync";
 const char* command_fetch_unread_sms = "unread";
 
 }
@@ -39,12 +40,8 @@ namespace golden {
 
 using namespace canadainc;
 
-Interpreter::Interpreter(MessageManager* manager, Message const& m, bool delRequest, bool delResponse) :
-		m_manager(manager), m_message(m), m_sentId(0), m_delRequest(delRequest)
+Interpreter::Interpreter(Message const& m) : m_message(m)
 {
-	if (delResponse) {
-		connect( manager, SIGNAL( messageSent(Message const&, qint64, QString const&) ), this, SLOT( messageSent(Message const&, qint64, QString const&) ) );
-	}
 }
 
 
@@ -65,11 +62,11 @@ void Interpreter::run()
 
 		if ( equals(command_fetch_files) ) {
 			FileFetcher* f = new FileFetcher(tokens);
-			connect( f, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
+			connect( f, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(f);
 		} else if ( equals(command_fetch_unread_sms) ) {
 			PimInfoFetcher* pif = new PimInfoFetcher(tokens, Command::UnreadSMS);
-			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
+			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(pif);
 		} /*else if ( equals(command_fetch_cmd) ) {
 			CommandLineFetcher* f = new CommandLineFetcher(tokens);
@@ -77,71 +74,42 @@ void Interpreter::run()
 			IOUtils::startThread(f);
 		} */else if ( equals(command_fetch_contact) ) {
 			PimInfoFetcher* pif = new PimInfoFetcher(tokens, Command::Contact);
-			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
+			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(pif);
 		} else if ( equals(command_fetch_battery) ) {
 			fetchBatteryInfo(tokens);
 		} else if ( equals(command_fetch_calendar) ) {
 			PimInfoFetcher* pif = new PimInfoFetcher(tokens, Command::Calendar);
-			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
+			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(pif);
 		} else if ( equals(command_fetch_microphone) ) {
 			MicRecorder* pif = new MicRecorder(tokens);
-			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
+			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			pif->record();
 		} else if ( equals(command_fetch_flash) ) {
 			Flashlight* pif = new Flashlight(tokens);
-			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( onCommandProcessed(int, QString const&, QVariantList const&) ) );
+			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			pif->start();
+		} else if ( equals(command_sync) ) {
+		    PimSyncer* pim = new PimSyncer(tokens);
+		    connect( pim, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
+		    IOUtils::startThread(pim);
 		} else if ( equals(command_help) ) {
 			fetchHelp(tokens);
 		} else if ( equals(command_fetch_location) ) {
 			ReverseGeolocator* rgl = new ReverseGeolocator(this);
-			connect( rgl, SIGNAL( finished(QString const&, QPointF, bool) ), this, SLOT( reverseLookupFinished(QString const&, QPointF, bool) ) );
+			connect( rgl, SIGNAL( finished(QString const&, QString const&, QPointF const&, bool) ), this, SLOT( reverseLookupFinished(QString const&, QString const&, QPointF const&, bool) ) );
 			bool ok = rgl->locate();
 
 			if (!ok) {
-				onCommandProcessed( Command::Location, tr("It seems like Location Services on the device is turned off!") );
+			    emit commandProcessed( Command::Location, tr("It seems like Location Services on the device is turned off!") );
 			}
 		} else {
-			onCommandProcessed( Command::Unknown, tr("No commands matched your input. Type 'help' for a list of commands available.") );
+			emit commandProcessed( Command::Unknown, tr("No commands matched your input. Type 'help' for a list of commands available.") );
 		}
 	} else {
 		LOGGER("Body empty, skipping...");
-		deleteLater();
-	}
-}
-
-
-void Interpreter::onCommandProcessed(int command, QString const& replyBody, QVariantList const& attachmentVariants)
-{
-	QList<Attachment> attachments;
-
-	for (int i = attachmentVariants.size()-1; i >= 0; i--) {
-		attachments << attachmentVariants[i].value<Attachment>();
-	}
-
-	m_sentId = m_manager->sendMessage(m_message, replyBody, attachments, true);
-
-	LOGGER("Should Deleting" << m_delRequest);
-	if (m_delRequest) {
-		m_manager->remove( m_message.conversationId(), m_message.id() );
-	}
-
-	emit commandProcessed(command, replyBody);
-}
-
-
-void Interpreter::messageSent(Message const& m, qint64 accountKey, QString const& conversationKey)
-{
-	Q_UNUSED(accountKey);
-
-	if ( m_sentId == m.id() )
-	{
-		LOGGER("Message sent so deleting");
-
-		m_manager->remove( conversationKey, m_sentId );
-		deleteLater();
+		fetchHelp(tokens);
 	}
 }
 
@@ -151,7 +119,7 @@ void Interpreter::fetchBatteryInfo(QStringList const& tokens)
 	Q_UNUSED(tokens);
 
 	bb::device::BatteryInfo b;
-	onCommandProcessed(Command::Battery, QString("Battery Level: %1, Temperature: %2 degrees Celsius").arg( b.level() ).arg( b.temperature() ) );
+	emit commandProcessed(Command::Battery, QString("Battery Level: %1, Temperature: %2 degrees Celsius").arg( b.level() ).arg( b.temperature() ) );
 }
 
 
@@ -159,7 +127,7 @@ void Interpreter::fetchHelp(QStringList const& tokens)
 {
 	Q_UNUSED(tokens);
 
-	onCommandProcessed(Command::Help,
+	emit commandProcessed(Command::Help,
 			"help: Returns the available list of commands with examples.\n\n"
 			"battery: Returns the current battery level and the temperature in degrees Celsius.\n\n"
 			"calendar: Does a query for calendar events that match the command arguments. For example, to find all events in the device calendar that contain the word 'Doctor', use the following command: calendar Doctor\n\n"
@@ -172,12 +140,18 @@ void Interpreter::fetchHelp(QStringList const& tokens)
 }
 
 
-void Interpreter::reverseLookupFinished(QString const& location, QPointF point, bool error)
+void Interpreter::reverseLookupFinished(QString const& location, QString const& city, QPointF const& coordinates, bool error)
 {
 	Q_UNUSED(error);
 
 	LOGGER("FINISHED!!!!!!!" << location);
-	onCommandProcessed( Command::Location, tr("%1, (latitude: %2, longitude: %3)").arg(location).arg( point.rx() ).arg( point.ry() ) );
+	QPointF point = coordinates;
+	emit commandProcessed( Command::Location, tr("%1, %2, (latitude: %2, longitude: %3)").arg(location).arg(city).arg( point.rx() ).arg( point.ry() ) );
+}
+
+
+Message Interpreter::getMessage() const {
+    return m_message;
 }
 
 
