@@ -156,7 +156,7 @@ void PimInfoFetcher::fetchUnreadMessages()
 {
 	QVariantList attachments;
 
-	MessageImporter importer(PimUtil::account_key_sms);
+	MessageImporter importer(ACCOUNT_KEY_SMS);
 	importer.setUnreadOnly();
 
 	QVariantList result = importer.getResult();

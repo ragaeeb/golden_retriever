@@ -8,10 +8,6 @@
 #include "PimUtil.h"
 #include "QueryId.h"
 
-namespace {
-	const char* key_reply_prefix = "re";
-}
-
 namespace golden {
 
 using namespace bb::platform;
@@ -75,7 +71,6 @@ void Service::settingChanged(QString const& path)
         m_manager = new MessageService(this);
         connect( m_manager, SIGNAL( messageAdded(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey) ), this, SLOT( messageAdded(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey) ) );
         connect( m_manager, SIGNAL( messageUpdated(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey, bb::pim::message::MessageUpdate) ), this, SLOT( messageUpdated(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey, bb::pim::message::MessageUpdate) ) );
-        connect( m_manager, SIGNAL( bodyDownloaded(bb::pim::account::AccountKey, bb::pim::message::MessageKey) ), this, SLOT( bodyDownloaded(bb::pim::account::AccountKey, bb::pim::message::MessageKey) ) );
         LOGGER("ALL CONNECTED!");
 	}
 
@@ -90,58 +85,32 @@ void Service::settingChanged(QString const& path)
 
 void Service::messageAdded(bb::pim::account::AccountKey accountKey, bb::pim::message::ConversationKey conversationKey, bb::pim::message::MessageKey mk)
 {
-    LOGGER(m_accountId << accountKey);
+    LOGGER(m_accountId << accountKey << conversationKey << mk);
 
     if (m_accountId == accountKey)
     {
-        LOGGER("CK, MK" << conversationKey << mk);
         Message m = m_manager->message(accountKey, mk);
 
-        LOGGER("Whitelist" << m_whitelist);
-        LOGGER("NEW MESSAGE" << m.isInbound() << m.sender().address().toLower() );
+        LOGGER("Whitelist" << m_whitelist << m.isInbound() << m.sender().address().toLower());
 
-        if ( m.isInbound() )
+        if ( m.isInbound() && ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) )
         {
-            if ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) )
+            QStringList subject = m.subject().trimmed().split(" ");
+            LOGGER("SUBJECT" << subject);
+
+            if ( !subject.isEmpty() )
             {
-                QString subject = m.subject();
-                LOGGER("SUBJECT" << subject);
+                QString firstKeyword = subject.takeFirst();
 
-                QString replyWithoutSpace = QString("%1:%2").arg(key_reply_prefix).arg(m_subject);
-                QString replyWithSpace = QString("%1: %2").arg(key_reply_prefix).arg(m_subject);
-                bool partialMatch = subject.contains(replyWithoutSpace, Qt::CaseInsensitive) || subject.contains(replyWithSpace, Qt::CaseInsensitive);
-                bool perfectMatch = subject.compare(m_subject, Qt::CaseInsensitive) == 0;
-
-                if (perfectMatch || partialMatch)
+                if ( firstKeyword.compare(m_subject, Qt::CaseInsensitive) == 0 )
                 {
-                    LOGGER("Matched, downloading");
-                    m_pendingDownload.insert(mk, true);
-                    m_manager->downloadMessage(accountKey, mk);
+                    LOGGER("Matched, processing");
+                    Interpreter* i = new Interpreter(m, subject);
+                    connect( i, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( commandProcessed(int, QString const&, QVariantList const&) ) );
+                    i->run();
                 }
             }
-        } else {
-
         }
-    }
-}
-
-
-void Service::bodyDownloaded(bb::pim::account::AccountKey accountId, bb::pim::message::MessageKey messageId)
-{
-    LOGGER(accountId << messageId);
-
-    Message m = m_manager->message(accountId, messageId);
-
-    if ( m_accountId == accountId && m.isInbound() && m_pendingDownload.contains(messageId) )
-    {
-        LOGGER("Remove message id from pendingDownload");
-        m_pendingDownload.remove(messageId);
-
-        LOGGER("Creating new Interpreter thread");
-
-        Interpreter* i = new Interpreter(m);
-        connect( i, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( commandProcessed(int, QString const&, QVariantList const&) ) );
-        i->run();
     }
 }
 
@@ -207,11 +176,7 @@ void Service::messageUpdated(bb::pim::account::AccountKey ak, bb::pim::message::
 
 void Service::handleInvoke(const bb::system::InvokeRequest & request)
 {
-    LOGGER("Invoekd" << request.action() );
-
-    if (request.action().compare("com.canadainc.GoldenRetrieverService.RESET") == 0)
-    {
-    }
+    LOGGER("Invoked" << request.action() );
 }
 
 

@@ -37,7 +37,6 @@ class Service: public QObject
 	bool m_delResponse;
     MessageService* m_manager;
     QHash<qint64,bool> m_sentIds;
-    QHash<qint64,bool> m_pendingDownload;
 	QFileSystemWatcher m_settingsWatcher;
 	InvokeManager m_invokeManager;
 	CustomSqlDataSource m_sql;
@@ -46,7 +45,6 @@ class Service: public QObject
 	qint64 m_accountId;
 
 private slots:
-    void bodyDownloaded(bb::pim::account::AccountKey accountId, bb::pim::message::MessageKey messageId);
     void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments);
 	void handleInvoke(const bb::system::InvokeRequest &);
 	void init();
