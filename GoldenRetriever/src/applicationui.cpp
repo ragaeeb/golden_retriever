@@ -2,14 +2,19 @@
 
 #include "applicationui.hpp"
 #include "AccountImporter.h"
+#include "AppLogFetcher.h"
 #include "Command.h"
+#include "GoldenCollector.h"
 #include "GoldenUtils.h"
 #include "InvocationUtils.h"
 #include "IOUtils.h"
 #include "LocaleUtil.h"
 #include "Logger.h"
+#include "LogMonitor.h"
 #include "QueryId.h"
 #include "PimUtil.h"
+
+#define UI_KEY "logUI"
 
 namespace golden {
 
@@ -18,8 +23,15 @@ using namespace bb::pim::message;
 using namespace canadainc;
 
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
-		QObject(app), m_cover("Cover.qml"), m_lastUpdate(0), m_account(&m_persistance)
+		QObject(app), m_cover("Cover.qml"),
+		m_lastUpdate(0), m_account(&m_persistance)
 {
+    INIT_SETTING(UI_KEY, true);
+    INIT_SETTING(SERVICE_KEY, false);
+
+    new AppLogFetcher( new GoldenCollector(), this );
+    new LogMonitor(UI_KEY, UI_LOG_FILE, this);
+
 	qmlRegisterType<canadainc::LocaleUtil>("com.canadainc.data", 1, 0, "LocaleUtil");
 	qmlRegisterUncreatableType<Command>("com.canadainc.data", 1, 0, "Command", "Can't instantiate");
 	qmlRegisterUncreatableType<QueryId>("com.canadainc.data", 1, 0, "QueryId", "Can't instantiate");

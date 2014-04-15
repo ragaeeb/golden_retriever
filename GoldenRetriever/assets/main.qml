@@ -6,10 +6,13 @@ TabbedPane
     id: root
     showTabsOnActionBar: true
     
-    Menu.definition: CanadaIncMenu {
+    Menu.definition: CanadaIncMenu
+    {
         projectName: "golden-retriever"
         bbWorldID: "23334872"
         promoteChannel: true
+        showServiceLogging: true
+        showSubmitLogs: true
     }
     
     Tab

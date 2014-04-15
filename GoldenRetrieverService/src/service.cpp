@@ -5,6 +5,7 @@
 #include "Interpreter.h"
 #include "IOUtils.h"
 #include "Logger.h"
+#include "LogMonitor.h"
 #include "PimUtil.h"
 #include "QueryId.h"
 
@@ -24,17 +25,16 @@ Service::Service(bb::Application * app)	:
 		s.sync();
 	}
 
-	LOGGER("Constructed");
+    m_settingsWatcher.addPath( s.fileName() );
 
 	connect( this, SIGNAL( initialize() ), this, SLOT( init() ), Qt::QueuedConnection ); // async startup
-
 	emit initialize();
 }
 
 
 void Service::init()
 {
-	m_settingsWatcher.addPath( QSettings().fileName() );
+    new LogMonitor(SERVICE_KEY, SERVICE_LOG_FILE, this);
 
 	connect( &m_invokeManager, SIGNAL( invoked(const bb::system::InvokeRequest&) ), this, SLOT( handleInvoke(const bb::system::InvokeRequest&) ) );
 	connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
