@@ -58,11 +58,16 @@ void ApplicationUI::init()
 {
 	m_cover.setContext("app", this);
 
+    InvokeRequest request;
+    request.setTarget("com.canadainc.GoldenRetrieverService");
+    request.setAction("com.canadainc.GoldenRetrieverService.RESET");
+    m_invokeManager.invoke(request);
+
 	bool ok = InvocationUtils::validateEmailSMSAccess( tr("Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.") );
 
 	if (ok)
 	{
-		ok = InvocationUtils::validateSharedFolderAccess( tr("Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played. If you leave this permission off, some features may not work properly.") );
+		ok = InvocationUtils::validateSharedFolderAccess( tr("Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played and sent. If you leave this permission off, some features may not work properly.") );
 
 		if (ok)
 		{
@@ -74,15 +79,9 @@ void ApplicationUI::init()
 		}
 	}
 
-	INIT_SETTING("tutorialCount", 0);
 	INIT_SETTING("subject", "golden");
 	INIT_SETTING("delRequest", 1);
 	INIT_SETTING("delResponse", 1);
-
-	InvokeRequest request;
-	request.setTarget("com.canadainc.GoldenRetrieverService");
-	request.setAction("com.canadainc.GoldenRetrieverService.RESET");
-	m_invokeManager.invoke(request);
 }
 
 
@@ -139,8 +138,39 @@ void ApplicationUI::recheck(int &count, const char* slotName)
 void ApplicationUI::loadAccounts()
 {
 	AccountImporter* ai = new AccountImporter();
-	connect( ai, SIGNAL( importCompleted(QVariantList const&) ), this, SIGNAL( accountsImported(QVariantList const&) ) );
+	connect( ai, SIGNAL( importCompleted(QVariantList const&) ), this, SLOT( accountsLoaded(QVariantList const&) ) );
+
 	IOUtils::startThread(ai);
+}
+
+
+void ApplicationUI::accountsLoaded(QVariantList const& qvl)
+{
+    QVariantList emailAccounts;
+
+    for (int i = qvl.size()-1; i >= 0; i--)
+    {
+        QVariantMap current = qvl[i].toMap();
+        qint64 accountId = current.value("accountId").toLongLong();
+
+        if (accountId != ACCOUNT_KEY_SMS && accountId != ACCOUNT_KEY_PIN && current.value("address").toString().contains("@") ) {
+            emailAccounts << current;
+        }
+    }
+
+    if ( !m_persistance.contains("whitelist") )
+    {
+        QVariantMap contacts = m_persistance.getValueFor("whitelist").toMap();
+
+        for (int i = emailAccounts.size()-1; i >= 0; i--) {
+            QString current = emailAccounts[i].toMap().value("address").toString().toLower();
+            contacts[current] = true;
+        }
+
+        m_persistance.saveValueFor("whitelist", contacts);
+    }
+
+    emit accountsImported(emailAccounts);
 }
 
 

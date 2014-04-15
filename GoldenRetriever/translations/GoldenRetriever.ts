@@ -285,39 +285,39 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
 <context>
     <name>golden::ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="61"/>
+        <location filename="../src/applicationui.cpp" line="66"/>
         <source>Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="65"/>
-        <source>Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played. If you leave this permission off, some features may not work properly.</source>
+        <location filename="../src/applicationui.cpp" line="70"/>
+        <source>Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played and sent. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="69"/>
+        <location filename="../src/applicationui.cpp" line="74"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="72"/>
+        <location filename="../src/applicationui.cpp" line="77"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that the &apos;location&apos; command can be processed. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="134"/>
+        <location filename="../src/applicationui.cpp" line="133"/>
         <source>Error initializing link with service. Please restart your device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="161"/>
+        <location filename="../src/applicationui.cpp" line="191"/>
         <source>Added %1 to whitelist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="165"/>
+        <location filename="../src/applicationui.cpp" line="195"/>
         <source>Invalid email address entered...</source>
         <translation type="unfinished"></translation>
     </message>

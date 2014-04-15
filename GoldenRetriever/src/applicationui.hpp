@@ -39,8 +39,9 @@ class ApplicationUI : public QObject
     void recheck(int &count, const char* slotName);
 
 private slots:
-	void init();
+    void accountsLoaded(QVariantList const& qvl);
 	void databaseUpdated(QString const& path);
+    void init();
 	void settingChanged(QString const& key);
 
 Q_SIGNALS:
