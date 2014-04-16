@@ -19,6 +19,7 @@ Dialog
             verticalAlignment: VerticalAlignment.Center
             inputMode: TextFieldInputMode.Password
             input.submitKey: SubmitKey.Submit
+            inputRoute.primaryKeyTarget: true
             
             input.onSubmitted: {
                 passwordValidator.validate();
