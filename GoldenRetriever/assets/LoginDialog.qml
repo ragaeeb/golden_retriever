@@ -1,54 +1,110 @@
 import bb.cascades 1.0
-import bb.device 1.0
 
-Dialog
+FullScreenDialog
 {
     id: root
     
-    Container
+    dialogContent: Container
     {
-        preferredWidth: displayInfo.pixelSize.width
-        preferredHeight: displayInfo.pixelSize.height
-        background: Color.create(0.0, 0.0, 0.0, 0.5)
+        leftPadding: 80; rightPadding: 80; topPadding: 100; bottomPadding: 150
         layout: DockLayout {}
-        leftPadding: 10;rightPadding: 10
         
-        TextField {
-            id: passwordField
+        ImageView {
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
+            imageSource: "images/login/background.amd"
+            opacity: 0
+            
+            animations: [
+                FadeTransition {
+                    id: fader
+                    fromOpacity: 0
+                    toOpacity: 1
+                    duration: 500
+                }
+            ]
+        }
+        
+        Container
+        {
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            inputMode: TextFieldInputMode.Password
-            input.submitKey: SubmitKey.Submit
-            inputRoute.primaryKeyTarget: true
+            leftPadding: 15; rightPadding: 15;
+            translationX: 1000
             
-            input.onSubmitted: {
-                passwordValidator.validate();
-            }
-            
-            validator: Validator
-            {
-                id: passwordValidator
-                mode: ValidationMode.Custom
-                errorMessage: qsTr("Invalid login credentials provided.") + Retranslate.onLanguageChanged
+            TextField {
+                id: passwordField
+                inputMode: TextFieldInputMode.Password
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                input.submitKey: SubmitKey.Submit
+                inputRoute.primaryKeyTarget: true
                 
-                onValidate: {
-                    valid = security.login(passwordField.text);
+                input.onSubmitted: {
+                    passwordValidator.validate();
+                }
+                
+                validator: Validator
+                {
+                    id: passwordValidator
+                    mode: ValidationMode.Custom
+                    errorMessage: qsTr("Invalid login credentials provided.") + Retranslate.onLanguageChanged
                     
-                    if (valid) {
-                        root.close();
+                    onValidate: {
+                        valid = security.login(passwordField.text);
+                        
+                        if (valid) {
+                            root.close();
+                        }
                     }
                 }
             }
+            
+            animations: [
+                TranslateTransition {
+                    id: translateAnim
+                    fromX: 1000
+                    toX: 0
+                    duration: 250
+                    easingCurve: StockCurve.SineIn
+                }
+            ]
         }
         
-        attachedObjects: [
-            DisplayInfo {
-                id: displayInfo
-            }
-        ]
+        ImageView {
+            horizontalAlignment: HorizontalAlignment.Left
+            verticalAlignment: VerticalAlignment.Top
+            imageSource: "images/login/lock.png"
+            translationX: -100
+            
+            animations: [
+                SequentialAnimation
+                {
+                    id: rotator
+                    
+                    TranslateTransition {
+                        fromX: -100
+                        toX: 0
+                        duration: 250
+                        easingCurve: StockCurve.SineInOut
+                    }
+                    
+                    RotateTransition
+                    {
+                        fromAngleZ: 0
+                        toAngleZ: 360
+                        duration: 1000
+                        easingCurve: StockCurve.SineOut
+                    }
+                }
+            ]
+        }
     }
     
     onOpened: {
         passwordField.requestFocus();
+        fader.play();
+        rotator.play();
+        translateAnim.play();
     }
 }

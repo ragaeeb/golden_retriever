@@ -44,7 +44,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Unknown Command") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_unknown.png"
+                            imageSource: "images/commands/ic_unknown.png"
                         }
                     },                    
 
@@ -53,7 +53,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Battery Status") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_battery.png"
+                            imageSource: "images/commands/ic_battery.png"
                         }
                     },
                     
@@ -62,7 +62,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Calendar Query") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_calendar.png"
+                            imageSource: "images/commands/ic_calendar.png"
                         }
                     },
                     
@@ -71,7 +71,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Contact Query") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_contact_fetch.png"
+                            imageSource: "images/commands/ic_contact_fetch.png"
                         }
                     },
                     
@@ -80,7 +80,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("File Request") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_file.png"
+                            imageSource: "images/commands/ic_file.png"
                         }
                     },
                     
@@ -89,7 +89,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Flashlight") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_flashlight.png"
+                            imageSource: "images/commands/ic_flashlight.png"
                         }
                     },
                     
@@ -107,7 +107,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Location Query") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_location.png"
+                            imageSource: "images/commands/ic_location.png"
                         }
                     },
                     
@@ -116,7 +116,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Audio Record") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_microphone.png"
+                            imageSource: "images/commands/ic_microphone.png"
                         }
                     },
                     
@@ -125,7 +125,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Sync") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_sync.png"
+                            imageSource: "images/commands/ic_sync.png"
                         }
                     },
                     
@@ -134,7 +134,7 @@ NavigationPane
                         
                         CommandListItem {
                             title: qsTr("Unread SMS Query") + Retranslate.onLanguageChanged
-                            imageSource: "images/ic_unread.png"
+                            imageSource: "images/commands/ic_unread.png"
                         }
                     }
                 ]

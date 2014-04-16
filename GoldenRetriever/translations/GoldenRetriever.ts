@@ -171,7 +171,7 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../assets/LoginDialog.qml" line="31"/>
+        <location filename="../assets/LoginDialog.qml" line="79"/>
         <source>Invalid login credentials provided.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -179,27 +179,47 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="8"/>
+        <location filename="../assets/SettingsPage.qml" line="7"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="14"/>
+        <location filename="../assets/SettingsPage.qml" line="13"/>
         <source>Change Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="43"/>
+        <location filename="../assets/SettingsPage.qml" line="42"/>
         <source>Subject</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="70"/>
+        <location filename="../assets/SettingsPage.qml" line="55"/>
+        <source>Subject Password (ie: golden)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="62"/>
+        <source>Subject password cannot be empty and cannot contain a space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="80"/>
+        <source>The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is &apos;golden&apos;, then in order to issue a battery command, the subject of the email must be &apos;golden battery&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="80"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SettingsPage.qml" line="94"/>
         <source>Delete Incoming Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="77"/>
+        <location filename="../assets/SettingsPage.qml" line="101"/>
         <source>Delete Outgoing Response</source>
         <translation type="unfinished"></translation>
     </message>
@@ -253,11 +273,13 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
     </message>
     <message>
         <location filename="../assets/WhitelistPane.qml" line="65"/>
+        <location filename="../assets/WhitelistPane.qml" line="155"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/WhitelistPane.qml" line="66"/>
+        <location filename="../assets/WhitelistPane.qml" line="155"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
@@ -279,6 +301,16 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
     <message>
         <location filename="../assets/WhitelistPane.qml" line="111"/>
         <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/WhitelistPane.qml" line="155"/>
+        <source>Tutorial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/WhitelistPane.qml" line="155"/>
+        <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
