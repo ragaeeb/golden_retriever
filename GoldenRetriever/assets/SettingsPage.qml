@@ -64,17 +64,17 @@ Page
             }
         }
         
-        SettingPair
+        PersistCheckBox
         {
             topMargin: 20
-            title: qsTr("Delete Incoming Request") + Retranslate.onLanguageChanged
+            text: qsTr("Delete Incoming Request") + Retranslate.onLanguageChanged
             key: "delRequest"
         }
         
-        SettingPair
+        PersistCheckBox
         {
             topMargin: 20
-            title: qsTr("Delete Outgoing Response") + Retranslate.onLanguageChanged
+            text: qsTr("Delete Outgoing Response") + Retranslate.onLanguageChanged
             key: "delResponse"
         }
     }
