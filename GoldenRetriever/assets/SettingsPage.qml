@@ -1,6 +1,5 @@
 import bb.cascades 1.0
 import bb.system 1.0
-import com.canadainc.data 1.0
 
 Page
 {
@@ -48,14 +47,39 @@ Page
                 }
             }
             
-            TextField {
+            TextField
+            {
+                id: subjectField
                 text: persist.getValueFor("subject");
                 input.flags: TextInputFlag.AutoCapitalizationOff | TextInputFlag.WordSubstitutionOff | TextInputFlag.PredictionOff
+                hintText: qsTr("Subject Password (ie: golden)") + Retranslate.onLanguageChanged
                 horizontalAlignment: HorizontalAlignment.Right
                 verticalAlignment: VerticalAlignment.Center
                 
+                validator: Validator
+                {
+                    mode: ValidationMode.Immediate
+                    errorMessage: qsTr("Subject password cannot be empty and cannot contain a space") + Retranslate.onLanguageChanged
+                    
+                    onValidate: { 
+                        valid = subjectField.text.length > 0 && subjectField.text.indexOf(" ") == -1;
+                    }
+                }
+                
                 onTextChanged: {
-                    persist.saveValueFor("subject", text);
+                    subjectField.text = subjectField.text.trim().toLowerCase();
+                    validator.validate();
+                    
+                    if (validator.valid) {
+                        persist.saveValueFor("subject", subjectField.text);
+                    }
+                }
+                
+                onCreationCompleted: {
+                    if ( !persist.contains("subjectTutorial") ) {
+                        persist.showToast( qsTr("The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is 'golden', then in order to issue a battery command, the subject of the email must be 'golden battery'."), qsTr("OK"), "asset:///images/ic_help.png" );
+                        persist.saveValueFor("subjectTutorial", 1);
+                    }
                 }
             }
             
