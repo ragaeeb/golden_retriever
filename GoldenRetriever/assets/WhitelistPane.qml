@@ -149,5 +149,27 @@ NavigationPane
             }
         }
     }
-
+    
+    onCreationCompleted: {
+        if ( !persist.contains("tutorialVideo") ) {
+            var yesClicked = persist.showBlockingDialog( qsTr("Tutorial"), qsTr("Would you like to see a video tutorial on how to use the app?"), qsTr("Yes"), qsTr("No") );
+            
+            if (yesClicked) {
+                vidTutorial.trigger("bb.action.OPEN");
+            }
+            
+            persist.saveValueFor("tutorialVideo", 1);
+        }
+    }
+    
+    attachedObjects: [
+        Invocation {
+            id: vidTutorial
+            
+            query: InvokeQuery {
+                mimeType: "text/html"
+                uri: "https://www.youtube.com/watch?v=8hDCBJosXGQ"
+            }
+        }
+    ]
 }
