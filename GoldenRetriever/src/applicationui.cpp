@@ -142,7 +142,7 @@ void ApplicationUI::recheck(int &count, const char* slotName)
 		QTimer::singleShot(2000*count, this, slotName);
 	} else {
 		LOGGER("Can't connect...");
-		m_persistance.showToast( tr("Error initializing link with service. Please restart your device...") );
+		m_persistance.showToast( tr("Error initializing link with service. Please restart your device..."), "", "asset:///images/ic_unknown.png" );
 	}
 }
 
@@ -200,11 +200,11 @@ bool ApplicationUI::addToWhiteList(QString request)
         contacts[request] = true;
 
         m_persistance.saveValueFor("whitelist", contacts);
-        m_persistance.showToast( tr("Added %1 to whitelist").arg(request) );
+        m_persistance.showToast( tr("Added %1 to whitelist").arg(request), "", "asset:///images/ic_whitelist.png" );
 
         return true;
     } else {
-    	m_persistance.showToast( tr("Invalid email address entered...") );
+    	m_persistance.showToast( tr("Invalid email address entered..."), "", "asset:///images/ic_unknown.png" );
 
     	return false;
     }

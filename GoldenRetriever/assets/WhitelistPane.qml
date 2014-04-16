@@ -108,7 +108,7 @@ NavigationPane
                 {
                     var email = adm.data(indexPath);
                     adm.removeAt( indexPath[0] );
-                    var undoClicked = persist.showBlockingToast( qsTr("Removed %1 from white list!").arg(email), qsTr("Undo") );
+                    var undoClicked = persist.showBlockingToast( qsTr("Removed %1 from white list!").arg(email), qsTr("Undo"), "asset:///images/ic_delete_contact.png" );
                     
                     if (undoClicked) {
                         dataModel.insert(indexPath[0], email);

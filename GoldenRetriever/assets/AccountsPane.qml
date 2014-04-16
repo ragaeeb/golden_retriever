@@ -9,7 +9,7 @@ NavigationPane
     }
     
     onCreationCompleted: {
-        persist.showToast( qsTr("Choose the mailbox to monitor for the commands.\n\nWhen you are away from your device, send the command messages to this mailbox so your device can process them."), qsTr("OK") );
+        persist.showToast( qsTr("Choose the mailbox to monitor for the commands.\n\nWhen you are away from your device, send the command messages to this mailbox so your device can process them."), qsTr("OK"), "asset:///images/ic_account.png" );
     }
     
     Page
