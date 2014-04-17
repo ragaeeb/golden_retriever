@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import bb.system 1.0
 import com.canadainc.data 1.0
 
 NavigationPane
@@ -14,6 +15,34 @@ NavigationPane
         titleBar: TitleBar {
             title: qsTr("Golden Retriever") + Retranslate.onLanguageChanged
         }
+        
+        actions: [
+            ActionItem {
+                title: qsTr("Test A Command") + Retranslate.onLanguageChanged
+                imageSource: "images/menu/ic_test.png"
+                ActionBar.placement: ActionBarPlacement.OnBar
+                
+                onTriggered: {
+                    prompt.show();
+                }
+                
+                attachedObjects: [
+                    SystemPrompt {
+                        id: prompt
+                        title: qsTr("Enter Command") + Retranslate.onLanguageChanged
+                        inputField.emptyText: qsTr("Enter the command (ie: battery)") + Retranslate.onLanguageChanged
+                        confirmButton.label: qsTr("OK") + Retranslate.onLanguageChanged
+                        cancelButton.label: qsTr("Cancel") + Retranslate.onLanguageChanged
+                        
+                        onFinished: {
+                            if (result == SystemUiResult.ConfirmButtonSelection) {
+                                app.invokeService( inputFieldTextEntry() );
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
         
         Container
         {

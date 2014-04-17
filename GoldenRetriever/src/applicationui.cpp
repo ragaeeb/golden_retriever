@@ -70,10 +70,7 @@ void ApplicationUI::init()
 {
 	m_cover.setContext("app", this);
 
-    InvokeRequest request;
-    request.setTarget("com.canadainc.GoldenRetrieverService");
-    request.setAction("com.canadainc.GoldenRetrieverService.RESET");
-    m_invokeManager.invoke(request);
+	invokeService();
 
 	bool ok = InvocationUtils::validateEmailSMSAccess( tr("Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.") );
 
@@ -94,6 +91,20 @@ void ApplicationUI::init()
 	INIT_SETTING("subject", "golden");
 	INIT_SETTING("delRequest", 1);
 	INIT_SETTING("delResponse", 1);
+}
+
+
+void ApplicationUI::invokeService(QString const& command)
+{
+    InvokeRequest request;
+    request.setTarget("com.canadainc.GoldenRetrieverService");
+    request.setAction("com.canadainc.GoldenRetrieverService.RESET");
+
+    if ( !command.isNull() ) {
+        request.setData( command.toAscii() );
+    }
+
+    m_invokeManager.invoke(request);
 }
 
 

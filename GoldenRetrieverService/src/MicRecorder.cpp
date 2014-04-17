@@ -5,13 +5,9 @@
 #include "IOUtils.h"
 #include "Logger.h"
 
-namespace {
-
-const unsigned int default_duration = 10;
-const unsigned int max_duration = 60;
-const unsigned int min_duration = 1;
-
-} // namespace
+#define default_duration 10
+#define max_duration 60
+#define min_duration 1
 
 namespace golden {
 
@@ -25,8 +21,8 @@ MicRecorder::MicRecorder(QStringList const& tokens, QObject* parent) : QObject(p
 		m_duration = tokens.first().toUInt();
 	}
 
-	m_duration = qMin(m_duration, max_duration); // max record of 1 minute
-	m_duration = qMax(m_duration, min_duration); // record for at least 1 second
+	m_duration = qMin(m_duration, (unsigned int)max_duration); // max record of 1 minute
+	m_duration = qMax(m_duration, (unsigned int)min_duration); // record for at least 1 second
 	m_duration *= 1000;
 
 	connect( &m_recorder, SIGNAL( durationChanged(unsigned int) ), this, SLOT( onDurationChanged(unsigned int) ) );

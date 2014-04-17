@@ -19,67 +19,92 @@ When you are away from your device, send the command messages to this mailbox so
 <context>
     <name>CommandLogPane</name>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="15"/>
+        <location filename="../assets/CommandLogPane.qml" line="16"/>
         <source>Golden Retriever</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="25"/>
+        <location filename="../assets/CommandLogPane.qml" line="21"/>
+        <source>Test A Command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="32"/>
+        <source>Enter Command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="33"/>
+        <source>Enter the command (ie: battery)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="34"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="35"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="54"/>
         <source>Welcome to Golden Retriever. This app can be used to remotely control your BlackBerry device using emails. To learn more about the commands available, swipe-down from the top-bezel and choose Help.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="46"/>
+        <location filename="../assets/CommandLogPane.qml" line="75"/>
         <source>Unknown Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="55"/>
+        <location filename="../assets/CommandLogPane.qml" line="84"/>
         <source>Battery Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="64"/>
+        <location filename="../assets/CommandLogPane.qml" line="93"/>
         <source>Calendar Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="73"/>
+        <location filename="../assets/CommandLogPane.qml" line="102"/>
         <source>Contact Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="82"/>
+        <location filename="../assets/CommandLogPane.qml" line="111"/>
         <source>File Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="91"/>
+        <location filename="../assets/CommandLogPane.qml" line="120"/>
         <source>Flashlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="100"/>
+        <location filename="../assets/CommandLogPane.qml" line="129"/>
         <source>Help Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="109"/>
+        <location filename="../assets/CommandLogPane.qml" line="138"/>
         <source>Location Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="118"/>
+        <location filename="../assets/CommandLogPane.qml" line="147"/>
         <source>Audio Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="127"/>
+        <location filename="../assets/CommandLogPane.qml" line="156"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="136"/>
+        <location filename="../assets/CommandLogPane.qml" line="165"/>
         <source>Unread SMS Query</source>
         <translation type="unfinished"></translation>
     </message>
@@ -171,7 +196,7 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../assets/LoginDialog.qml" line="79"/>
+        <location filename="../assets/LoginDialog.qml" line="51"/>
         <source>Invalid login credentials provided.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -317,39 +342,39 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
 <context>
     <name>golden::ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="78"/>
+        <location filename="../src/applicationui.cpp" line="75"/>
         <source>Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="82"/>
+        <location filename="../src/applicationui.cpp" line="79"/>
         <source>Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played and sent. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="86"/>
+        <location filename="../src/applicationui.cpp" line="83"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="89"/>
+        <location filename="../src/applicationui.cpp" line="86"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that the &apos;location&apos; command can be processed. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="145"/>
+        <location filename="../src/applicationui.cpp" line="156"/>
         <source>Error initializing link with service. Please restart your device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="203"/>
+        <location filename="../src/applicationui.cpp" line="214"/>
         <source>Added %1 to whitelist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="207"/>
+        <location filename="../src/applicationui.cpp" line="218"/>
         <source>Invalid email address entered...</source>
         <translation type="unfinished"></translation>
     </message>

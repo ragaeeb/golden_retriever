@@ -1,8 +1,8 @@
 #ifndef MICRECORDER_H_
 #define MICRECORDER_H_
 
-#include <QObject>
 #include <QVariantList>
+
 #include <bb/multimedia/AudioRecorder>
 
 namespace golden {

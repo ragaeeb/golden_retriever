@@ -44,9 +44,11 @@ class Service: public QObject
 	QString m_subject;
 	qint64 m_accountId;
 
+	void process(Message const& m, QStringList const& subject);
+
 private slots:
     void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments);
-	void handleInvoke(const bb::system::InvokeRequest &);
+	void handleInvoke(bb::system::InvokeRequest const&);
 	void init();
     void messageAdded(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey);
     void messageUpdated(bb::pim::account::AccountKey accountId, bb::pim::message::ConversationKey conversationId, bb::pim::message::MessageKey messageId, bb::pim::message::MessageUpdate data);

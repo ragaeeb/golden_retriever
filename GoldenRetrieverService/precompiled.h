@@ -18,3 +18,7 @@
 #include <bb/device/Led>
 
 #include <QTimer>
+
+#include <QtLocationSubset/QGeoServiceProvider>
+#include <QtLocationSubset/QGeoSearchManager>
+#include <QtLocationSubset/QGeoSearchReply>

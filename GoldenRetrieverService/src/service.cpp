@@ -102,16 +102,21 @@ void Service::messageAdded(bb::pim::account::AccountKey accountKey, bb::pim::mes
             {
                 QString firstKeyword = subject.takeFirst();
 
-                if ( firstKeyword.compare(m_subject, Qt::CaseInsensitive) == 0 )
-                {
-                    LOGGER("Matched, processing");
-                    Interpreter* i = new Interpreter(m, subject);
-                    connect( i, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( commandProcessed(int, QString const&, QVariantList const&) ) );
-                    i->run();
+                if ( firstKeyword.compare(m_subject, Qt::CaseInsensitive) == 0 ) {
+                    process(m, subject);
                 }
             }
         }
     }
+}
+
+
+void Service::process(Message const& m, QStringList const& subject)
+{
+    LOGGER("Matched, processing");
+    Interpreter* i = new Interpreter(m, subject);
+    connect( i, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( commandProcessed(int, QString const&, QVariantList const&) ) );
+    i->run();
 }
 
 
@@ -174,9 +179,14 @@ void Service::messageUpdated(bb::pim::account::AccountKey ak, bb::pim::message::
 }
 
 
-void Service::handleInvoke(const bb::system::InvokeRequest & request)
+void Service::handleInvoke(bb::system::InvokeRequest const& request)
 {
     LOGGER("Invoked" << request.action() );
+
+    if ( !request.data().isNull() ) {
+        QString command = QString( request.data() );
+        process( Message(), command.trimmed().split(" ") );
+    }
 }
 
 

@@ -61,6 +61,7 @@ public:
     Q_INVOKABLE QStringList getWhiteList();
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void removeFromWhiteList(QString request);
+    Q_INVOKABLE void invokeService(QString const& command=QString());
     int whiteListCount();
 };
 
