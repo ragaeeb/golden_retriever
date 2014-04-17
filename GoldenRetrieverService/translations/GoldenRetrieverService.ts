@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>golden::Alarm</name>
+    <message>
+        <source>Could not play alarm due to an unknown error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>Played alarm for %n seconds.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>golden::CommandLineFetcher</name>
     <message>
         <source>Error occured when running command!</source>
@@ -74,10 +87,6 @@ You entered only: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1, %2, (latitude: %2, longitude: %3)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Battery Level: %1, Temperature: %2 degrees Celsius</source>
         <translation type="unfinished"></translation>
     </message>
@@ -117,6 +126,14 @@ mic 15
 If no argument is specified after the *mic* command, the default value of 10 seconds is used.
 
 unread: Fetches all the unread SMS messages that are on the device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The device&apos;s location could not be fetched. Please try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1, %2, %3 (latitude: %4, longitude: %5)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

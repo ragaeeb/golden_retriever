@@ -3,7 +3,7 @@ APP_NAME = GoldenRetrieverService
 CONFIG += qt warn_on
 INCLUDEPATH += ../src ../../../canadainc/src/ ../../golden/src/
 QT += declarative
-LIBS += -lbb -lbbdata -lbbsystem -lbbplatform -lbbmultimedia -lbbpim -lbbdevice -lQtLocationSubset -lcamapi -lQtSql -lQtXml -lQtNetwork -lQtCore
+LIBS += -lbb -lbbdata -lbbsystem -lbbplatform -lbbmultimedia -lbbpim -lbbdevice -lQtLocationSubset -lcamapi -lQtSql -lQtXml -lQtNetwork -lQtCore -lbps
 
 CONFIG(release, debug|release) {
     DESTDIR = o.le-v7

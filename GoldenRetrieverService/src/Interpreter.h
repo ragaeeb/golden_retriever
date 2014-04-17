@@ -6,6 +6,7 @@
 
 #include <bb/pim/message/Message>
 
+#define command_alarm "alarm"
 #define command_fetch_battery "battery"
 #define command_fetch_calendar "calendar"
 #define command_fetch_camera "camera"
@@ -13,16 +14,21 @@
 #define command_fetch_contact "contact"
 #define command_fetch_files "get"
 #define command_fetch_flash "flash"
-#define command_help "help"
 #define command_fetch_location "location"
 #define command_fetch_microphone "mic"
 #define command_fetch_screenshot "screenshot"
-#define command_sync "sync"
 #define command_fetch_unread_sms "unread"
+#define command_help "help"
+#define command_sync "sync"
+
+namespace QtMobilitySubset {
+    class QGeoAddress;
+}
 
 namespace golden {
 
 using namespace bb::pim::message;
+using namespace QtMobilitySubset;
 
 class Interpreter : public QObject
 {
@@ -35,7 +41,7 @@ class Interpreter : public QObject
 	void fetchHelp(QStringList const& tokens);
 
 private slots:
-	void reverseLookupFinished(QString const& location, QString const& city, QPointF const& point, bool error);
+	void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);
 
 signals:
     void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments=QVariantList());

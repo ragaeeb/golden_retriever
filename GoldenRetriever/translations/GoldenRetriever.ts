@@ -60,51 +60,56 @@ When you are away from your device, send the command messages to this mailbox so
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="84"/>
-        <source>Battery Status</source>
+        <source>Alarm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="93"/>
-        <source>Calendar Query</source>
+        <source>Battery Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="102"/>
-        <source>Contact Query</source>
+        <source>Calendar Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="111"/>
-        <source>File Request</source>
+        <source>Contact Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="120"/>
-        <source>Flashlight</source>
+        <source>File Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="129"/>
-        <source>Help Query</source>
+        <source>Flashlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="138"/>
-        <source>Location Query</source>
+        <source>Help Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="147"/>
-        <source>Audio Record</source>
+        <source>Location Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="156"/>
-        <source>Sync</source>
+        <source>Audio Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="165"/>
+        <source>Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="174"/>
         <source>Unread SMS Query</source>
         <translation type="unfinished"></translation>
     </message>

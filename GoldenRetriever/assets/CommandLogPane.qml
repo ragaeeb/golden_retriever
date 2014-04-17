@@ -75,7 +75,16 @@ NavigationPane
                             title: qsTr("Unknown Command") + Retranslate.onLanguageChanged
                             imageSource: "images/commands/ic_unknown.png"
                         }
-                    },                    
+                    },
+                    
+                    ListItemComponent {
+                        type: ""+Command.Alarm
+                        
+                        CommandListItem {
+                            title: qsTr("Alarm") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_alarm.png"
+                        }
+                    },
 
                     ListItemComponent {
                         type: ""+Command.Battery

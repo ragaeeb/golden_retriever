@@ -1,6 +1,7 @@
 #include "precompiled.h"
 
 #include "Interpreter.h"
+#include "Alarm.h"
 #include "Command.h"
 #include "CommandLineFetcher.h"
 #include "Flashlight.h"
@@ -18,6 +19,7 @@
 namespace golden {
 
 using namespace canadainc;
+using namespace QtMobilitySubset;
 
 Interpreter::Interpreter(Message const& m, QStringList const& command) : m_message(m), m_command(command)
 {
@@ -74,13 +76,17 @@ void Interpreter::run()
 			fetchHelp(tokens);
 		} else if ( equals(command_fetch_location) ) {
 			ReverseGeolocator* rgl = new ReverseGeolocator(this);
-			connect( rgl, SIGNAL( finished(QString const&, QString const&, QPointF const&, bool) ), this, SLOT( reverseLookupFinished(QString const&, QString const&, QPointF const&, bool) ) );
+			connect( rgl, SIGNAL( finished(QGeoAddress const&, QPointF const&, bool) ), this, SLOT( reverseLookupFinished(QGeoAddress const&, QPointF const&, bool) ) );
 			bool ok = rgl->locate();
 
 			if (!ok) {
 			    emit commandProcessed( Command::Location, tr("It seems like Location Services on the device is turned off!") );
 			}
-		} else {
+		} else if ( equals(command_alarm) ) {
+		    Alarm* ap = new Alarm(tokens);
+		    connect( ap, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
+		    ap->play();
+        } else {
 			emit commandProcessed( Command::Unknown, tr("No commands matched your input. Type 'help' for a list of commands available.") );
 		}
 	} else {
@@ -116,13 +122,18 @@ void Interpreter::fetchHelp(QStringList const& tokens)
 }
 
 
-void Interpreter::reverseLookupFinished(QString const& location, QString const& city, QPointF const& coordinates, bool error)
+void Interpreter::reverseLookupFinished(QGeoAddress const& g, QPointF const& coordinates, bool error)
 {
 	Q_UNUSED(error);
 
-	LOGGER("FINISHED!" << location);
+	LOGGER("FINISHED!" << g.city() << g.country() << g.text());
 	QPointF point = coordinates;
-	emit commandProcessed( Command::Location, tr("%1, %2, (latitude: %2, longitude: %3)").arg(location).arg(city).arg( point.rx() ).arg( point.ry() ) );
+
+	if (error) {
+	    emit commandProcessed( Command::Location, tr("The device's location could not be fetched. Please try again.") );
+	} else {
+	    emit commandProcessed( Command::Location, tr("%1, %2, %3 (latitude: %4, longitude: %5)").arg( g.text() ).arg( g.city() ).arg( g.country() ).arg( point.rx() ).arg( point.ry() ) );
+	}
 }
 
 
