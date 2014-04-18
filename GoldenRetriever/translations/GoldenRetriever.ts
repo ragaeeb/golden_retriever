@@ -24,93 +24,98 @@ When you are away from your device, send the command messages to this mailbox so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="21"/>
-        <source>Test A Command</source>
+        <location filename="../assets/CommandLogPane.qml" line="20"/>
+        <source>Test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="32"/>
+        <location filename="../assets/CommandLogPane.qml" line="30"/>
         <source>Enter Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="33"/>
+        <location filename="../assets/CommandLogPane.qml" line="31"/>
         <source>Enter the command (ie: battery)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="34"/>
+        <location filename="../assets/CommandLogPane.qml" line="32"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="35"/>
+        <location filename="../assets/CommandLogPane.qml" line="33"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="54"/>
+        <location filename="../assets/CommandLogPane.qml" line="52"/>
         <source>Welcome to Golden Retriever. This app can be used to remotely control your BlackBerry device using emails. To learn more about the commands available, swipe-down from the top-bezel and choose Help.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="75"/>
+        <location filename="../assets/CommandLogPane.qml" line="73"/>
         <source>Unknown Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="84"/>
+        <location filename="../assets/CommandLogPane.qml" line="82"/>
         <source>Alarm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="93"/>
+        <location filename="../assets/CommandLogPane.qml" line="91"/>
         <source>Battery Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="102"/>
+        <location filename="../assets/CommandLogPane.qml" line="100"/>
         <source>Calendar Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="111"/>
+        <location filename="../assets/CommandLogPane.qml" line="109"/>
         <source>Contact Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="120"/>
+        <location filename="../assets/CommandLogPane.qml" line="118"/>
         <source>File Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="129"/>
+        <location filename="../assets/CommandLogPane.qml" line="127"/>
         <source>Flashlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="138"/>
+        <location filename="../assets/CommandLogPane.qml" line="136"/>
         <source>Help Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="147"/>
+        <location filename="../assets/CommandLogPane.qml" line="145"/>
         <source>Location Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="156"/>
+        <location filename="../assets/CommandLogPane.qml" line="154"/>
         <source>Audio Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="165"/>
+        <location filename="../assets/CommandLogPane.qml" line="163"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="174"/>
+        <location filename="../assets/CommandLogPane.qml" line="172"/>
         <source>Unread SMS Query</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="181"/>
+        <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

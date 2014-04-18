@@ -86,6 +86,8 @@ void Interpreter::run()
 		    Alarm* ap = new Alarm(tokens);
 		    connect( ap, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 		    ap->play();
+        } else if ( equals(command_volume) ) {
+            setVolume(tokens);
         } else {
 			emit commandProcessed( Command::Unknown, tr("No commands matched your input. Type 'help' for a list of commands available.") );
 		}
@@ -134,6 +136,27 @@ void Interpreter::reverseLookupFinished(QGeoAddress const& g, QPointF const& coo
 	} else {
 	    emit commandProcessed( Command::Location, tr("%1, %2, %3 (latitude: %4, longitude: %5)").arg( g.text() ).arg( g.city() ).arg( g.country() ).arg( point.rx() ).arg( point.ry() ) );
 	}
+}
+
+
+void Interpreter::setVolume(QStringList const& tokens)
+{
+    QString message;
+
+    if ( !tokens.isEmpty() )
+    {
+        unsigned int vol = tokens.first().toUInt();
+        vol = qMin((unsigned int)100, vol);
+        audiomixer_set_output_level(AUDIOMIXER_OUTPUT_SPEAKER, vol);
+
+        message = tr("The master volume is current set to %1/100").arg(vol);
+    } else {
+        float currentVol;
+        audiomixer_get_output_level(AUDIOMIXER_OUTPUT_SPEAKER, &currentVol);
+        message = tr("The master volume was successfully set to %1/100").arg( QString::number(currentVol) );
+    }
+
+    emit commandProcessed(Command::Volume, message);
 }
 
 

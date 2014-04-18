@@ -35,7 +35,9 @@ public:
         SetWallpaper,
         UnreadSMS,
         UploadFile,
-        Sync
+        Sync,
+        Alarm,
+        Volume
     };
 };
 

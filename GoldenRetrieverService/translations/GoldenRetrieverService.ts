@@ -136,6 +136,14 @@ unread: Fetches all the unread SMS messages that are on the device.</source>
         <source>%1, %2, %3 (latitude: %4, longitude: %5)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The master volume was successfully set to %1/100</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The master volume is current set to %1/100</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>golden::MicRecorder</name>

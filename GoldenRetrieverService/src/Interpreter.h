@@ -20,6 +20,7 @@
 #define command_fetch_unread_sms "unread"
 #define command_help "help"
 #define command_sync "sync"
+#define command_volume "volume"
 
 namespace QtMobilitySubset {
     class QGeoAddress;
@@ -39,6 +40,7 @@ class Interpreter : public QObject
 
 	void fetchBatteryInfo(QStringList const& tokens);
 	void fetchHelp(QStringList const& tokens);
+	void setVolume(QStringList const& tokens);
 
 private slots:
 	void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);

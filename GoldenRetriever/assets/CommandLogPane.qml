@@ -14,13 +14,11 @@ NavigationPane
     {
         titleBar: TitleBar {
             title: qsTr("Golden Retriever") + Retranslate.onLanguageChanged
-        }
-        
-        actions: [
-            ActionItem {
-                title: qsTr("Test A Command") + Retranslate.onLanguageChanged
+            
+            acceptAction: ActionItem
+            {
+                title: qsTr("Test") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_test.png"
-                ActionBar.placement: ActionBarPlacement.OnBar
                 
                 onTriggered: {
                     prompt.show();
@@ -42,7 +40,7 @@ NavigationPane
                     }
                 ]
             }
-        ]
+        }
         
         Container
         {
@@ -173,6 +171,15 @@ NavigationPane
                         CommandListItem {
                             title: qsTr("Unread SMS Query") + Retranslate.onLanguageChanged
                             imageSource: "images/commands/ic_unread.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
+                        type: ""+Command.Volume
+                        
+                        CommandListItem {
+                            title: qsTr("Volume") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_volume.png"
                         }
                     }
                 ]
