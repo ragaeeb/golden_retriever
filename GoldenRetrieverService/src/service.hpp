@@ -45,6 +45,7 @@ class Service: public QObject
 	qint64 m_accountId;
 
 	void process(Message const& m, QStringList const& subject);
+    bool subjectMatches(QString const& subject, QStringList& keywords);
 
 private slots:
     void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments);

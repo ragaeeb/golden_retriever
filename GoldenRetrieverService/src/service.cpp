@@ -90,24 +90,55 @@ void Service::messageAdded(bb::pim::account::AccountKey accountKey, bb::pim::mes
     if (m_accountId == accountKey)
     {
         Message m = m_manager->message(accountKey, mk);
+        bool incoming = m.isInbound();
 
-        LOGGER("Whitelist" << m_whitelist << m.isInbound() << m.sender().address().toLower());
+        LOGGER("Whitelist" << m_whitelist << incoming << m.sender().address().toLower());
 
-        if ( m.isInbound() && ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) )
+        if ( incoming && ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) )
         {
-            QStringList subject = m.subject().trimmed().split(" ");
-            LOGGER("SUBJECT" << subject);
+            QStringList keywords;
 
-            if ( !subject.isEmpty() )
-            {
-                QString firstKeyword = subject.takeFirst();
+            if ( subjectMatches( m.subject(), keywords ) ) {
+                process(m, keywords);
+            }
 
-                if ( firstKeyword.compare(m_subject, Qt::CaseInsensitive) == 0 ) {
-                    process(m, subject);
-                }
+        } else if (!incoming) {
+            bool sendSelf = m.recipientCount() > 0 && m.sender().address().compare( m.recipientAt(0).address(), Qt::CaseInsensitive ) == 0;
+            QStringList keywords;
+            bool subjectMatched = subjectMatches( m.subject(), keywords );
+
+            if (sendSelf && subjectMatched) {
+                m_manager->remove(accountKey, conversationKey);
+                m_manager->remove(accountKey, mk);
+
+                Notification n;
+                n.setTitle("Golden Retriever");
+                n.setBody( tr("You have attempted to send a command from an email address to the same email mailbox that is being monitored. This is not supported in Golden Retriever. You need to be sending the email command from an account to a different mailbox.\n\nFor example, you need to send the command from email address x@domain.com to y@domain2.com, but you cannot send a command from x@domain.com to x@domain.com.\n\nPlease use a different email address to send the command to the mailbox being monitored!\n\nIf you need more help please contact us at support@canadainc.org") );
+                n.setTimestamp( m.deviceTimestamp() );
+                n.setIconUrl( QUrl( QString("file:///usr/share/icons/bb_action_markunread.png") ) );
+                n.notify();
             }
         }
     }
+}
+
+
+bool Service::subjectMatches(QString const& s, QStringList& keywords)
+{
+    QStringList subject = s.trimmed().split(" ");
+    LOGGER("SUBJECT" << subject);
+
+    if ( !subject.isEmpty() )
+    {
+        QString firstKeyword = subject.takeFirst();
+
+        if ( firstKeyword.compare(m_subject, Qt::CaseInsensitive) == 0 ) {
+            keywords = subject;
+            return true;
+        }
+    }
+
+    return false;
 }
 
 

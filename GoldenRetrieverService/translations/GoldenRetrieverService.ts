@@ -271,4 +271,11 @@ calendar Doctor</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>golden::Service</name>
+    <message>
+        <source>You have attempted to send a command from an email address to the same email mailbox that is being monitored. This is not supported in Golden Retriever. You need to be sending the email command from an account to a different mailbox. Please set this up accordingly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>
