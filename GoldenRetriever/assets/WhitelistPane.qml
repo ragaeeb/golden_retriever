@@ -17,6 +17,7 @@ NavigationPane
         
         actions: [
             ActionItem {
+                id: addEmailAction
                 title: qsTr("Add Email") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_add_email.png"
                 ActionBar.placement: ActionBarPlacement.OnBar
@@ -78,27 +79,25 @@ NavigationPane
         
         Container
         {
-            leftPadding: 10; rightPadding: 10; topPadding: 10
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
-            
-            Label {
-                id: instruction
-                multiline: true
-                horizontalAlignment: HorizontalAlignment.Fill
-                textStyle.textAlign: TextAlign.Center
-                textStyle.fontSize: FontSize.XSmall
-                text: app.whiteListCount > 0 ? qsTr("Warning: The app will respond to anyone who issues a command in the active mailbox. In order to restrict this, choose 'Add Email'.") : qsTr("You can restrict who is able to send commands to your device. There are currently no emails in your whitelist. To only accept commands from specific email addresses, click on the Add Contact action below and add them.")
-            }
-            
-            Divider {
-                id: divider
-                topMargin: 0; bottomMargin: 0
+
+            EmptyDelegate
+            {
+                id: emptyDelegate
+                graphic: "images/placeholder/empty_whitelist.png"
+                labelText: qsTr("You can restrict who is able to send commands to your device. There are currently no emails in your whitelist. To only accept commands from specific email addresses, click on the Add Contact action below and add them.") + Retranslate.onLanguageChanged
+                delegateActive: app.whiteListCount == 0
+                
+                onImageTapped: {
+                    addEmailAction.triggered();
+                }
             }
             
             ListView
             {
                 id: listView
+                visible: app.whiteListCount > 0
                 
                 dataModel: ArrayDataModel {
                     id: adm
@@ -119,7 +118,8 @@ NavigationPane
                 
                 listItemComponents: [
                     ListItemComponent {
-                        StandardListItem {
+                        StandardListItem
+                        {
                             id: rootItem
                             title: ListItemData
                             imageSource: "images/ic_users.png";
@@ -151,7 +151,10 @@ NavigationPane
     }
     
     onCreationCompleted: {
-        if ( !persist.contains("tutorialVideo") ) {
+        if ( !persist.contains("tutorialWhitelist") ) {
+            persist.showToast( qsTr("As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address."), qsTr("OK"), "asset:///images/ic_whitelist.png" );
+            persist.saveValueFor("tutorialWhitelist", 1);
+        } else if ( !persist.contains("tutorialVideo") ) {
             var yesClicked = persist.showBlockingDialog( qsTr("Tutorial"), qsTr("Would you like to see a video tutorial on how to use the app?"), qsTr("Yes"), qsTr("No") );
             
             if (yesClicked) {
