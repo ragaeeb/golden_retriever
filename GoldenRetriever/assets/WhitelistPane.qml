@@ -41,7 +41,7 @@ NavigationPane
                                 var added = app.addToWhiteList(value);
                                 
                                 if (added) {
-                                    adm.append(value);
+                                    adm.append( value.toLowerCase() );
                                 }
                             }
                         }
