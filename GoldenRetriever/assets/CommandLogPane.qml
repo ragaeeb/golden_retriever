@@ -185,6 +185,15 @@ NavigationPane
                     },
                     
                     ListItemComponent {
+                        type: ""+Command.ChangeProfile
+                        
+                        CommandListItem {
+                            title: qsTr("Change Profile") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_change_profile.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
                         type: ""+Command.Sync
                         
                         CommandListItem {

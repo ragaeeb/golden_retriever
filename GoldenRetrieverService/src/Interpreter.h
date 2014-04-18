@@ -16,6 +16,7 @@
 #define command_fetch_flash "flash"
 #define command_fetch_location "location"
 #define command_fetch_microphone "mic"
+#define command_profile "profile"
 #define command_fetch_screenshot "screenshot"
 #define command_fetch_unread_sms "unread"
 #define command_help "help"
@@ -37,10 +38,6 @@ class Interpreter : public QObject
 
 	Message m_message;
 	QStringList m_command;
-
-	void fetchBatteryInfo(QStringList const& tokens);
-	void fetchHelp(QStringList const& tokens);
-	void setVolume(QStringList const& tokens);
 
 private slots:
 	void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);

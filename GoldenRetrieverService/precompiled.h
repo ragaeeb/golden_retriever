@@ -1,6 +1,7 @@
 #include <bb/Application>
 
 #include <bb/platform/Notification>
+#include <bb/platform/NotificationGlobalSettings>
 
 #include <bb/pim/account/AccountService>
 

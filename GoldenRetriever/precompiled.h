@@ -5,3 +5,5 @@
 #include <bb/pim/account/AccountService>
 
 #include <bb/device/DisplayInfo>
+
+#include <bb/platform/NotificationGlobalSettings>

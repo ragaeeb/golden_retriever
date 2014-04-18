@@ -20,6 +20,7 @@ namespace golden {
 
 using namespace bb::cascades;
 using namespace bb::pim::message;
+using namespace bb::platform;
 using namespace canadainc;
 
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
@@ -82,8 +83,27 @@ void ApplicationUI::init()
 		{
 			ok = PimUtil::validateCalendarAccess( tr("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly.") );
 
-			if (ok) {
+			if (ok)
+			{
 				ok = InvocationUtils::validateLocationAccess( tr("Warning: It seems like the app does not have access to access your device's location. This permission is needed to detect your GPS location so that the 'location' command can be processed. If you keep this permission off, the app may not work properly.\n\nPress OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.") );
+
+				if (ok)
+				{
+				    NotificationGlobalSettings ngs;
+				    NotificationMode::Type current = ngs.mode();
+
+				    NotificationSettingsError::Type nse = ngs.setMode(NotificationMode::AlertsOff);
+                    LOGGER("NSE Permissions" << nse);
+
+				    if ( nse == NotificationSettingsError::InsufficientPermissions )
+				    {
+				        LOGGER("No permissions");
+				        m_persistance.showToast( tr("Warning: It seems like the app does not have access to your device's notification profile settings. This permission is needed to process the 'profile' commands if you ever want to remotely set or fetch the device's notification profile. If you keep this permission off, the app may not work properly.\n\nPress OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission."), tr("OK"), "asset:///images/commands/ic_change_profile.png" );
+				        InvocationUtils::launchAppPermissionSettings();
+				    } else {
+				        ngs.setMode(current);
+				    }
+				}
 			}
 		}
 	}

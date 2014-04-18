@@ -166,6 +166,7 @@
     <permission>access_pimdomain_calendars</permission>
     <permission>access_pimdomain_contacts</permission>
     <permission>access_pimdomain_messages</permission>
+    <permission>access_notify_settings_control</permission>
     <permission>access_shared</permission>
     <permission>access_sms_mms</permission>
     <permission>read_geolocation</permission>

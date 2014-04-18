@@ -135,16 +135,21 @@ When you are away from your device, send the command messages to this mailbox so
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="191"/>
-        <source>Sync</source>
+        <source>Change Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="200"/>
-        <source>Unread SMS Query</source>
+        <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="209"/>
+        <source>Unread SMS Query</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CommandLogPane.qml" line="218"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
@@ -220,6 +225,10 @@ get /accounts/1000/shared/documents/abdul khaliq.txt
 location: Fetches the current location of the device reverse geocoded as well as in latitude/longitude coordinates.
 
 mic: Records audio from the device&apos;s microphone and sends it back. You can customize how long the device should record for by specifying an argument in terms of seconds. For example to record 15 seconds of audio, use the following command:
+mic 15
+If no argument is specified after the *mic* command, the default value of 10 seconds is used.
+
+volume: Sets or retrieves the master volume on the device. For example to set the , use the following command:
 mic 15
 If no argument is specified after the *mic* command, the default value of 10 seconds is used.
 
@@ -383,39 +392,51 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
 <context>
     <name>golden::ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="75"/>
+        <location filename="../src/applicationui.cpp" line="76"/>
         <source>Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="79"/>
+        <location filename="../src/applicationui.cpp" line="80"/>
         <source>Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played and sent. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="83"/>
+        <location filename="../src/applicationui.cpp" line="84"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="86"/>
+        <location filename="../src/applicationui.cpp" line="88"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that the &apos;location&apos; command can be processed. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="156"/>
+        <location filename="../src/applicationui.cpp" line="101"/>
+        <source>Warning: It seems like the app does not have access to your device&apos;s notification profile settings. This permission is needed to process the &apos;profile&apos; commands if you ever want to remotely set or fetch the device&apos;s notification profile. If you keep this permission off, the app may not work properly.
+
+Press OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/applicationui.cpp" line="101"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/applicationui.cpp" line="176"/>
         <source>Error initializing link with service. Please restart your device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="214"/>
+        <location filename="../src/applicationui.cpp" line="234"/>
         <source>Added %1 to whitelist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="218"/>
+        <location filename="../src/applicationui.cpp" line="238"/>
         <source>Invalid email address entered...</source>
         <translation type="unfinished"></translation>
     </message>
