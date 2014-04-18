@@ -47,6 +47,12 @@ NavigationPane
                         }
                     }
                 ]
+                
+                shortcuts: [
+                    SystemShortcut {
+                        type: SystemShortcuts.CreateNew
+                    }
+                ]
             },
             
             DeleteActionItem {
