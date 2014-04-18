@@ -53,6 +53,7 @@ NavigationPane
                 id: clearAllAction
                 title: qsTr("Clear List") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_clear_whitelist.png"
+                enabled: listView.visible
                 
                 onTriggered: {
                     delPrompt.show()
