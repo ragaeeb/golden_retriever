@@ -12,7 +12,8 @@ NavigationPane
     
     Page
     {
-        titleBar: TitleBar {
+        titleBar: TitleBar
+        {
             title: qsTr("Golden Retriever") + Retranslate.onLanguageChanged
             
             acceptAction: ActionItem
@@ -41,6 +42,36 @@ NavigationPane
                 ]
             }
         }
+        
+        actions: [
+            DeleteActionItem {
+                title: qsTr("Clear Logs") + Retranslate.onLanguageChanged
+                imageSource: "images/menu/ic_clear_logs.png"
+                
+                onTriggered: {
+                    clearPrompt.show();
+                }
+                
+                attachedObjects: [
+                    SystemDialog {
+                        id: clearPrompt
+                        title: qsTr("Confirmation") + Retranslate.onLanguageChanged
+                        body: qsTr("Are you sure you want to clear all the logs?") + Retranslate.onLanguageChanged
+                        confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
+                        cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
+                        
+                        onFinished: {
+                            if (result == SystemUiResult.ConfirmButtonSelection)
+                            {
+                                sql.query = "DELETE FROM logs";
+                                sql.load(QueryId.ClearLogs);
+                                persist.showToast( qsTr("Cleared all logs!"), "", "asset:///images/menu/ic_clear_logs.png" );
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
         
         Container
         {
@@ -198,6 +229,8 @@ NavigationPane
                         adm.append(data);
                     } else if (id == QueryId.FetchLatestLogs) {
                         adm.insert(0, data);
+                    } else if (id == QueryId.ClearLogs) {
+                        adm.clear();
                     }
                     
                     listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
