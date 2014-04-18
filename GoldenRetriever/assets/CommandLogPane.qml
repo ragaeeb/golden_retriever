@@ -44,16 +44,19 @@ NavigationPane
         }
         
         actions: [
-            DeleteActionItem {
+            DeleteActionItem
+            {
                 title: qsTr("Clear Logs") + Retranslate.onLanguageChanged
                 imageSource: "images/menu/ic_clear_logs.png"
+                enabled: listView.visible
                 
                 onTriggered: {
                     clearPrompt.show();
                 }
                 
                 attachedObjects: [
-                    SystemDialog {
+                    SystemDialog
+                    {
                         id: clearPrompt
                         title: qsTr("Confirmation") + Retranslate.onLanguageChanged
                         body: qsTr("Are you sure you want to clear all the logs?") + Retranslate.onLanguageChanged
@@ -77,18 +80,12 @@ NavigationPane
         {
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
-            topPadding: 10; bottomPadding: 10; rightPadding: 10; leftPadding: 10
             
-            Label {
-                text: qsTr("Welcome to Golden Retriever. This app can be used to remotely control your BlackBerry device using emails. To learn more about the commands available, swipe-down from the top-bezel and choose Help.") + Retranslate.onLanguageChanged
-                textStyle.fontSize: FontSize.XSmall
-                textStyle.textAlign: TextAlign.Center
-                multiline: true
-                horizontalAlignment: HorizontalAlignment.Fill
-            }
-            
-            Divider {
-                topMargin: 0; bottomMargin: 0
+            EmptyDelegate
+            {
+                id: emptyDelegate
+                graphic: "images/placeholder/empty_logs.png"
+                labelText: qsTr("Welcome to Golden Retriever. This app can be used to remotely control your BlackBerry device using emails. To learn more about the commands available, swipe-down from the top-bezel and choose Help.") + Retranslate.onLanguageChanged
             }
             
             ListView
@@ -232,6 +229,9 @@ NavigationPane
                     } else if (id == QueryId.ClearLogs) {
                         adm.clear();
                     }
+                    
+                    listView.visible = !adm.isEmpty();
+                    emptyDelegate.delegateActive = adm.isEmpty();
                     
                     listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
                 }
