@@ -5,6 +5,8 @@ StandardListItem
     id: sli
     description: ListItemData.reply
     status: ListItem.view.localizer.renderStandardTime( new Date(ListItemData.timestamp) )
+    scaleX: 0.8
+    opacity: 0
     
     onCreationCompleted: {
         inflateAnim.play();
@@ -31,7 +33,7 @@ StandardListItem
                 duration: 200
             }
             
-            delay: sli.ListItem.indexInSection * 100
+            delay: Math.min(sli.ListItem.indexInSection*100, 1000)
             
             onCreationCompleted: {
                 play();

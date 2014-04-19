@@ -35,7 +35,7 @@ When you are away from your device, send the command messages to this mailbox so
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="32"/>
-        <source>Enter the command (ie: battery)</source>
+        <source>Enter the command (ie: %1 battery)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -130,7 +130,7 @@ When you are away from your device, send the command messages to this mailbox so
     </message>
     <message>
         <location filename="../assets/CommandLogPane.qml" line="182"/>
-        <source>Audio Record</source>
+        <source>Record Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -170,7 +170,7 @@ When you are away from your device, send the command messages to this mailbox so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="56"/>
+        <location filename="../assets/HelpPage.qml" line="57"/>
         <source>Golden Retriever is a must have app for all BlackBerry users.
 
 This app allows users to remotely control their BlackBerry 10 device using commands sent via email messages. This is particularly useful when the user may not have the device in their possession yet they need to interact with it. There are several occasions when this might happen.
@@ -181,11 +181,9 @@ Another example of a use case is if the user loses their phone, or misplaces it 
 
 All of this and more can be done using Golden Retriever. When active, the app simply monitors a user&apos;s specified email inbox for issued commands. When the user is away from the phone, they can simply log into their email address from their laptop or desktop, and send an email command to this email address that the app is monitoring to fetch the information from the device they are looking for.
 
-To issue a command, the user needs to email the target email address with the subject line: &apos;golden&apos; (without quotes).
+To issue a command, the user needs to email the target email address with the subject line: &apos;%1&apos; (without quotes) followed by the command they want to issue.
 
-In the body of the message, the user needs to specify the command they want to issue.
-
-Once the user sends the email to the target address with the command in the body and &apos;golden&apos; as the subject, the app will process the command and reply back to the email with the response.
+Once the user sends the email to the target address with the command after &apos;%1&apos; as the subject, the app will process the command and reply back to the email with the response.
 
 Here are some of the commands that are available (keep in mind future updates will continually bring more and more features):</source>
         <translation type="unfinished"></translation>
@@ -228,12 +226,12 @@ Here are some of the commands that are available (keep in mind future updates wi
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="80"/>
-        <source>The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is &apos;golden&apos;, then in order to issue a battery command, the subject of the email must be &apos;golden battery&apos;.</source>
+        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SettingsPage.qml" line="80"/>
-        <source>OK</source>
+        <source>The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is &apos;%1&apos;, then in order to issue a battery command, the subject of the email must be &apos;%1 battery&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -329,51 +327,51 @@ Here are some of the commands that are available (keep in mind future updates wi
 <context>
     <name>golden::ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="76"/>
+        <location filename="../src/applicationui.cpp" line="78"/>
         <source>Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="80"/>
+        <location filename="../src/applicationui.cpp" line="82"/>
         <source>Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played and sent. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="84"/>
+        <location filename="../src/applicationui.cpp" line="86"/>
         <source>Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to &apos;calendar&apos; commands if you want to ever check your device&apos;s local calendar remotely. If you leave this permission off, some features may not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="88"/>
+        <location filename="../src/applicationui.cpp" line="90"/>
         <source>Warning: It seems like the app does not have access to access your device&apos;s location. This permission is needed to detect your GPS location so that the &apos;location&apos; command can be processed. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="101"/>
+        <location filename="../src/applicationui.cpp" line="103"/>
         <source>Warning: It seems like the app does not have access to your device&apos;s notification profile settings. This permission is needed to process the &apos;profile&apos; commands if you ever want to remotely set or fetch the device&apos;s notification profile. If you keep this permission off, the app may not work properly.
 
 Press OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="101"/>
+        <location filename="../src/applicationui.cpp" line="103"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="176"/>
+        <location filename="../src/applicationui.cpp" line="178"/>
         <source>Error initializing link with service. Please restart your device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="234"/>
+        <location filename="../src/applicationui.cpp" line="236"/>
         <source>Added %1 to whitelist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="238"/>
+        <location filename="../src/applicationui.cpp" line="240"/>
         <source>Invalid email address entered...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -407,7 +405,7 @@ Press OK to launch the application permissions, then go to Golden Retriever and 
     </message>
     <message>
         <location filename="../assets/main.qml" line="73"/>
-        <source>IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the &apos;golden&apos; keyword instead of being specified in the message body. For example before if you used to specify the &apos;golden&apos; keyword in the subject line and &apos;battery&apos; in the body, you would now just specify &apos;golden battery&apos; in the subject line only (without quotes).
+        <source>IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the &apos;%1&apos; keyword instead of being specified in the message body. For example before if you used to specify the &apos;%1&apos; keyword in the subject line and &apos;battery&apos; in the body, you would now just specify &apos;%1 battery&apos; in the subject line only (without quotes).
 
 This was done to preserve battery life since downloading the message body every time drains your device&apos;s battery. If you have any questions, please watch the tutorial video or send us an email!</source>
         <translation type="unfinished"></translation>

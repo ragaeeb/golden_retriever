@@ -26,6 +26,7 @@ class ApplicationUI : public QObject
     Q_OBJECT
     Q_PROPERTY(int whiteListCount READ whiteListCount NOTIFY whiteListCountChanged)
     Q_PROPERTY(bool accountSelected READ accountSelected NOTIFY accountSelectedChanged)
+    Q_PROPERTY(QString subjectPrefix READ subjectPrefix NOTIFY subjectPrefixChanged)
 
     CustomSqlDataSource m_sql;
     LazySceneCover m_cover;
@@ -47,8 +48,9 @@ private slots:
 Q_SIGNALS:
 	void initialize();
 	void accountsImported(QVariantList const& qvl);
+    void accountSelectedChanged();
+    void subjectPrefixChanged();
 	void whiteListCountChanged();
-	void accountSelectedChanged();
 
 public:
 	static void create(Application *app);
@@ -62,6 +64,7 @@ public:
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void removeFromWhiteList(QString request);
     Q_INVOKABLE void invokeService(QString const& command=QString());
+    QString subjectPrefix();
     int whiteListCount();
 };
 

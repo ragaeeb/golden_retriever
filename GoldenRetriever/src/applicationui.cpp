@@ -63,6 +63,8 @@ void ApplicationUI::settingChanged(QString const& key)
 	} else if (key == "account") {
 		LOGGER("Accounts elected changed");
 		emit accountSelectedChanged();
+	} else if (key == "subject") {
+	    emit subjectPrefixChanged();
 	}
 }
 
@@ -264,14 +266,18 @@ void ApplicationUI::removeFromWhiteList(QString request)
 }
 
 
-int ApplicationUI::whiteListCount() {
-	return m_persistance.getValueFor("whitelist").toMap().size();
+bool ApplicationUI::accountSelected() {
+	return m_persistance.contains("account");
 }
 
 
-bool ApplicationUI::accountSelected() {
-	LOGGER( m_persistance.contains("account") );
-	return m_persistance.contains("account");
+QString ApplicationUI::subjectPrefix() {
+    return m_persistance.getValueFor("subject").toString();
+}
+
+
+int ApplicationUI::whiteListCount() {
+    return m_persistance.getValueFor("whitelist").toMap().size();
 }
 
 

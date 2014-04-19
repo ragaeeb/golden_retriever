@@ -96,11 +96,7 @@ void Service::messageAdded(bb::pim::account::AccountKey accountKey, bb::pim::mes
 
         if ( incoming && ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) )
         {
-            QStringList keywords;
-
-            if ( subjectMatches( m.subject(), keywords ) ) {
-                process(m, keywords);
-            }
+            process( m, m.subject() );
 
         } else if (!incoming) {
             bool sendSelf = m.recipientCount() > 0 && m.sender().address().compare( m.recipientAt(0).address(), Qt::CaseInsensitive ) == 0;
@@ -142,12 +138,17 @@ bool Service::subjectMatches(QString const& s, QStringList& keywords)
 }
 
 
-void Service::process(Message const& m, QStringList const& subject)
+void Service::process(Message const& m, QString const& subject)
 {
-    LOGGER("Matched, processing");
-    Interpreter* i = new Interpreter(m, subject);
-    connect( i, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( commandProcessed(int, QString const&, QVariantList const&) ) );
-    i->run();
+    QStringList keywords;
+
+    if ( subjectMatches(subject, keywords) )
+    {
+        LOGGER("Matched, processing");
+        Interpreter* i = new Interpreter(m, keywords);
+        connect( i, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SLOT( commandProcessed(int, QString const&, QVariantList const&) ) );
+        i->run();
+    }
 }
 
 
@@ -216,7 +217,7 @@ void Service::handleInvoke(bb::system::InvokeRequest const& request)
 
     if ( !request.data().isNull() ) {
         QString command = QString( request.data() );
-        process( Message(), command.trimmed().split(" ") );
+        process( Message(), command.trimmed() );
     }
 }
 

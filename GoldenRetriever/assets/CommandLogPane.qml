@@ -29,7 +29,7 @@ NavigationPane
                     SystemPrompt {
                         id: prompt
                         title: qsTr("Enter Command") + Retranslate.onLanguageChanged
-                        inputField.emptyText: qsTr("Enter the command (ie: battery)") + Retranslate.onLanguageChanged
+                        inputField.emptyText: qsTr("Enter the command (ie: %1 battery)").arg(app.subjectPrefix) + Retranslate.onLanguageChanged
                         confirmButton.label: qsTr("OK") + Retranslate.onLanguageChanged
                         cancelButton.label: qsTr("Cancel") + Retranslate.onLanguageChanged
                         
@@ -179,7 +179,7 @@ NavigationPane
                         type: ""+Command.Microphone
                         
                         CommandListItem {
-                            title: qsTr("Audio Record") + Retranslate.onLanguageChanged
+                            title: qsTr("Record Audio") + Retranslate.onLanguageChanged
                             imageSource: "images/commands/ic_microphone.png"
                         }
                     },

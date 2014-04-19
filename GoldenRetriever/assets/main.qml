@@ -70,7 +70,7 @@ TabbedPane
     function onSheetClosed()
     {
         if ( !persist.contains("subjectMoveTutorial") ) {
-            persist.showBlockingToast( qsTr("IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the 'golden' keyword instead of being specified in the message body. For example before if you used to specify the 'golden' keyword in the subject line and 'battery' in the body, you would now just specify 'golden battery' in the subject line only (without quotes).\n\nThis was done to preserve battery life since downloading the message body every time drains your device's battery. If you have any questions, please watch the tutorial video or send us an email!"), qsTr("OK"), "asset:///images/ic_help.png" );
+            persist.showBlockingToast( qsTr("IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the '%1' keyword instead of being specified in the message body. For example before if you used to specify the '%1' keyword in the subject line and 'battery' in the body, you would now just specify '%1 battery' in the subject line only (without quotes).\n\nThis was done to preserve battery life since downloading the message body every time drains your device's battery. If you have any questions, please watch the tutorial video or send us an email!").arg(app.subjectPrefix), qsTr("OK"), "asset:///images/ic_help.png" );
             persist.saveValueFor("subjectMoveTutorial", 1);
         }
         

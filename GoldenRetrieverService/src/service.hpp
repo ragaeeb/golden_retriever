@@ -44,7 +44,7 @@ class Service: public QObject
 	QString m_subject;
 	qint64 m_accountId;
 
-	void process(Message const& m, QStringList const& subject);
+	void process(Message const& m, QString const& subject);
     bool subjectMatches(QString const& subject, QStringList& keywords);
 
 private slots:
