@@ -26,7 +26,7 @@ void HelpFetcher::run()
         result << tr("%1: %2").arg( current.value("title").toString() ).arg( current.value("description").toString() );
     }
 
-	emit commandProcessed(Command::Help, result.join("\n"), QVariantList());
+	emit commandProcessed(Command::Help, result.join("\n\n"), QVariantList());
 }
 
 

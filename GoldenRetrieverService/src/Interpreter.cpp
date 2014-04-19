@@ -91,7 +91,7 @@ void Interpreter::run()
         } else if ( equals(command_profile) ) {
             emit commandProcessed( Command::ChangeProfile, InterpreterHelper::processProfile(tokens) );
         } else {
-			emit commandProcessed( Command::Unknown, tr("No commands matched your input. Type 'help' for a list of commands available.") );
+			emit commandProcessed( Command::Unknown, tr("No commands matched your input. Use the 'help' command for a list of commands supported.") );
 		}
 	} else {
 		LOGGER("Body empty, skipping...");
