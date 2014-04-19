@@ -3,7 +3,7 @@ import bb.cascades 1.0
 StandardListItem
 {
     id: sli
-    description: ListItemData.reply
+    description: ListItemData.reply.replace(/\n/g, " ").substr(0, 120) + "..."
     status: ListItem.view.localizer.renderStandardTime( new Date(ListItemData.timestamp) )
     scaleX: 0.8
     opacity: 0
