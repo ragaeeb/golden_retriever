@@ -1,5 +1,5 @@
 import bb.cascades 1.0
-import bb.system 1.0
+import bb.system 1.2
 
 NavigationPane
 {
@@ -33,6 +33,7 @@ NavigationPane
                         body: qsTr("Enter the email address to whitelist:") + Retranslate.onLanguageChanged
                         confirmButton.label: qsTr("OK") + Retranslate.onLanguageChanged
                         cancelButton.label: qsTr("Cancel") + Retranslate.onLanguageChanged
+                        inputOptions: SystemUiInputOption.None
                         
                         onFinished: {
                             if (result == SystemUiResult.ConfirmButtonSelection)
