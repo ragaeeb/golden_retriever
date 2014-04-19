@@ -22,7 +22,7 @@ Page
         InvokeActionItem {
             query {
                 mimeType: "text/html"
-                uri: "http://www.youtube.com/watch?v=8hDCBJosXGQ"
+                uri: "http://youtu.be/KA56n786BOo"
                 invokeActionId: "bb.action.OPEN"
             }
             

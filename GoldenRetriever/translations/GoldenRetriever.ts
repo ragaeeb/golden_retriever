@@ -192,7 +192,7 @@ Here are some of the commands that are available (keep in mind future updates wi
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../assets/LoginDialog.qml" line="51"/>
+        <location filename="../assets/LoginDialog.qml" line="52"/>
         <source>Invalid login credentials provided.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -3,6 +3,7 @@ import bb.cascades 1.0
 FullScreenDialog
 {
     id: root
+    canClose: false
     
     dialogContent: Container
     {

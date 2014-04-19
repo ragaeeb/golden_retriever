@@ -93,7 +93,8 @@ TabbedPane
         }
     }
     
-    onCreationCompleted: {
+    function authenticate()
+    {
         if ( !security.accountCreated() ) {
             definition.source = "SignupSheet.qml";
         } else {
@@ -102,8 +103,11 @@ TabbedPane
         
         var sheet = definition.createObject();
         sheet.closed.connect(onSheetClosed);
-        //sheet.open();
-        onSheetClosed();
+        sheet.open();
+    }
+    
+    onCreationCompleted: {
+        app.initialize.connect(authenticate);
     }
     
     attachedObjects: [
@@ -116,7 +120,7 @@ TabbedPane
             
             query: InvokeQuery {
                 mimeType: "text/html"
-                uri: "https://www.youtube.com/watch?v=8hDCBJosXGQ"
+                uri: "http://youtu.be/KA56n786BOo"
             }
         }
     ]
