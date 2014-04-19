@@ -39,6 +39,8 @@ class Interpreter : public QObject
 	Message m_message;
 	QStringList m_command;
 
+	void fetchHelp(QStringList const& tokens);
+
 private slots:
 	void reverseLookupFinished(QGeoAddress const& g, QPointF const& point, bool error);
 

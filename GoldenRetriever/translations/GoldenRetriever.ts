@@ -39,117 +39,117 @@ When you are away from your device, send the command messages to this mailbox so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="33"/>
+        <location filename="../assets/CommandLogPane.qml" line="34"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="34"/>
+        <location filename="../assets/CommandLogPane.qml" line="35"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="49"/>
+        <location filename="../assets/CommandLogPane.qml" line="50"/>
         <source>Clear Logs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="61"/>
+        <location filename="../assets/CommandLogPane.qml" line="62"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="62"/>
+        <location filename="../assets/CommandLogPane.qml" line="63"/>
         <source>Are you sure you want to clear all the logs?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="63"/>
+        <location filename="../assets/CommandLogPane.qml" line="64"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="64"/>
+        <location filename="../assets/CommandLogPane.qml" line="65"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="71"/>
+        <location filename="../assets/CommandLogPane.qml" line="72"/>
         <source>Cleared all logs!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="88"/>
+        <location filename="../assets/CommandLogPane.qml" line="89"/>
         <source>Welcome to Golden Retriever. This app can be used to remotely control your BlackBerry device using emails. To learn more about the commands available, swipe-down from the top-bezel and choose Help.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="101"/>
+        <location filename="../assets/CommandLogPane.qml" line="102"/>
         <source>Unknown Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="110"/>
+        <location filename="../assets/CommandLogPane.qml" line="111"/>
         <source>Alarm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="119"/>
+        <location filename="../assets/CommandLogPane.qml" line="120"/>
         <source>Battery Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="128"/>
+        <location filename="../assets/CommandLogPane.qml" line="129"/>
         <source>Calendar Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="137"/>
+        <location filename="../assets/CommandLogPane.qml" line="138"/>
         <source>Contact Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="146"/>
+        <location filename="../assets/CommandLogPane.qml" line="147"/>
         <source>File Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="155"/>
+        <location filename="../assets/CommandLogPane.qml" line="156"/>
         <source>Flashlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="164"/>
+        <location filename="../assets/CommandLogPane.qml" line="165"/>
         <source>Help Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="173"/>
+        <location filename="../assets/CommandLogPane.qml" line="174"/>
         <source>Location Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="182"/>
+        <location filename="../assets/CommandLogPane.qml" line="183"/>
         <source>Record Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="191"/>
+        <location filename="../assets/CommandLogPane.qml" line="192"/>
         <source>Change Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="200"/>
+        <location filename="../assets/CommandLogPane.qml" line="201"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="209"/>
+        <location filename="../assets/CommandLogPane.qml" line="210"/>
         <source>Unread SMS Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CommandLogPane.qml" line="218"/>
+        <location filename="../assets/CommandLogPane.qml" line="219"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
@@ -269,7 +269,7 @@ Here are some of the commands that are available (keep in mind future updates wi
     </message>
     <message>
         <location filename="../assets/WhitelistPane.qml" line="34"/>
-        <location filename="../assets/WhitelistPane.qml" line="162"/>
+        <location filename="../assets/WhitelistPane.qml" line="163"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -279,47 +279,47 @@ Here are some of the commands that are available (keep in mind future updates wi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="60"/>
+        <location filename="../assets/WhitelistPane.qml" line="61"/>
         <source>Clear List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="71"/>
+        <location filename="../assets/WhitelistPane.qml" line="72"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="72"/>
+        <location filename="../assets/WhitelistPane.qml" line="73"/>
         <source>Are you sure you want to clear the whitelist?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="73"/>
+        <location filename="../assets/WhitelistPane.qml" line="74"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="74"/>
+        <location filename="../assets/WhitelistPane.qml" line="75"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="96"/>
+        <location filename="../assets/WhitelistPane.qml" line="97"/>
         <source>You can restrict who is able to send commands to your device. There are currently no emails in your whitelist. To only accept commands from specific email addresses, click on the Add Contact action below and add them.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="117"/>
+        <location filename="../assets/WhitelistPane.qml" line="118"/>
         <source>Removed %1 from white list!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="117"/>
+        <location filename="../assets/WhitelistPane.qml" line="118"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="162"/>
+        <location filename="../assets/WhitelistPane.qml" line="163"/>
         <source>As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address.</source>
         <translation type="unfinished"></translation>
     </message>

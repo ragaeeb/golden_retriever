@@ -1,5 +1,5 @@
-#ifndef PIMSYNCER_H_
-#define PIMSYNCER_H_
+#ifndef HELPFETCHER_H_
+#define HELPFETCHER_H_
 
 #include <QObject>
 #include <QRunnable>
@@ -7,7 +7,7 @@
 
 namespace golden {
 
-class PimSyncer : public QObject, public QRunnable
+class HelpFetcher : public QObject, public QRunnable
 {
 	Q_OBJECT
 
@@ -15,10 +15,10 @@ signals:
 	void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments);
 
 public:
-	PimSyncer(QStringList const& tokens);
+	HelpFetcher(QStringList const& tokens);
 	void run();
 };
 
 } /* namespace golden */
 
-#endif /* PIMSYNCER_H_ */
+#endif /* HELPFETCHER_H_ */

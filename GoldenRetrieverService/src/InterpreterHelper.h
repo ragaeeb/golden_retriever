@@ -9,7 +9,6 @@ class InterpreterHelper
 {
 public:
     static QString fetchBatteryInfo(QStringList const& tokens);
-    static QString fetchHelp(QStringList const& tokens);
     static QString processProfile(QStringList const& tokens);
     static QString processVolume(QStringList const& tokens);
 };

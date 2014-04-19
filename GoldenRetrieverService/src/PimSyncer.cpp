@@ -9,8 +9,9 @@ namespace golden {
 using namespace bb::pim::account;
 using namespace bb::pim::message;
 
-PimSyncer::PimSyncer(QStringList const& tokens) : m_tokens(tokens)
+PimSyncer::PimSyncer(QStringList const& tokens)
 {
+    Q_UNUSED(tokens);
 }
 
 void PimSyncer::run()

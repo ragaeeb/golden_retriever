@@ -6,6 +6,7 @@
 #include "CommandLineFetcher.h"
 #include "Flashlight.h"
 #include "FileFetcher.h"
+#include "HelpFetcher.h"
 #include "InterpreterHelper.h"
 #include "IOUtils.h"
 #include "Logger.h"
@@ -72,7 +73,7 @@ void Interpreter::run()
 		    connect( pim, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 		    IOUtils::startThread(pim);
 		} else if ( equals(command_help) ) {
-			emit commandProcessed( Command::Help, InterpreterHelper::fetchHelp(tokens) );
+		    fetchHelp(tokens);
 		} else if ( equals(command_fetch_location) ) {
 			ReverseGeolocator* rgl = new ReverseGeolocator(this);
 			connect( rgl, SIGNAL( finished(QGeoAddress const&, QPointF const&, bool) ), this, SLOT( reverseLookupFinished(QGeoAddress const&, QPointF const&, bool) ) );
@@ -94,8 +95,16 @@ void Interpreter::run()
 		}
 	} else {
 		LOGGER("Body empty, skipping...");
-		emit commandProcessed( Command::Help, InterpreterHelper::fetchHelp(tokens) );
+		fetchHelp(tokens);
 	}
+}
+
+
+void Interpreter::fetchHelp(QStringList const& tokens)
+{
+    HelpFetcher* help = new HelpFetcher(tokens);
+    connect( help, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
+    IOUtils::startThread(help);
 }
 
 
