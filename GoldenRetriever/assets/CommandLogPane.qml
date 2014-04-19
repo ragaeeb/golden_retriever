@@ -1,5 +1,5 @@
 import bb.cascades 1.0
-import bb.system 1.0
+import bb.system 1.2
 import com.canadainc.data 1.0
 
 NavigationPane
@@ -30,6 +30,7 @@ NavigationPane
                         id: prompt
                         title: qsTr("Enter Command") + Retranslate.onLanguageChanged
                         inputField.emptyText: qsTr("Enter the command (ie: %1 battery)").arg(app.subjectPrefix) + Retranslate.onLanguageChanged
+                        inputOptions: SystemUiInputOption.None
                         confirmButton.label: qsTr("OK") + Retranslate.onLanguageChanged
                         cancelButton.label: qsTr("Cancel") + Retranslate.onLanguageChanged
                         
