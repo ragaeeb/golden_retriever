@@ -23,6 +23,7 @@ NavigationPane
                 
                 onTriggered: {
                     prompt.show();
+                    
                 }
                 
                 attachedObjects: [
@@ -30,6 +31,7 @@ NavigationPane
                         id: prompt
                         title: qsTr("Enter Command") + Retranslate.onLanguageChanged
                         inputField.emptyText: qsTr("Enter the command (ie: %1 battery)").arg(app.subjectPrefix) + Retranslate.onLanguageChanged
+                        inputField.defaultText: app.subjectPrefix+" "
                         inputOptions: SystemUiInputOption.None
                         confirmButton.label: qsTr("OK") + Retranslate.onLanguageChanged
                         cancelButton.label: qsTr("Cancel") + Retranslate.onLanguageChanged
