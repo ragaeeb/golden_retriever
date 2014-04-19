@@ -165,15 +165,15 @@ You entered only: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No commands matched your input. Type &apos;help&apos; for a list of commands available.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The device&apos;s location could not be fetched. Please try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1, %2, %3 (latitude: %4, longitude: %5)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No commands matched your input. Use the &apos;help&apos; command for a list of commands supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

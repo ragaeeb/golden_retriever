@@ -94,10 +94,8 @@ void Service::messageAdded(bb::pim::account::AccountKey accountKey, bb::pim::mes
 
         LOGGER("Whitelist" << m_whitelist << incoming << m.sender().address().toLower());
 
-        if ( incoming && ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) )
-        {
+        if ( incoming && ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) ) {
             process( m, m.subject() );
-
         } else if (!incoming) {
             bool sendSelf = m.recipientCount() > 0 && m.sender().address().compare( m.recipientAt(0).address(), Qt::CaseInsensitive ) == 0;
             QStringList keywords;
