@@ -165,24 +165,13 @@ When you are away from your device, send the command messages to this mailbox so
 <context>
     <name>HelpPage</name>
     <message>
-        <location filename="../assets/HelpPage.qml" line="7"/>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/HelpPage.qml" line="34"/>
+        <location filename="../assets/HelpPage.qml" line="30"/>
         <source>Video Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="57"/>
-        <source>(c) 2013 %1. All Rights Reserved.
-%2 %3
-
-Please report all bugs to:
-support@canadainc.org
-
-Golden Retriever is a must have app for all BlackBerry users.
+        <location filename="../assets/HelpPage.qml" line="56"/>
+        <source>Golden Retriever is a must have app for all BlackBerry users.
 
 This app allows users to remotely control their BlackBerry 10 device using commands sent via email messages. This is particularly useful when the user may not have the device in their possession yet they need to interact with it. There are several occasions when this might happen.
 
@@ -194,51 +183,11 @@ All of this and more can be done using Golden Retriever. When active, the app si
 
 To issue a command, the user needs to email the target email address with the subject line: &apos;golden&apos; (without quotes).
 
-In the body of the message, the user needs to specify the command they want to issue. Here are some of the commands that are available (keep in mind future updates will continually bring more and more features):
-
-help: Returns the available list of commands with examples.
-
-battery: Returns the current battery level and the temperature in degrees Celsius.
-
-calendar: Does a query for calendar events that match the command arguments. For example, to find all events in the device calendar that contain the word &apos;Doctor&apos;, use the following command: calendar Doctor
-
-contact: Does a query for a contact&apos;s details (specified in the command arguments) from the device address book. For example, to find all contacts in the device address book that contain the name &apos;Yunis&apos;, use the following command: contact Yunis
-
-flash: Turns on the flash light for a specified amount of time. Follow it with the total duration that you wish to turn on the flashlight for. For example send &apos;flash 3&apos; to turn on the light for 3 minutes. The maximum duration is 10 minutes.
-
-get: Fetches one or more files from the device&apos;s file system or media card. Wildcards are supported. For example, to fetch all image files on the device that start with &apos;Apple&apos;, use the following command:
-get Apple*.jpg
-
-To fetch all text files that contain the word &apos;Yunis&apos;, use the following command:
-get *Yunis*.txt
-
-There may be cases where your query is too broad, and matches too many files. For example, a query like:
-get A*.txt
-can produce a really large result. In that case the app will return you a list of all the files that matched the query. You should then instead specify the exact file that you are looking for.
-
-To fetch a very specific file, provide the full path to the file as an argument. For example, to fetch the file named &apos;abdul khaliq.txt&apos; located in the documents folder of the device&apos;s SD card, use the following command:
-get /accounts/1000/removable/sdcard/documents/abdul khaliq.txt
-
-To fetch the file &apos;abdul khaliq.txt&apos; that is located in the documents folder of the device&apos;s local storage, use the following command instead:
-get /accounts/1000/shared/documents/abdul khaliq.txt
-
-location: Fetches the current location of the device reverse geocoded as well as in latitude/longitude coordinates.
-
-mic: Records audio from the device&apos;s microphone and sends it back. You can customize how long the device should record for by specifying an argument in terms of seconds. For example to record 15 seconds of audio, use the following command:
-mic 15
-If no argument is specified after the *mic* command, the default value of 10 seconds is used.
-
-volume: Sets or retrieves the master volume on the device. For example to set the , use the following command:
-mic 15
-If no argument is specified after the *mic* command, the default value of 10 seconds is used.
-
-unread: Fetches all the unread SMS messages that are on the device.
+In the body of the message, the user needs to specify the command they want to issue.
 
 Once the user sends the email to the target address with the command in the body and &apos;golden&apos; as the subject, the app will process the command and reply back to the email with the response.
 
-To turn off monitoring your inbox, simply close the app. To activate it again, just reopen the app, it&apos;s that simple!
-
-</source>
+Here are some of the commands that are available (keep in mind future updates will continually bring more and more features):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -322,7 +271,7 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
     </message>
     <message>
         <location filename="../assets/WhitelistPane.qml" line="34"/>
-        <location filename="../assets/WhitelistPane.qml" line="155"/>
+        <location filename="../assets/WhitelistPane.qml" line="162"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -332,60 +281,48 @@ To turn off monitoring your inbox, simply close the app. To activate it again, j
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="54"/>
+        <location filename="../assets/WhitelistPane.qml" line="60"/>
         <source>Clear List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="64"/>
+        <location filename="../assets/WhitelistPane.qml" line="71"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="65"/>
+        <location filename="../assets/WhitelistPane.qml" line="72"/>
         <source>Are you sure you want to clear the whitelist?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="66"/>
-        <location filename="../assets/WhitelistPane.qml" line="158"/>
+        <location filename="../assets/WhitelistPane.qml" line="73"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="67"/>
-        <location filename="../assets/WhitelistPane.qml" line="158"/>
+        <location filename="../assets/WhitelistPane.qml" line="74"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="89"/>
+        <location filename="../assets/WhitelistPane.qml" line="96"/>
         <source>You can restrict who is able to send commands to your device. There are currently no emails in your whitelist. To only accept commands from specific email addresses, click on the Add Contact action below and add them.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="110"/>
+        <location filename="../assets/WhitelistPane.qml" line="117"/>
         <source>Removed %1 from white list!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="110"/>
+        <location filename="../assets/WhitelistPane.qml" line="117"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="155"/>
+        <location filename="../assets/WhitelistPane.qml" line="162"/>
         <source>As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/WhitelistPane.qml" line="158"/>
-        <source>Tutorial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/WhitelistPane.qml" line="158"/>
-        <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -461,6 +398,38 @@ Press OK to launch the application permissions, then go to Golden Retriever and 
     <message>
         <location filename="../assets/main.qml" line="60"/>
         <source>Allowed senders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="73"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="73"/>
+        <source>IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the &apos;golden&apos; keyword instead of being specified in the message body. For example before if you used to specify the &apos;golden&apos; keyword in the subject line and &apos;battery&apos; in the body, you would now just specify &apos;golden battery&apos; in the subject line only (without quotes).
+
+This was done to preserve battery life since downloading the message body every time drains your device&apos;s battery. If you have any questions, please watch the tutorial video or send us an email!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="78"/>
+        <source>Tutorial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="78"/>
+        <source>Would you like to see a video tutorial on how to use the app?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="78"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="78"/>
+        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -161,25 +161,6 @@ NavigationPane
         if ( !persist.contains("tutorialWhitelist") ) {
             persist.showToast( qsTr("As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address."), qsTr("OK"), "asset:///images/ic_whitelist.png" );
             persist.saveValueFor("tutorialWhitelist", 1);
-        } else if ( !persist.contains("tutorialVideo") ) {
-            var yesClicked = persist.showBlockingDialog( qsTr("Tutorial"), qsTr("Would you like to see a video tutorial on how to use the app?"), qsTr("Yes"), qsTr("No") );
-            
-            if (yesClicked) {
-                vidTutorial.trigger("bb.action.OPEN");
-            }
-            
-            persist.saveValueFor("tutorialVideo", 1);
         }
     }
-    
-    attachedObjects: [
-        Invocation {
-            id: vidTutorial
-            
-            query: InvokeQuery {
-                mimeType: "text/html"
-                uri: "https://www.youtube.com/watch?v=8hDCBJosXGQ"
-            }
-        }
-    ]
 }

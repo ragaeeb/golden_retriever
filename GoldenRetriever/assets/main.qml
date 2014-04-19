@@ -69,6 +69,21 @@ TabbedPane
     
     function onSheetClosed()
     {
+        if ( !persist.contains("subjectMoveTutorial") ) {
+            persist.showBlockingToast( qsTr("IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the 'golden' keyword instead of being specified in the message body. For example before if you used to specify the 'golden' keyword in the subject line and 'battery' in the body, you would now just specify 'golden battery' in the subject line only (without quotes).\n\nThis was done to preserve battery life since downloading the message body every time drains your device's battery. If you have any questions, please watch the tutorial video or send us an email!"), qsTr("OK"), "asset:///images/ic_help.png" );
+            persist.saveValueFor("subjectMoveTutorial", 1);
+        }
+        
+        if ( !persist.contains("tutorialVideo") ) {
+            var yesClicked = persist.showBlockingDialog( qsTr("Tutorial"), qsTr("Would you like to see a video tutorial on how to use the app?"), qsTr("Yes"), qsTr("No") );
+            
+            if (yesClicked) {
+                vidTutorial.trigger("bb.action.OPEN");
+            }
+            
+            persist.saveValueFor("tutorialVideo", 1);
+        }
+        
         logTab.delegateActivationPolicy = TabDelegateActivationPolicy.ActivateWhenSelected;
         
         if (app.accountSelected) {
@@ -87,12 +102,22 @@ TabbedPane
         
         var sheet = definition.createObject();
         sheet.closed.connect(onSheetClosed);
-        sheet.open();
+        //sheet.open();
+        onSheetClosed();
     }
     
     attachedObjects: [
         ComponentDefinition {
             id: definition
+        },
+        
+        Invocation {
+            id: vidTutorial
+            
+            query: InvokeQuery {
+                mimeType: "text/html"
+                uri: "https://www.youtube.com/watch?v=8hDCBJosXGQ"
+            }
         }
     ]
 }

@@ -149,7 +149,7 @@ NavigationPane
                     },
                     
                     ListItemComponent {
-                        type: ""+Command.Flashlight
+                        type: ""+Command.Flash
                         
                         CommandListItem {
                             title: qsTr("Flashlight") + Retranslate.onLanguageChanged
