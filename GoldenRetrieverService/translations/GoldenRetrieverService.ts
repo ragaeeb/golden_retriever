@@ -179,15 +179,21 @@ You entered only: %1</source>
 </context>
 <context>
     <name>golden::MicRecorder</name>
+    <message>
+        <source>Could not record audio due to an unknown error.</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message numerus="yes">
-        <source>Recorded %n seconds of audio.</source>
+        <source>Recorded %n seconds of LQ audio.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
-    <message>
-        <source>Could not record audio due to an unknown error.</source>
-        <translation type="unfinished"></translation>
+    <message numerus="yes">
+        <source>Recorded %n seconds of HQ audio.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

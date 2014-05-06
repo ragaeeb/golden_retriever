@@ -8,6 +8,10 @@
 #define default_duration 10
 #define max_duration 60
 #define min_duration 1
+#define extension_amr "amr"
+#define extension_m4a "m4a"
+#define quality_hi "hi"
+#define quality_lo "lo"
 
 namespace golden {
 
@@ -15,10 +19,24 @@ using namespace bb::pim::message;
 using namespace bb::multimedia;
 using namespace canadainc;
 
-MicRecorder::MicRecorder(QStringList const& tokens, QObject* parent) : QObject(parent), m_duration(default_duration)
+MicRecorder::MicRecorder(QStringList const& tokens, QObject* parent) :
+        QObject(parent), m_duration(default_duration), m_extension(extension_amr)
 {
-	if ( !tokens.isEmpty() ) {
+    int n = tokens.size();
+
+	if (n > 0)
+	{
 		m_duration = tokens.first().toUInt();
+
+		if (n > 1)
+		{
+		    m_extension = tokens[1];
+		    LOGGER("m_ext" << m_extension << m_extension.compare(quality_hi, Qt::CaseInsensitive) << m_extension.compare(quality_lo, Qt::CaseInsensitive));
+
+		    if ( m_extension.compare(quality_hi, Qt::CaseInsensitive) != 0 && m_extension.compare(quality_lo, Qt::CaseInsensitive) ) {
+		        m_extension = extension_amr;
+		    }
+		}
 	}
 
 	m_duration = qMin(m_duration, (unsigned int)max_duration); // max record of 1 minute
@@ -31,15 +49,21 @@ MicRecorder::MicRecorder(QStringList const& tokens, QObject* parent) : QObject(p
 
 void MicRecorder::onDurationChanged(unsigned int duration)
 {
-	if (duration > m_duration) {
+	if (duration > m_duration)
+	{
 		disconnect( &m_recorder, SIGNAL( durationChanged(unsigned int) ), this, SLOT( onDurationChanged(unsigned int) ) );
 		m_recorder.reset();
 
-		QString fileName = QString("%1.m4a").arg( QDateTime::currentMSecsSinceEpoch() );
+		QString fileName = QString("%1.%2").arg( QDateTime::currentMSecsSinceEpoch() ).arg(m_extension);
 
 		QVariantList attachments;
-		attachments << QVariant::fromValue( Attachment( "audio/mp4", fileName, m_recorder.outputUrl() ) );
-		emit commandProcessed( Command::Microphone, tr("Recorded %n seconds of audio.", "", duration/1000), attachments );
+		attachments << QVariant::fromValue( Attachment( QString("audio/%1").arg(m_extension), fileName, m_recorder.outputUrl() ) );
+
+		if (m_extension == extension_amr) {
+	        emit commandProcessed( Command::Microphone, tr("Recorded %n seconds of LQ audio.", "", duration/1000), attachments );
+		} else {
+		    emit commandProcessed( Command::Microphone, tr("Recorded %n seconds of HQ audio.", "", duration/1000), attachments );
+		}
 	}
 }
 
