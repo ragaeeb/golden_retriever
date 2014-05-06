@@ -153,34 +153,38 @@ void Service::process(Message const& m, QString const& subject)
 void Service::commandProcessed(int command, QString const& data, QVariantList const& attachmentVariants)
 {
     LOGGER(command << data << attachmentVariants.size());
-    Interpreter* i = static_cast<Interpreter*>( sender() );
-    Message m_message = i->getMessage();
 
-    QList<Attachment> attachments;
+    if (m_manager)
+    {
+        Interpreter* i = static_cast<Interpreter*>( sender() );
+        Message m_message = i->getMessage();
 
-    for (int i = attachmentVariants.size()-1; i >= 0; i--) {
-        attachments << attachmentVariants[i].value<Attachment>();
+        QList<Attachment> attachments;
+
+        for (int i = attachmentVariants.size()-1; i >= 0; i--) {
+            attachments << attachmentVariants[i].value<Attachment>();
+        }
+
+        qint64 messageId = PimUtil::sendMessage(m_manager, m_message, data, attachments, true);
+        m_sentIds.insert( messageId, true );
+
+        LOGGER("Inserted messageId into m_sentIds" << messageId);
+        LOGGER("Deleting request" << m_delRequest);
+
+        if (m_delRequest) {
+            LOGGER("Deleting");
+            m_manager->remove( m_accountId, m_message.conversationId() );
+            m_manager->remove( m_accountId, m_message.id() );
+            LOGGER("Deleted");
+        }
+
+        QVariantList params = QVariantList() << data;
+
+        m_sql.setQuery( QString("INSERT INTO logs (command,reply,timestamp) VALUES ('%1',?,%2)").arg(command).arg( QDateTime::currentMSecsSinceEpoch() ) );
+        m_sql.executePrepared(params, QueryId::LogCommand);
+
+        i->deleteLater();
     }
-
-    qint64 messageId = PimUtil::sendMessage(m_manager, m_message, data, attachments, true);
-    m_sentIds.insert( messageId, true );
-
-    LOGGER("Inserted messageId into m_sentIds" << messageId);
-    LOGGER("Deleting request" << m_delRequest);
-
-    if (m_delRequest) {
-        LOGGER("Deleting");
-        m_manager->remove( m_accountId, m_message.conversationId() );
-        m_manager->remove( m_accountId, m_message.id() );
-        LOGGER("Deleted");
-    }
-
-	QVariantList params = QVariantList() << data;
-
-    m_sql.setQuery( QString("INSERT INTO logs (command,reply,timestamp) VALUES ('%1',?,%2)").arg(command).arg( QDateTime::currentMSecsSinceEpoch() ) );
-    m_sql.executePrepared(params, QueryId::LogCommand);
-
-    i->deleteLater();
 }
 
 
