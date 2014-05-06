@@ -27,6 +27,7 @@ CONFIG(debug, debug|release) {
     LIBS += -Bstatic -L../../golden/x86/o-g/ -lgolden -Bdynamic
     LIBS += -Bstatic -L../../../quazip/x86/o-g -lquazip -Bdynamic
 }
+
 }
 
 include(config.pri)

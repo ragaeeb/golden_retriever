@@ -379,64 +379,64 @@ Press OK to launch the application permissions, then go to Golden Retriever and 
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="21"/>
+        <location filename="../assets/main.qml" line="20"/>
         <source>Logs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="22"/>
+        <location filename="../assets/main.qml" line="21"/>
         <source>Processed commands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="59"/>
+        <location filename="../assets/main.qml" line="58"/>
         <source>Whitelist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="60"/>
+        <location filename="../assets/main.qml" line="59"/>
         <source>Allowed senders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="73"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="73"/>
+        <location filename="../assets/main.qml" line="72"/>
         <source>IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the &apos;%1&apos; keyword instead of being specified in the message body. For example before if you used to specify the &apos;%1&apos; keyword in the subject line and &apos;battery&apos; in the body, you would now just specify &apos;%1 battery&apos; in the subject line only (without quotes).
 
 This was done to preserve battery life since downloading the message body every time drains your device&apos;s battery. If you have any questions, please watch the tutorial video or send us an email!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="78"/>
+        <location filename="../assets/main.qml" line="77"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="78"/>
+        <location filename="../assets/main.qml" line="77"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="78"/>
+        <location filename="../assets/main.qml" line="77"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="78"/>
+        <location filename="../assets/main.qml" line="77"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="46"/>
+        <location filename="../assets/main.qml" line="45"/>
         <source>Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="47"/>
+        <location filename="../assets/main.qml" line="46"/>
         <source>Monitored Mailbox</source>
         <translation type="unfinished"></translation>
     </message>
