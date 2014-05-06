@@ -61,6 +61,7 @@ void Flashlight::timeout()
 {
 	const camera_videolightmode_t mode = (CAMERA_VIDEOLIGHT_OFF);
 	camera_config_videolight(m_camera, mode);
+	camera_close(m_camera);
 
 	m_led.cancel();
 
