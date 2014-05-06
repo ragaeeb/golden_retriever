@@ -14,6 +14,7 @@ class MicRecorder : public QObject
 	Q_OBJECT
 
 	unsigned int m_duration;
+	QString m_extension;
 	AudioRecorder m_recorder;
 
 private slots:
