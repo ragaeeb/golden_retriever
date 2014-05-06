@@ -26,7 +26,11 @@ To fetch the file 'abdul khaliq.txt' that is located in the documents folder of 
 	<command title="location" description="Fetches the current location of the device reverse geocoded as well as in latitude/longitude coordinates." />
 	<command title="mic" description="Records audio from the device's microphone and sends it back. You can customize how long the device should record for by specifying an argument in terms of seconds. For example to record 15 seconds of audio, use the following command:
 	mic 15
-If no argument is specified after the 'mic' command, the default value of 10 seconds is used." />
+	
+You can also specify the quality of the recording by appending 'hi' or 'lo' without quotes after the duration. For example to record high-quality audio for 15 seconds use:
+	mic 15 hi
+
+If no argument is specified after the 'mic' command, the default value of 10 seconds is used and low-quality recording is used." />
 	<command title="profile" description="Sets or retrieves the device notification profile. For example to set the profile to Vibrate, use the following command:
 	profile vibrate
 
