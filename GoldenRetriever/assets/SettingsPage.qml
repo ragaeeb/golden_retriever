@@ -76,7 +76,7 @@ Page
                 }
                 
                 onCreationCompleted: {
-                    if ( !persist.tutorial("subjectTutorial"), qsTr("The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is '%1', then in order to issue a battery command, the subject of the email must be '%1 battery'.").arg(app.subjectPrefix), "asset:///images/ic_help.png" ) {}
+                    if ( !persist.tutorial("subjectTutorial", qsTr("The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is '%1', then in order to issue a battery command, the subject of the email must be '%1 battery'.").arg(app.subjectPrefix), "asset:///images/ic_help.png" ) ) {}
                 }
             }
             

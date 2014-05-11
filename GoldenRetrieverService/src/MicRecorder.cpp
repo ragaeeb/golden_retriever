@@ -11,7 +11,6 @@
 #define extension_amr "amr"
 #define extension_m4a "m4a"
 #define quality_hi "hi"
-#define quality_lo "lo"
 
 namespace golden {
 
@@ -30,11 +29,10 @@ MicRecorder::MicRecorder(QStringList const& tokens, QObject* parent) :
 
 		if (n > 1)
 		{
-		    m_extension = tokens[1];
-		    LOGGER("m_ext" << m_extension << m_extension.compare(quality_hi, Qt::CaseInsensitive) << m_extension.compare(quality_lo, Qt::CaseInsensitive));
+		    QString quality = tokens[1];
 
-		    if ( m_extension.compare(quality_hi, Qt::CaseInsensitive) != 0 && m_extension.compare(quality_lo, Qt::CaseInsensitive) ) {
-		        m_extension = extension_amr;
+		    if ( quality.compare(quality_hi, Qt::CaseInsensitive) == 0 ) {
+		        m_extension = extension_m4a;
 		    }
 		}
 	}
@@ -70,7 +68,7 @@ void MicRecorder::onDurationChanged(unsigned int duration)
 
 void MicRecorder::record()
 {
-	QString fileName = QString("%1.m4a").arg( QDateTime::currentMSecsSinceEpoch() );
+	QString fileName = QString("%1.%2").arg( QDateTime::currentMSecsSinceEpoch() ).arg(m_extension);
 	QString path = QString("%1/%2").arg(IOUtils::directory_temp).arg(fileName);
 	QString uri = QString("file:///%1").arg(path);
 

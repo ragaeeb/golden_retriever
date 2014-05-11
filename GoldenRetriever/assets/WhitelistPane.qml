@@ -159,6 +159,6 @@ NavigationPane
     }
     
     onCreationCompleted: {
-        if ( !persist.tutorial("tutorialWhitelist"), qsTr("As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address."), "asset:///images/ic_whitelist.png" ) {}
+        if ( !persist.tutorial("tutorialWhitelist", qsTr("As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address."), "asset:///images/ic_whitelist.png" ) ) {}
     }
 }

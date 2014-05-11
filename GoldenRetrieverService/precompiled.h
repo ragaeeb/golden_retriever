@@ -25,6 +25,3 @@
 #include <QtLocationSubset/QGeoServiceProvider>
 #include <QtLocationSubset/QGeoSearchManager>
 #include <QtLocationSubset/QGeoSearchReply>
-
-#include <QtConcurrentRun>
-#include <QTimer>
