@@ -225,22 +225,17 @@ Here are some of the commands that are available (keep in mind future updates wi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="80"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/SettingsPage.qml" line="80"/>
+        <location filename="../assets/SettingsPage.qml" line="79"/>
         <source>The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is &apos;%1&apos;, then in order to issue a battery command, the subject of the email must be &apos;%1 battery&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="94"/>
+        <location filename="../assets/SettingsPage.qml" line="91"/>
         <source>Delete Incoming Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/SettingsPage.qml" line="101"/>
+        <location filename="../assets/SettingsPage.qml" line="98"/>
         <source>Delete Outgoing Response</source>
         <translation type="unfinished"></translation>
     </message>
@@ -269,7 +264,6 @@ Here are some of the commands that are available (keep in mind future updates wi
     </message>
     <message>
         <location filename="../assets/WhitelistPane.qml" line="34"/>
-        <location filename="../assets/WhitelistPane.qml" line="163"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -319,7 +313,7 @@ Here are some of the commands that are available (keep in mind future updates wi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/WhitelistPane.qml" line="163"/>
+        <location filename="../assets/WhitelistPane.qml" line="162"/>
         <source>As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -399,35 +393,10 @@ Press OK to launch the application permissions, then go to Golden Retriever and 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="72"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="72"/>
+        <location filename="../assets/main.qml" line="71"/>
         <source>IMPORTANT: In the new version of Golden Retriever, the commands are specified in the SUBJECT line after the &apos;%1&apos; keyword instead of being specified in the message body. For example before if you used to specify the &apos;%1&apos; keyword in the subject line and &apos;battery&apos; in the body, you would now just specify &apos;%1 battery&apos; in the subject line only (without quotes).
 
 This was done to preserve battery life since downloading the message body every time drains your device&apos;s battery. If you have any questions, please watch the tutorial video or send us an email!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="77"/>
-        <source>Tutorial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="77"/>
-        <source>Would you like to see a video tutorial on how to use the app?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="77"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="77"/>
-        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
