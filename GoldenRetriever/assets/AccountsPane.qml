@@ -34,6 +34,8 @@ NavigationPane
             ]
             
             onTriggered: {
+                console.log("UserEvent: AccountSelected");
+                
                 clearSelection();
                 toggleSelection(indexPath);
                 
