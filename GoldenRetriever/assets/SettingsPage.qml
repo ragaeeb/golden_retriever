@@ -41,6 +41,7 @@ Page
             Label {
                 text: qsTr("Subject") + Retranslate.onLanguageChanged
                 verticalAlignment: VerticalAlignment.Center
+                textStyle.fontSize: FontSize.Medium
                 
                 layoutProperties: StackLayoutProperties {
                     spaceQuota: 1
