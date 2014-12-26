@@ -16,27 +16,34 @@ void CommandLineFetcher::run()
 
 	if ( !m_tokens.isEmpty() )
 	{
-	    char buffer[1024];
+	    QString inParam = m_tokens.join(" ");
+	    QStringList strListReturn;
+	    FILE *fp;
+	    char path[2048];
 
-	    QByteArray byteArray = m_tokens.join(" ").toUtf8();
-	    const char* cString = byteArray.constData();
-	    FILE* fd = popen(cString, "r");
+	    printf("inParam: %s\n", inParam.toStdString().c_str());
+	    fflush(stdout);
 
-	    if (fd == NULL) {
-	    	replyBody = tr("Error occured when running command!");
+	    // Open the command for reading.
+	    fp = popen(inParam.toStdString().c_str(), "r");
+
+	    if (fp == NULL) {
+	        printf("No data, something's super-wrong\n");
+	        fflush(stdout);
+	        pclose(fp);
 	    }
 
-	    while( NULL != fgets(buffer, sizeof(buffer), fd) )
+	    // Read the output a line at a time - output it.
+	    while ( fgets(path, sizeof(path) - 1, fp) != NULL )
 	    {
-	    	QString s(buffer);
-	    	replyBody += s.trimmed();
+	        //  printf("%s\n", path);fflush(stdout);
+	        strListReturn.append(path);
 	    }
 
-	    if ( replyBody.isEmpty() ) {
-	    	replyBody = tr("Output of command was empty...");
-	    }
+	    // close
+	    pclose(fp);
 
-	    pclose(fd);
+	    replyBody = strListReturn.join("\n");
 	} else {
 		replyBody = tr("Missing actual command\n\nYou entered only: %1").arg( m_tokens.join(" ") );
 	}
