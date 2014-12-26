@@ -14,8 +14,6 @@
 #include "QueryId.h"
 #include "PimUtil.h"
 
-#define UI_KEY "logUI"
-
 namespace golden {
 
 using namespace bb::cascades;
@@ -30,8 +28,8 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     INIT_SETTING(UI_KEY, true);
     INIT_SETTING(SERVICE_KEY, false);
 
-    new AppLogFetcher( new GoldenCollector(), this );
-    new LogMonitor(UI_KEY, UI_LOG_FILE, this);
+    AppLogFetcher::create( &m_persistance, new GoldenCollector(), this );
+    LogMonitor::create(UI_KEY, UI_LOG_FILE, this);
 
 	qmlRegisterType<canadainc::LocaleUtil>("com.canadainc.data", 1, 0, "LocaleUtil");
 	qmlRegisterUncreatableType<Command>("com.canadainc.data", 1, 0, "Command", "Can't instantiate");
@@ -75,7 +73,8 @@ void ApplicationUI::init()
 
 	invokeService();
 
-	bool ok = PimUtil::validateEmailSMSAccess( tr("Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.") );
+	/*
+	bool ok = Persistance::hasEmailSmsAccess( tr("Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.") );
 
 	if (ok)
 	{
@@ -108,7 +107,7 @@ void ApplicationUI::init()
 				}
 			}
 		}
-	}
+	} */
 
 	INIT_SETTING("subject", "golden");
 	INIT_SETTING("delRequest", 1);
@@ -167,14 +166,14 @@ void ApplicationUI::checkDatabase()
 
 void ApplicationUI::recheck(int &count, const char* slotName)
 {
-	LOGGER("Database does not exist");
+	LOGGER("DatabaseDoesNotExist");
 	++count;
 
 	if (count < 5) {
 		LOGGER("Retrying" << count);
 		QTimer::singleShot(2000*count, this, slotName);
 	} else {
-		LOGGER("Can't connect...");
+		LOGGER("CantConnect...");
 		m_persistance.showToast( tr("Error initializing link with service. Please restart your device..."), "", "asset:///images/commands/ic_unknown.png" );
 	}
 }
@@ -221,6 +220,7 @@ void ApplicationUI::accountsLoaded(QVariantList const& qvl)
 
 bool ApplicationUI::addToWhiteList(QString request)
 {
+    LOGGER(request);
     request = request.toLower();
 
     int firstAtSign = request.indexOf("@");
@@ -259,6 +259,7 @@ QStringList ApplicationUI::getWhiteList()
 
 void ApplicationUI::removeFromWhiteList(QString request)
 {
+    LOGGER(request);
 	QVariantMap result = m_persistance.getValueFor("whitelist").toMap();
 	result.remove(request);
 

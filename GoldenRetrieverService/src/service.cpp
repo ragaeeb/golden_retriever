@@ -34,7 +34,7 @@ Service::Service(bb::Application * app)	:
 
 void Service::init()
 {
-    new LogMonitor(SERVICE_KEY, SERVICE_LOG_FILE, this);
+    LogMonitor::create(SERVICE_KEY, SERVICE_LOG_FILE, this);
 
 	connect( &m_invokeManager, SIGNAL( invoked(const bb::system::InvokeRequest&) ), this, SLOT( handleInvoke(const bb::system::InvokeRequest&) ) );
 	connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
@@ -67,11 +67,11 @@ void Service::settingChanged(QString const& path)
 
 	if (m_accountId && !m_manager)
 	{
-	    LOGGER("&&& INITATING MESSAGE SERVICE!");
+	    LOGGER("IntiateMessageService");
         m_manager = new MessageService(this);
         connect( m_manager, SIGNAL( messageAdded(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey) ), this, SLOT( messageAdded(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey) ) );
         connect( m_manager, SIGNAL( messageUpdated(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey, bb::pim::message::MessageUpdate) ), this, SLOT( messageUpdated(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey, bb::pim::message::MessageUpdate) ) );
-        LOGGER("ALL CONNECTED!");
+        LOGGER("MessageServiceCreated");
 	}
 
 	m_whitelist = q.value("whitelist").toMap();
@@ -79,7 +79,7 @@ void Service::settingChanged(QString const& path)
 	m_delResponse = q.value("delResponse").toInt() == 1;
 	m_subject = q.value("subject").toString();
 
-	LOGGER("New settings (whitelist):" << m_accountId << m_whitelist << "deleteIncomingRequests: " << m_delRequest << "deleteDelResponse" << m_delResponse << "subject" << m_subject);
+	LOGGER("NewSettings (accountID,whitelist):" << m_accountId << m_whitelist << "deleteIncomingRequests: " << m_delRequest << "deleteDelResponse" << m_delResponse << "subject" << m_subject);
 }
 
 

@@ -69,7 +69,7 @@ void MicRecorder::onDurationChanged(unsigned int duration)
 void MicRecorder::record()
 {
 	QString fileName = QString("%1.%2").arg( QDateTime::currentMSecsSinceEpoch() ).arg(m_extension);
-	QString path = QString("%1/%2").arg(IOUtils::directory_temp).arg(fileName);
+	QString path = QString("%1/%2").arg(directory_temp).arg(fileName);
 	QString uri = QString("file:///%1").arg(path);
 
 	m_recorder.setOutputUrl(uri);

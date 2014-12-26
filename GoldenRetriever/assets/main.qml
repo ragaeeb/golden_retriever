@@ -1,5 +1,4 @@
 import bb.cascades 1.2
-import bb.system 1.0
 
 TabbedPane
 {
@@ -9,9 +8,7 @@ TabbedPane
     Menu.definition: CanadaIncMenu
     {
         projectName: "golden-retriever"
-        bbWorldID: "23334872"
         showServiceLogging: true
-        showSubmitLogs: true
     }
     
     Tab

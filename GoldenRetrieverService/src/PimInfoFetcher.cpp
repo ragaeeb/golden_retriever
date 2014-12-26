@@ -87,7 +87,7 @@ void PimInfoFetcher::processContactSearch()
 					currentBody += textualize(attribs[j]) + "\n";
 				}
 
-				QString path = QString("%1/%2.txt").arg(IOUtils::directory_temp).arg( contact.id() );
+				QString path = QString("%1/%2.txt").arg(directory_temp).arg( contact.id() );
 				IOUtils::writeTextFile(path, currentBody);
 
 				attachments << QVariant::fromValue( Attachment("text/plain", fileName, QUrl::fromLocalFile(path) ) );
@@ -138,7 +138,7 @@ void PimInfoFetcher::processCalendarSearch()
 					currentBody += "\n\n"+eventBody;
 				}
 
-				QString path = QString("%1/%2.txt").arg(IOUtils::directory_temp).arg( event.id() );
+				QString path = QString("%1/%2.txt").arg(directory_temp).arg( event.id() );
 				IOUtils::writeTextFile(path, currentBody);
 
 				attachments << QVariant::fromValue( Attachment("text/plain", fileName, QUrl::fromLocalFile(path) ) );
@@ -177,7 +177,7 @@ void PimInfoFetcher::fetchUnreadMessages()
 			sender = QString("%1.txt").arg(sender);
 		}
 
-		QString path = QString("%1/%2.txt").arg(IOUtils::directory_temp).arg(messageId);
+		QString path = QString("%1/%2.txt").arg(directory_temp).arg(messageId);
 		bool written = IOUtils::writeTextFile(path, body);
 
 		if (written) {
