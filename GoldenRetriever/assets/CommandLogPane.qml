@@ -122,6 +122,15 @@ NavigationPane
                     },
                     
                     ListItemComponent {
+                        type: ""+Command.CommandLine
+                        
+                        CommandListItem {
+                            title: qsTr("Command Line") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_terminal.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
                         type: ""+Command.Contact
                         
                         CommandListItem {
