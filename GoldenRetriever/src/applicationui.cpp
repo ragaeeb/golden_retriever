@@ -3,6 +3,7 @@
 #include "applicationui.hpp"
 #include "AccountImporter.h"
 #include "AppLogFetcher.h"
+#include "CardUtils.h"
 #include "Command.h"
 #include "GoldenCollector.h"
 #include "GoldenUtils.h"
@@ -21,34 +22,25 @@ using namespace bb::pim::message;
 using namespace bb::platform;
 using namespace canadainc;
 
-ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
+ApplicationUI::ApplicationUI(bb::cascades::Application* app) :
 		QObject(app), m_cover("Cover.qml"),
 		m_lastUpdate(0), m_account(&m_persistance)
 {
     INIT_SETTING(UI_KEY, true);
     INIT_SETTING(SERVICE_KEY, false);
 
-    AppLogFetcher::create( &m_persistance, new GoldenCollector(), this );
     LogMonitor::create(UI_KEY, UI_LOG_FILE, this);
 
 	qmlRegisterType<canadainc::LocaleUtil>("com.canadainc.data", 1, 0, "LocaleUtil");
 	qmlRegisterUncreatableType<Command>("com.canadainc.data", 1, 0, "Command", "Can't instantiate");
 	qmlRegisterUncreatableType<QueryId>("com.canadainc.data", 1, 0, "QueryId", "Can't instantiate");
-	qmlRegisterType<bb::device::DisplayInfo>("bb.device", 1, 0, "DisplayInfo");
 
-    QmlDocument* qml = QmlDocument::create("asset:///main.qml").parent(this);
-    qml->setContextProperty("app", this);
-    qml->setContextProperty("persist", &m_persistance);
-    qml->setContextProperty("sql", &m_sql);
-    qml->setContextProperty("security", &m_account);
+    QMap<QString, QObject*> context;
+    context.insert("security", &m_account);
+    context.insert("sql", &m_sql);
 
-    AbstractPane* root = qml->createRootObject<AbstractPane>();
-    app->setScene(root);
-
-	connect( &m_persistance, SIGNAL( settingChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
-	connect( this, SIGNAL( initialize() ), this, SLOT( init() ), Qt::QueuedConnection ); // async startup
-
-	emit initialize();
+    CardUtils::initAppropriate("main.qml", context, this);
+    emit initialize();
 }
 
 
@@ -67,7 +59,7 @@ void ApplicationUI::settingChanged(QString const& key)
 }
 
 
-void ApplicationUI::init()
+void ApplicationUI::lazyInit()
 {
 	m_cover.setContext("app", this);
 
@@ -112,6 +104,10 @@ void ApplicationUI::init()
 	INIT_SETTING("subject", "golden");
 	INIT_SETTING("delRequest", 1);
 	INIT_SETTING("delResponse", 1);
+
+    AppLogFetcher::create( &m_persistance, new GoldenCollector(), this );
+    connect( &m_persistance, SIGNAL( settingChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
+    connect( &m_updateWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( databaseUpdated(QString const&) ) );
 }
 
 
@@ -133,7 +129,7 @@ void ApplicationUI::databaseUpdated(QString const& path)
 {
 	Q_UNUSED(path);
 
-	LOGGER("Database updated!");
+	LOGGER("DatabaseUpdated!");
 
 	m_sql.setQuery( QString("SELECT command,reply,timestamp FROM logs WHERE timestamp > %1 ORDER BY timestamp").arg(m_lastUpdate) );
 	m_sql.load(QueryId::FetchLatestLogs);
@@ -142,40 +138,33 @@ void ApplicationUI::databaseUpdated(QString const& path)
 }
 
 
-void ApplicationUI::checkDatabase()
+bool ApplicationUI::checkDatabase(QString const& path)
 {
-	QString database = GoldenUtils::databasePath();
+    Q_UNUSED(path);
 
-	if ( QFile::exists(database) )
-	{
-		m_lastUpdate = QDateTime::currentMSecsSinceEpoch();
+    LOGGER("checking");
 
-		m_sql.setSource(database);
-		m_sql.setQuery("SELECT command,reply,timestamp FROM logs ORDER BY timestamp DESC");
-		m_sql.load(QueryId::FetchLogs);
+    if ( ready() )
+    {
+        LOGGER("ready...");
+        m_sql.setSource(DATABASE_PATH);
+        m_sql.setQuery("SELECT command,reply,timestamp FROM logs ORDER BY timestamp DESC");
+        m_sql.load(QueryId::FetchLogs);
 
-		connect( &m_updateWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( databaseUpdated(QString const&) ) );
-		m_updateWatcher.addPath(database);
-	} else {
-		LOGGER("Database does not exist");
-		static int count = 0;
-		recheck( count, SLOT( checkDatabase() ) );
-	}
-}
+        m_updateWatcher.removePath( QDir::homePath() );
+        m_updateWatcher.addPath(DATABASE_PATH);
 
+        m_lastUpdate = QDateTime::currentMSecsSinceEpoch();
 
-void ApplicationUI::recheck(int &count, const char* slotName)
-{
-	LOGGER("DatabaseDoesNotExist");
-	++count;
+        emit readyChanged();
 
-	if (count < 5) {
-		LOGGER("Retrying" << count);
-		QTimer::singleShot(2000*count, this, slotName);
-	} else {
-		LOGGER("CantConnect...");
-		m_persistance.showToast( tr("Error initializing link with service. Please restart your device..."), "", "asset:///images/commands/ic_unknown.png" );
-	}
+        return true;
+    } else {
+        LOGGER("wait...");
+        m_updateWatcher.addPath( QDir::homePath() );
+
+        return false;
+    }
 }
 
 
@@ -269,6 +258,11 @@ void ApplicationUI::removeFromWhiteList(QString request)
 
 bool ApplicationUI::accountSelected() {
 	return m_persistance.contains("account");
+}
+
+
+bool ApplicationUI::ready() const {
+    return QFile::exists(SETUP_FILE_PATH);
 }
 
 

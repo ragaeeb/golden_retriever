@@ -250,12 +250,22 @@ NavigationPane
                 
                 onCreationCompleted: {
                     sql.dataLoaded.connect(onDataLoaded);
-                    app.checkDatabase();
+
+                    if ( !app.checkDatabase() )
+                    {
+                        definition.source = "SetupDialog.qml";
+                        var setup = definition.createObject();
+                        setup.open();
+                    }
                 }
                 
                 attachedObjects: [
                     LocaleUtil {
                         id: localeUtil
+                    },
+                    
+                    ComponentDefinition {
+                        id: definition
                     }
                 ]
             }

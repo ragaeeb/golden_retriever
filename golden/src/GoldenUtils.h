@@ -3,17 +3,9 @@
 
 #include <QString>
 
+#define DATABASE_PATH QString("%1/database.db").arg( QDir::homePath() )
 #define SERVICE_KEY "logService"
 #define SERVICE_LOG_FILE QString("%1/logs/service.log").arg( QDir::currentPath() )
-
-namespace golden {
-
-class GoldenUtils
-{
-public:
-	static QString databasePath();
-};
-
-} /* namespace golden */
+#define SETUP_FILE_PATH QString("%1/setup.log").arg( QDir::homePath() )
 
 #endif /* GOLDENUTILS_H_ */

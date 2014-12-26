@@ -26,6 +26,7 @@ class ApplicationUI : public QObject
     Q_OBJECT
     Q_PROPERTY(int whiteListCount READ whiteListCount NOTIFY whiteListCountChanged)
     Q_PROPERTY(bool accountSelected READ accountSelected NOTIFY accountSelectedChanged)
+    Q_PROPERTY(bool ready READ ready NOTIFY readyChanged)
     Q_PROPERTY(QString subjectPrefix READ subjectPrefix NOTIFY subjectPrefixChanged)
 
     CustomSqlDataSource m_sql;
@@ -42,13 +43,15 @@ class ApplicationUI : public QObject
 private slots:
     void accountsLoaded(QVariantList const& qvl);
 	void databaseUpdated(QString const& path);
-    void init();
+    void lazyInit();
 	void settingChanged(QString const& key);
 
 Q_SIGNALS:
-	void initialize();
-	void accountsImported(QVariantList const& qvl);
+    void accountsImported(QVariantList const& qvl);
     void accountSelectedChanged();
+	void initialize();
+    void lazyInitComplete();
+    void readyChanged();
     void subjectPrefixChanged();
 	void whiteListCountChanged();
 
@@ -58,12 +61,13 @@ public:
 
     bool accountSelected();
     Q_INVOKABLE bool addToWhiteList(QString request);
-	Q_SLOT void checkDatabase();
+    Q_SLOT bool checkDatabase(QString const& path=QString());
     Q_INVOKABLE void clearWhiteList();
     Q_INVOKABLE QStringList getWhiteList();
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void removeFromWhiteList(QString request);
     Q_INVOKABLE void invokeService(QString const& command=QString());
+    bool ready() const;
     QString subjectPrefix();
     int whiteListCount();
 };
