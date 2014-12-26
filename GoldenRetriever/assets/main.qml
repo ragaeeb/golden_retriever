@@ -27,6 +27,10 @@ TabbedPane
             source: "CommandLogPane.qml"
         }
         
+        onTriggered: {
+            console.log("UserEvent: LogTab");
+        }
+        
         function onDataLoaded(id, data)
         {
             if (id == QueryId.FetchLogs) {
@@ -52,6 +56,10 @@ TabbedPane
         delegate: Delegate {
             source: "AccountsPane.qml"
         }
+        
+        onTriggered: {
+            console.log("UserEvent: AccountTab");
+        }
     }
     
     Tab {
@@ -64,6 +72,10 @@ TabbedPane
         
         delegate: Delegate {
             source: "WhitelistPane.qml"
+        }
+        
+        onTriggered: {
+            console.log("UserEvent: WhitelistTab");
         }
     }
     

@@ -54,28 +54,16 @@ NavigationPane
                 enabled: listView.visible
                 
                 onTriggered: {
-                    clearPrompt.show();
-                }
-                
-                attachedObjects: [
-                    SystemDialog
-                    {
-                        id: clearPrompt
-                        title: qsTr("Confirmation") + Retranslate.onLanguageChanged
-                        body: qsTr("Are you sure you want to clear all the logs?") + Retranslate.onLanguageChanged
-                        confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
-                        cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
-                        
-                        onFinished: {
-                            if (result == SystemUiResult.ConfirmButtonSelection)
-                            {
-                                sql.query = "DELETE FROM logs";
-                                sql.load(QueryId.ClearLogs);
-                                persist.showToast( qsTr("Cleared all logs!"), "", "asset:///images/menu/ic_clear_logs.png" );
-                            }
-                        }
+                    console.log("UserEvent: ClearLogs");
+                    var ok = persist.showBlockingDialog( qsTr("Confirmation"), qsTr("Are you sure you want to clear all the logs?") );
+                    console.log("UserEvent: ClearLogsConfirm", ok);
+                    
+                    if (ok) {
+                        sql.query = "DELETE FROM logs";
+                        sql.load(QueryId.ClearLogs);
+                        persist.showToast( qsTr("Cleared all logs!"), "", "asset:///images/menu/ic_clear_logs.png" );
                     }
-                ]
+                }
             }
         ]
         

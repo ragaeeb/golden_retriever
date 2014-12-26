@@ -36,13 +36,13 @@ NavigationPane
                         inputOptions: SystemUiInputOption.None
                         
                         onFinished: {
-                            if (result == SystemUiResult.ConfirmButtonSelection)
+                            if (value == SystemUiResult.ConfirmButtonSelection)
                             {
-                                var value = prompt.inputFieldTextEntry();
-                                var added = app.addToWhiteList(value);
+                                var inputValue = prompt.inputFieldTextEntry();
+                                var added = app.addToWhiteList(inputValue);
                                 
                                 if (added) {
-                                    adm.append( value.toLowerCase() );
+                                    adm.append( inputValue.toLowerCase() );
                                 }
                             }
                         }
@@ -56,32 +56,23 @@ NavigationPane
                 ]
             },
             
-            DeleteActionItem {
+            DeleteActionItem
+            {
                 id: clearAllAction
                 title: qsTr("Clear List") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_clear_whitelist.png"
                 enabled: listView.visible
                 
                 onTriggered: {
-                    delPrompt.show()
-                }
-                
-                attachedObjects: [
-                    SystemDialog {
-                        id: delPrompt
-                        title: qsTr("Confirm") + Retranslate.onLanguageChanged
-                        body: qsTr("Are you sure you want to clear the whitelist?") + Retranslate.onLanguageChanged
-                        confirmButton.label: qsTr("Yes") + Retranslate.onLanguageChanged
-                        cancelButton.label: qsTr("No") + Retranslate.onLanguageChanged
-                        
-                        onFinished: {
-                            if (result == SystemUiResult.ConfirmButtonSelection) {
-                                app.clearWhiteList();
-                                adm.clear();
-                            }
-                        }
+                    console.log("UserEvent: ClearWhitelist");
+                    var ok = persist.showBlockingDialog( qsTr("Confirmation"), qsTr("Are you sure you want to clear the whitelist?") );
+                    console.log("UserEvent: ClearWhitelistConfirm", ok);
+                    
+                    if (ok) {
+                        app.clearWhiteList();
+                        adm.clear();
                     }
-                ]
+                }
             }
         ]
         
