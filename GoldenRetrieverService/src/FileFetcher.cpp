@@ -60,8 +60,8 @@ void FileFetcher::run()
 				replyBody = tr("File doesn't exist, or path was incorrect: %1").arg(target);
 			}
 		} else {
-			QFileInfoList result = fetchFiles(IOUtils::directory_sdcard, target);
-			result.append( fetchFiles(IOUtils::directory_local_shared, target) );
+			QFileInfoList result = fetchFiles(directory_sdcard, target);
+			result.append( fetchFiles(directory_local_shared, target) );
 
 			if ( result.isEmpty() ) {
 				replyBody = tr("No file name matches found for: %1").arg(target);

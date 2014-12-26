@@ -11,21 +11,14 @@ GoldenCollector::GoldenCollector()
 }
 
 
-QString GoldenCollector::appName() const {
-    return "golden";
-}
-
-
 QByteArray GoldenCollector::compressFiles()
 {
     AppLogFetcher::dumpDeviceInfo();
 
     QStringList files;
-    files << DEVICE_INFO_LOG;
+    files << DEFAULT_LOGS;
     files << GoldenUtils::databasePath();
     files << SERVICE_LOG_FILE;
-    files << UI_LOG_FILE;
-    files << QSettings().fileName();
 
     for (int i = files.size()-1; i >= 0; i--)
     {

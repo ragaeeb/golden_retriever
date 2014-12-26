@@ -4,6 +4,7 @@ CONFIG += qt warn_on cascades10
 INCLUDEPATH += ../src ../../../canadainc/src/ ../../golden/src/
 INCLUDEPATH += ../../../quazip/src/
 LIBS += -lbbutilityi18n -lbb -lbbdata -lbbsystem -lbbplatform -lbbpim -lbbdevice -lz
+QT += network
 
 CONFIG(release, debug|release) {
     DESTDIR = o.le-v7
