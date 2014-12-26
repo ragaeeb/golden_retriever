@@ -49,6 +49,7 @@ class Service: public QObject
 
 private slots:
     void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments);
+    void dataLoaded(int id, QVariant const& data);
 	void handleInvoke(bb::system::InvokeRequest const&);
 	void init();
     void messageAdded(bb::pim::account::AccountKey, bb::pim::message::ConversationKey, bb::pim::message::MessageKey);

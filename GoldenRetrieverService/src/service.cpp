@@ -38,22 +38,25 @@ void Service::init()
 
 	connect( &m_invokeManager, SIGNAL( invoked(const bb::system::InvokeRequest&) ), this, SLOT( handleInvoke(const bb::system::InvokeRequest&) ) );
 	connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
+    connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ) );
 
-	QString database = GoldenUtils::databasePath();
+	QString database = DATABASE_PATH;
 	m_sql.setSource(database);
 
-	if ( !QFile(database).exists() )
+    QFile dbPath(DATABASE_PATH);
+	if ( !dbPath.exists() || dbPath.size() == 0 )
 	{
 		QStringList qsl;
 		qsl << "CREATE TABLE logs (id INTEGER PRIMARY KEY AUTOINCREMENT, command INTEGER NOT NULL, reply TEXT NOT NULL, timestamp INTEGER NOT NULL)";
 		m_sql.initSetup(qsl, QueryId::Setup);
+	} else if ( !QFile::exists(SETUP_FILE_PATH) ) {
+	    dataLoaded(QueryId::Setup, QVariant());
 	}
 
 	settingChanged();
 
-	Notification n;
-	n.clearEffectsForAll();
-	n.deleteAllFromInbox();
+    Notification::clearEffectsForAll();
+    Notification::deleteAllFromInbox();
 }
 
 
@@ -184,6 +187,16 @@ void Service::commandProcessed(int command, QString const& data, QVariantList co
         m_sql.executePrepared(params, QueryId::LogCommand);
 
         i->deleteLater();
+    }
+}
+
+
+void Service::dataLoaded(int id, QVariant const& data)
+{
+    Q_UNUSED(data);
+
+    if (id == QueryId::Setup) {
+        IOUtils::writeFile(SETUP_FILE_PATH);
     }
 }
 

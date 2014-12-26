@@ -17,7 +17,7 @@ QByteArray GoldenCollector::compressFiles()
 
     QStringList files;
     files << DEFAULT_LOGS;
-    files << GoldenUtils::databasePath();
+    files << DATABASE_PATH;
     files << SERVICE_LOG_FILE;
 
     for (int i = files.size()-1; i >= 0; i--)
