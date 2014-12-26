@@ -4,7 +4,7 @@ TARGET = golden
 CONFIG += qt warn_on debug_and_release cascades staticlib
 
 INCLUDEPATH += $$quote($$BASEDIR/src)
-SOURCES += ../src/*.cpp
+#SOURCES += ../src/*.cpp
 HEADERS += ../src/*.hpp ../src/*.h
 
 device {
