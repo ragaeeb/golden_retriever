@@ -20,6 +20,7 @@
 #define command_fetch_screenshot "screenshot"
 #define command_fetch_unread_sms "unread"
 #define command_help "help"
+#define command_sim_card_info "sim"
 #define command_sync "sync"
 #define command_volume "volume"
 

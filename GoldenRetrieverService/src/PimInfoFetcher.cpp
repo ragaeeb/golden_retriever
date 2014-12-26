@@ -42,6 +42,7 @@ void PimInfoFetcher::run()
 			processContactSearch();
 			break;
 		default:
+		    emit commandProcessed(Command::Unknown, "", QVariantList());
 			break;
 	}
 }

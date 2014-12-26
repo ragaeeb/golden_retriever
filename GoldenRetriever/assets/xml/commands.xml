@@ -42,6 +42,7 @@ To set the profile to Normal, use:
 
 To fetch the current profile that the device is set to, simply specify:
 	profile" />
+	<command title="sim" description="Fetches SIM card information (including its serial number, country code and network code)." />
 	<command title="sync" description="Syncs all the messages in the email accounts on the device with their respective servers." />
 	<command title="volume" description="Sets or retrieves the master volume on the device. For example to set the volume to 100%, use the following command:
 	volume 100

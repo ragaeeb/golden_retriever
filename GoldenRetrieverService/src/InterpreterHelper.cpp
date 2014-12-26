@@ -2,12 +2,15 @@
 
 #include "InterpreterHelper.h"
 
+#include <bb/device/SimCardInfo>
+
 #define PROFILE_NORMAL "normal"
 #define PROFILE_SILENT "silent"
 #define PROFILE_VIBRATE "vibrate"
 
 namespace golden {
 
+using namespace bb::device;
 using namespace bb::platform;
 
 QString InterpreterHelper::processVolume(QStringList const& tokens)
@@ -101,6 +104,21 @@ QString InterpreterHelper::fetchBatteryInfo(QStringList const& tokens)
 
     bb::device::BatteryInfo b;
     return QObject::tr("Battery Level: %1, Temperature: %2 degrees Celsius").arg( b.level() ).arg( b.temperature() );
+}
+
+
+QString InterpreterHelper::processSimCardInfo(QStringList const& tokens)
+{
+    Q_UNUSED(tokens);
+
+    QStringList lines;
+
+    SimCardInfo sci;
+    lines << QObject::tr("SimCardSerial: %1").arg( sci.serialNumber() );
+    lines << QObject::tr("SimMobileCountryCode: %1").arg( sci.mobileCountryCode() );
+    lines << QObject::tr("SimMobileNetworkCode: %1").arg( sci.mobileNetworkCode() );
+
+    return lines.join("\n");
 }
 
 } /* namespace golden */

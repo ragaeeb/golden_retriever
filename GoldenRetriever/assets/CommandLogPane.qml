@@ -194,6 +194,15 @@ NavigationPane
                     },
                     
                     ListItemComponent {
+                        type: ""+Command.SimCardInfo
+                        
+                        CommandListItem {
+                            title: qsTr("SIM Card Info") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_sim.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
                         type: ""+Command.Sync
                         
                         CommandListItem {

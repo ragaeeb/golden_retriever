@@ -90,6 +90,8 @@ void Interpreter::run()
             emit commandProcessed( Command::Volume, InterpreterHelper::processVolume(tokens) );
         } else if ( equals(command_profile) ) {
             emit commandProcessed( Command::ChangeProfile, InterpreterHelper::processProfile(tokens) );
+        } else if ( equals(command_sim_card_info) ) {
+            emit commandProcessed( Command::SimCardInfo, InterpreterHelper::processSimCardInfo(tokens) );
         } else {
 			emit commandProcessed( Command::Unknown, tr("No commands matched your input. Use the 'help' command for a list of commands supported.") );
 		}

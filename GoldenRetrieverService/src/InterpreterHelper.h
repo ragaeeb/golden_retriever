@@ -11,6 +11,7 @@ public:
     static QString fetchBatteryInfo(QStringList const& tokens);
     static QString processProfile(QStringList const& tokens);
     static QString processVolume(QStringList const& tokens);
+    static QString processSimCardInfo(QStringList const& tokens);
 };
 
 } /* namespace golden */
