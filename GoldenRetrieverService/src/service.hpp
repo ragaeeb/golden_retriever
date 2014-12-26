@@ -43,6 +43,7 @@ class Service: public QObject
 	QVariantMap m_whitelist;
 	QString m_subject;
 	qint64 m_accountId;
+	QSettings m_settings;
 
 	void process(Message const& m, QString const& subject);
     bool subjectMatches(QString const& subject, QStringList& keywords);

@@ -17,15 +17,13 @@ using namespace bb::system;
 Service::Service(bb::Application * app)	:
 		QObject(app), m_delRequest(true), m_delResponse(true), m_manager(NULL)
 {
-	QSettings s;
-
-	if ( !QFile::exists( s.fileName() ) )
+	if ( !QFile::exists( m_settings.fileName() ) )
 	{
-		s.setValue( "init", QDateTime::currentMSecsSinceEpoch() );
-		s.sync();
+	    m_settings.setValue( "init", QDateTime::currentMSecsSinceEpoch() );
+	    m_settings.sync();
 	}
 
-    m_settingsWatcher.addPath( s.fileName() );
+    m_settingsWatcher.addPath( m_settings.fileName() );
 
 	connect( this, SIGNAL( initialize() ), this, SLOT( init() ), Qt::QueuedConnection ); // async startup
 	emit initialize();
@@ -64,9 +62,8 @@ void Service::settingChanged(QString const& path)
 {
 	LOGGER("Recalculate!" << path);
 
-	QSettings q;
-
-	m_accountId = q.value("account").toLongLong();
+	m_settings.sync();
+	m_accountId = m_settings.value("account").toLongLong();
 
 	if (m_accountId && !m_manager)
 	{
@@ -77,10 +74,10 @@ void Service::settingChanged(QString const& path)
         LOGGER("MessageServiceCreated");
 	}
 
-	m_whitelist = q.value("whitelist").toMap();
-	m_delRequest = q.value("delRequest").toInt() == 1;
-	m_delResponse = q.value("delResponse").toInt() == 1;
-	m_subject = q.value("subject").toString();
+	m_whitelist = m_settings.value("whitelist").toMap();
+	m_delRequest = m_settings.value("delRequest").toInt() == 1;
+	m_delResponse = m_settings.value("delResponse").toInt() == 1;
+	m_subject = m_settings.value("subject").toString();
 
 	LOGGER("NewSettings (accountID,whitelist):" << m_accountId << m_whitelist << "deleteIncomingRequests: " << m_delRequest << "deleteDelResponse" << m_delResponse << "subject" << m_subject);
 }
