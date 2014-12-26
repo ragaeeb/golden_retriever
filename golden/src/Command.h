@@ -37,7 +37,9 @@ public:
         UploadFile,
         Sync,
         Alarm,
-        Volume
+        Volume,
+        SimCardInfo,
+        NetworkInfo
     };
 };
 
