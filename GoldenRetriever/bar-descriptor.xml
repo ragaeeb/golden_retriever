@@ -163,17 +163,19 @@
 	<permission system="true">_sys_headless_nostop</permission>
 	<permission>access_led_control</permission>
     <permission>access_location_services</permission>
+    <permission>access_notify_settings_control</permission>
+    <permission>access_pimdomain_calllogs</permission>
     <permission>access_pimdomain_calendars</permission>
     <permission>access_pimdomain_contacts</permission>
     <permission>access_pimdomain_messages</permission>
-    <permission>access_notify_settings_control</permission>
     <permission>access_shared</permission>
     <permission>access_sms_mms</permission>
-    <permission>read_geolocation</permission>
-    <permission>record_audio</permission>
-    <permission>use_camera</permission>
-    <permission>post_notification</permission>
     <permission>read_device_identifying_information</permission>
+    <permission>read_geolocation</permission>
+    <permission>read_phonecall_details</permission>
+    <permission>record_audio</permission>
+    <permission>post_notification</permission>
+    <permission>use_camera</permission>
 	<env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib" />
 	<env var="CASCADES_THEME" value="dark"/>
 </qnx>

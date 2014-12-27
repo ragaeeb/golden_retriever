@@ -17,6 +17,7 @@ class PimInfoFetcher : public QObject, public QRunnable
 	void processContactSearch();
 	void processCalendarSearch();
 	void fetchUnreadMessages();
+	void fetchAllCalls();
 
 signals:
 	void commandProcessed(int command, QString const& replyBody, QVariantList const& attachments);

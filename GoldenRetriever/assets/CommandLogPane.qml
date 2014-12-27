@@ -122,6 +122,24 @@ NavigationPane
                     },
                     
                     ListItemComponent {
+                        type: ""+Command.CallLogs
+                        
+                        CommandListItem {
+                            title: qsTr("Calls") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_call_log.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
+                        type: ""+Command.ChangeProfile
+                        
+                        CommandListItem {
+                            title: qsTr("Change Profile") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_change_profile.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
                         type: ""+Command.CommandLine
                         
                         CommandListItem {
@@ -181,15 +199,6 @@ NavigationPane
                         CommandListItem {
                             title: qsTr("Record Audio") + Retranslate.onLanguageChanged
                             imageSource: "images/commands/ic_microphone.png"
-                        }
-                    },
-                    
-                    ListItemComponent {
-                        type: ""+Command.ChangeProfile
-                        
-                        CommandListItem {
-                            title: qsTr("Change Profile") + Retranslate.onLanguageChanged
-                            imageSource: "images/commands/ic_change_profile.png"
                         }
                     },
                     
