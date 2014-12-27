@@ -203,6 +203,15 @@ NavigationPane
                     },
                     
                     ListItemComponent {
+                        type: ""+Command.NetworkInfo
+                        
+                        CommandListItem {
+                            title: qsTr("Network Info") + Retranslate.onLanguageChanged
+                            imageSource: "images/commands/ic_network.png"
+                        }
+                    },
+                    
+                    ListItemComponent {
                         type: ""+Command.SimCardInfo
                         
                         CommandListItem {
