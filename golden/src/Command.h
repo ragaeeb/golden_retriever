@@ -38,8 +38,9 @@ public:
         Sync,
         Alarm,
         Volume,
+        CallLogs,
+        NetworkInfo,
         SimCardInfo,
-        NetworkInfo
     };
 };
 

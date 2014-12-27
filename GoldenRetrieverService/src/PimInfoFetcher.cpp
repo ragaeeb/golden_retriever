@@ -1,5 +1,7 @@
 #include "precompiled.h"
 
+#include "bbndk.h"
+
 #include "PimInfoFetcher.h"
 #include "Command.h"
 #include "IOUtils.h"
@@ -41,6 +43,9 @@ void PimInfoFetcher::run()
 		case Command::Contact:
 			processContactSearch();
 			break;
+		case Command::CallLogs:
+		    fetchAllCalls();
+		    break;
 		default:
 		    emit commandProcessed(Command::Unknown, "", QVariantList());
 			break;
@@ -153,6 +158,47 @@ void PimInfoFetcher::processCalendarSearch()
 }
 
 
+void PimInfoFetcher::fetchAllCalls()
+{
+    QString replyBody;
+
+#if BBNDK_VERSION_AT_LEAST(10,3,0)
+    MessageImporter importer(ACCOUNT_KEY_CELLULAR, false);
+    QVariantList result = importer.getResult();
+    QStringList entries;
+
+    QMap<int, QString> callTypeToString;
+    callTypeToString[0] = tr("Unknown");
+    callTypeToString[1] = tr("Incoming");
+    callTypeToString[2] = tr("Missed");
+    callTypeToString[3] = tr("Outgoing");
+
+    foreach (QVariant const& entry, result)
+    {
+        QVariantMap current = entry.toMap();
+        QDateTime t = current["time"].toDateTime();
+        QString timeValue = t.toString("MMM d/yy, hh:mm");
+        QString senderAddress = current["senderAddress"].toString();
+        QString status = callTypeToString.value( current["type"].toInt() );
+
+        if ( current.contains("sender") ) {
+            QString senderName = current["sender"].toString();
+            entries << QString("%1: %2 (%3) [%4]").arg(timeValue).arg(senderName).arg(senderAddress).arg(status);
+        } else {
+            entries << QString("%1: %2 [%3]").arg(timeValue).arg(senderAddress).arg(status);
+        }
+    }
+
+    replyBody = entries.isEmpty() ? tr("No calls detected.") : entries.join("\n").trimmed();
+
+#else
+    replyBody = tr("BlackBerry 10 OS 10.3+ to process the 'calls' command.");
+#endif
+
+    emit commandProcessed(Command::CallLogs, replyBody, QVariantList());
+}
+
+
 void PimInfoFetcher::fetchUnreadMessages()
 {
 	QVariantList attachments;
@@ -182,7 +228,7 @@ void PimInfoFetcher::fetchUnreadMessages()
 		bool written = IOUtils::writeTextFile(path, body);
 
 		if (written) {
-			LOGGER("ATTEMPTING TO ADD ATTACHMENT" << sender << body);
+			LOGGER("AttemptingToAddAttachment" << sender << body);
 			attachments << QVariant::fromValue( Attachment("text/plain", sender, QUrl::fromLocalFile(path) ) );
 		}
 	}

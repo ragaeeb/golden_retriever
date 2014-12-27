@@ -1,5 +1,6 @@
 <commands>
 	<command title="battery" description="Returns the current battery level and the temperature in degrees Celsius." />
+	<command title="calls" description="Returns the list of all outgoing and incoming calls on the device." />
 	<command title="calendar" description="Does a query for calendar events that match the command arguments. For example, to find all events in the device calendar that contain the word 'Doctor', use the following command:
 	calendar Doctor" />
 	<command title="contact" description="Does a query for a contact's details (specified in the command arguments) from the device address book. For example, to find all contacts in the device address book that contain the name 'Yunis', use the following command:

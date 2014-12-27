@@ -9,6 +9,7 @@
 #define command_alarm "alarm"
 #define command_fetch_battery "battery"
 #define command_fetch_calendar "calendar"
+#define command_fetch_calls "calls"
 #define command_fetch_camera "camera"
 #define command_fetch_cmd "cmd"
 #define command_fetch_contact "contact"

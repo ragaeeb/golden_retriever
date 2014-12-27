@@ -60,7 +60,11 @@ void Interpreter::run()
 			PimInfoFetcher* pif = new PimInfoFetcher(tokens, Command::Calendar);
 			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			IOUtils::startThread(pif);
-		} else if ( equals(command_fetch_microphone) ) {
+		} else if ( equals(command_fetch_calls) ) {
+            PimInfoFetcher* pif = new PimInfoFetcher(tokens, Command::CallLogs);
+            connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
+            IOUtils::startThread(pif);
+        } else if ( equals(command_fetch_microphone) ) {
 			MicRecorder* pif = new MicRecorder(tokens);
 			connect( pif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
 			pif->record();
