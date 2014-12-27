@@ -11,6 +11,7 @@
 #include "IOUtils.h"
 #include "Logger.h"
 #include "MicRecorder.h"
+#include "NetworkInfoFetcher.h"
 #include "PimInfoFetcher.h"
 #include "PimSyncer.h"
 #include "PimUtil.h"
@@ -86,6 +87,11 @@ void Interpreter::run()
 			if (!ok) {
 			    emit commandProcessed( Command::Location, tr("It seems like Location Services on the device is turned off!") );
 			}
+		} else if ( equals(command_fetch_network) ) {
+		    NetworkInfoFetcher* nif = new NetworkInfoFetcher(tokens, this);
+		    connect( nif, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
+
+		    nif->process();
 		} else if ( equals(command_alarm) ) {
 		    Alarm* ap = new Alarm(tokens);
 		    connect( ap, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ), this, SIGNAL( commandProcessed(int, QString const&, QVariantList const&) ) );
