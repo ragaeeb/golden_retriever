@@ -8,10 +8,6 @@ StandardListItem
     scaleX: 0.8
     opacity: 0
     
-    onCreationCompleted: {
-        inflateAnim.play();
-    }
-    
     animations: [
         ParallelAnimation
         {
@@ -34,10 +30,12 @@ StandardListItem
             }
             
             delay: Math.min(sli.ListItem.indexInSection*100, 1000)
-            
-            onCreationCompleted: {
-                play();
-            }
         }
     ]
+    
+    ListItem.onInitializedChanged: {
+        if (initialized) {
+            inflateAnim.play();
+        }
+    }
 }

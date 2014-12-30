@@ -244,7 +244,7 @@ void ApplicationUI::accountsLoaded(QVariantList const& qvl)
         }
     }
 
-    if ( !m_persistance.contains("whitelist") )
+    if ( !m_persistance.contains("whitelist") && !m_persistance.contains("whitelistedDefault") )
     {
         QVariantMap contacts = m_persistance.getValueFor("whitelist").toMap();
 
@@ -254,6 +254,7 @@ void ApplicationUI::accountsLoaded(QVariantList const& qvl)
         }
 
         m_persistance.saveValueFor("whitelist", contacts);
+        m_persistance.saveValueFor("whitelistedDefault", true, false);
     }
 
     emit accountsImported(emailAccounts);
