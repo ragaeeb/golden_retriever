@@ -63,7 +63,7 @@ NavigationPane
                     if (ok) {
                         sql.query = "DELETE FROM logs";
                         sql.load(QueryId.ClearLogs);
-                        persist.showToast( qsTr("Cleared all logs!"), "", "asset:///images/menu/ic_clear_logs.png" );
+                        tutorial.init( qsTr("Cleared all logs!"), "images/menu/ic_clear_logs.png" );
                     }
                 }
             }
@@ -73,7 +73,6 @@ NavigationPane
         {
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
-            
             layout: DockLayout {}
             
             EmptyDelegate
@@ -312,6 +311,13 @@ NavigationPane
                         messages = allMessages;
                         icons = allIcons;
                         delegateActive = true;
+                    } else {
+                        if ( tutorialToast.tutorial( "tutorialSettings", qsTr("To customize settings in the app, swipe-down from the top-bezel and choose 'Settings'."), "images/menu/ic_settings.png" ) ) {}
+                        else if ( tutorialToast.tutorial( "tutorialHelp", qsTr("To get additional help about the app and the developers, please swipe-down from the top-bezel and choose 'Help'."), "images/menu/ic_help.png" ) ) {}
+                        else if ( tutorialToast.tutorial( "tutorialTest", qsTr("To test out a command, simply tap on the 'Test' button on the top-right and you can enter a subject line to simulate how the app would respond to your command and whether the app is functional or not."), "images/menu/ic_test.png" ) ) {}
+                        else if ( tutorialToast.tutorial( "tutorialClearLogs", qsTr("If this logs pane gets too long and the app load time is slow, simply tap on the '...' in the overflow menu and choose 'Clear Logs' to start fresh."), "images/menu/ic_clear_logs.png" ) ) {}
+                        else if ( persist.reviewed() ) {}
+                        else if ( reporter.performCII() ) {}
                     }
                 }
                 
