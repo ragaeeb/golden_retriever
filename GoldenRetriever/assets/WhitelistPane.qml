@@ -45,6 +45,7 @@ NavigationPane
                                 
                                 if (added) {
                                     adm.append( inputValue.toLowerCase() );
+                                    tutorial.init( qsTr("'%1' added to the whitelist!").arg( inputValue.toLowerCase() ), "images/ic_add_email.png" );
                                 }
                             }
                         }
@@ -62,7 +63,7 @@ NavigationPane
             {
                 id: clearAllAction
                 title: qsTr("Clear List") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_clear_whitelist.png"
+                imageSource: "images/menu/ic_clear_whitelist.png"
                 enabled: listView.visible
                 
                 onTriggered: {
@@ -73,6 +74,8 @@ NavigationPane
                     if (ok) {
                         app.clearWhiteList();
                         adm.clear();
+                        
+                        tutorial.init( qsTr("Cleared all logs!"), "images/menu/ic_clear_whitelist.png" );
                     }
                 }
             }
@@ -107,14 +110,9 @@ NavigationPane
                 function performDelete(indexPath)
                 {
                     var email = adm.data(indexPath);
-                    adm.removeAt( indexPath[0] );
-                    var undoClicked = persist.showBlockingToast( qsTr("Removed %1 from white list!").arg(email), qsTr("Undo"), "asset:///images/ic_delete_contact.png" );
-                    
-                    if (undoClicked) {
-                        dataModel.insert(indexPath[0], email);
-                    } else {
-                        app.removeFromWhiteList(email);
-                    }
+                    app.removeFromWhiteList(email);
+
+                    tutorial.init( qsTr("Removed %1 from white list!").arg(email), "images/menu/ic_delete_contact.png" );
                 }
                 
                 listItemComponents: [
@@ -132,7 +130,7 @@ NavigationPane
                                     
                                     DeleteActionItem
                                     {
-                                        imageSource: "images/ic_delete_contact.png"
+                                        imageSource: "images/menu/ic_delete_contact.png"
                                         
                                         onTriggered: {
                                             rootItem.ListItem.view.performDelete(rootItem.ListItem.indexPath);
@@ -152,6 +150,6 @@ NavigationPane
     }
     
     onCreationCompleted: {
-        if ( !persist.tutorial("tutorialWhitelist", qsTr("As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address."), "asset:///images/ic_whitelist.png" ) ) {}
+        if ( tutorialToast.tutorial("tutorialWhitelist", qsTr("As a security measure you can specify exactly which email addresses are allowed to send commands to your device here. If you remove all entries, the app will process commands from any email address."), "images/ic_whitelist.png" ) ) {}
     }
 }

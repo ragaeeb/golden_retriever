@@ -132,6 +132,10 @@ void ApplicationUI::lazyInit()
     connect( &m_updateWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( databaseUpdated(QString const&) ) );
     connect( &m_permissions, SIGNAL( finished() ), this, SLOT( onPermissionsValidated() ) );
 
+    QmlDocument* qml = QmlDocument::create("asset:///NotificationToast.qml").parent(this);
+    QObject* toast = qml->createRootObject<QObject>();
+    QmlDocument::defaultDeclarativeEngine()->rootContext()->setContextProperty("tutorialToast", toast);
+
     emit lazyInitComplete();
 }
 

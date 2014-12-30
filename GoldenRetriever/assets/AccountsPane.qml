@@ -8,10 +8,6 @@ NavigationPane
         page.destroy();
     }
     
-    onCreationCompleted: {
-        persist.showToast( qsTr("Choose the mailbox to monitor for the commands.\n\nWhen you are away from your device, send the command messages to this mailbox so your device can process them."), qsTr("OK"), "asset:///images/ic_account.png" );
-    }
-    
     Page
     {
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
@@ -65,6 +61,12 @@ NavigationPane
                         listView.select([j],true);
                         break;
                     }
+                }
+                
+                if (results.length == 0) {
+                    tutorial.init( qsTr("No mailboxes detected. It seems like you may not have given the app the appropriate permissions..."), "images/ic_account.png" );
+                } else {
+                    tutorial.init( qsTr("Choose the mailbox to monitor for the commands.\n\nWhen you are away from your device, send the command messages to this mailbox so your device can process them."), "images/ic_account.png" );
                 }
             }
             

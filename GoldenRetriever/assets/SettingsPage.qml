@@ -77,10 +77,6 @@ Page
                         persist.saveValueFor("subject", subjectField.text);
                     }
                 }
-                
-                onCreationCompleted: {
-                    if ( !persist.tutorial("subjectTutorial", qsTr("The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is '%1', then in order to issue a battery command, the subject of the email must be '%1 battery'.").arg(app.subjectPrefix), "asset:///images/ic_help.png" ) ) {}
-                }
             }
             
             layout: StackLayout {
@@ -101,5 +97,12 @@ Page
             text: qsTr("Delete Outgoing Response") + Retranslate.onLanguageChanged
             key: "delResponse"
         }
+    }
+    
+    onCreationCompleted: {
+        if ( tutorialToast.tutorial("tutorialSubject", qsTr("The subject password is the keyword what the subject of all your emails must start with. So for example if your subject password is '%1', then in order to issue a battery command, the subject of the email must be '%1 battery'.").arg(app.subjectPrefix), "images/ic_help.png" ) ) {}
+        else if ( tutorialToast.tutorial("tutorialDelResponse", qsTr("Enable the 'Delete Outgoing Response' option to remove the app's reply from your sent box."), "images/ic_help.png" ) ) {}
+        else if ( tutorialToast.tutorial("tutorialDelRequest", qsTr("Enable the 'Delete Incoming Request' option to remove your incoming command from your inbox."), "images/ic_help.png" ) ) {}
+        else if ( tutorialToast.tutorial("tutorialChangePassword", qsTr("To change the password that you are prompted when you open the app, simply tap on the 'Change Password' option in the menu."), "images/ic_password.png" ) ) {}
     }
 }
