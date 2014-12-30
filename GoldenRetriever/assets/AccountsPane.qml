@@ -14,6 +14,8 @@ NavigationPane
     
     Page
     {
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        
         ListView
         {
             id: listView

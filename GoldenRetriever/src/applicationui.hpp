@@ -36,6 +36,7 @@ class ApplicationUI : public QObject
     QFileSystemWatcher m_updateWatcher;
     qint64 m_lastUpdate;
     AccountManager m_account;
+    QFutureWatcher<QVariantList> m_permissions;
 
     ApplicationUI(Application *app);
     void recheck(int &count, const char* slotName);
@@ -44,6 +45,7 @@ private slots:
     void accountsLoaded(QVariantList const& qvl);
 	void databaseUpdated(QString const& path);
     void lazyInit();
+    void onPermissionsValidated();
 	void settingChanged(QString const& key);
 
 Q_SIGNALS:
@@ -51,6 +53,7 @@ Q_SIGNALS:
     void accountSelectedChanged();
 	void initialize();
     void lazyInitComplete();
+    void permissionsReady(QVariantList const& allMessages, QVariantList const& allIcons);
     void readyChanged();
     void subjectPrefixChanged();
 	void whiteListCountChanged();
@@ -67,6 +70,7 @@ public:
     Q_INVOKABLE void loadAccounts();
     Q_INVOKABLE void removeFromWhiteList(QString request);
     Q_INVOKABLE void invokeService(QString const& command=QString());
+    Q_INVOKABLE void startValidation();
     bool ready() const;
     QString subjectPrefix();
     int whiteListCount();

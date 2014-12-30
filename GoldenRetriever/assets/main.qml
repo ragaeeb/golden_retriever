@@ -107,7 +107,7 @@ TabbedPane
     }
     
     onCreationCompleted: {
-        app.initialize.connect(authenticate);
+        app.lazyInitComplete.connect(authenticate);
     }
     
     attachedObjects: [

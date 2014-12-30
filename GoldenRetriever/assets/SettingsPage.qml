@@ -3,6 +3,8 @@ import bb.system 1.0
 
 Page
 {
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    
     titleBar: TitleBar {
         title: qsTr("Settings") + Retranslate.onLanguageChanged
     }

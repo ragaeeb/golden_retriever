@@ -12,6 +12,8 @@ NavigationPane
     
     Page
     {
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        
         titleBar: TitleBar
         {
             title: qsTr("Golden Retriever") + Retranslate.onLanguageChanged
@@ -71,6 +73,8 @@ NavigationPane
         {
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
+            
+            layout: DockLayout {}
             
             EmptyDelegate
             {
@@ -292,6 +296,29 @@ NavigationPane
                         id: definition
                     }
                 ]
+            }
+            
+            PermissionToast
+            {
+                id: tm
+                horizontalAlignment: HorizontalAlignment.Right
+                verticalAlignment: VerticalAlignment.Center
+                labelColor: Color.Black
+                
+                function onReady(allMessages, allIcons)
+                {
+                    if (allMessages.length > 0)
+                    {
+                        messages = allMessages;
+                        icons = allIcons;
+                        delegateActive = true;
+                    }
+                }
+                
+                onCreationCompleted: {
+                    app.permissionsReady.connect(onReady);
+                    app.startValidation();
+                }
             }
         }
     }
