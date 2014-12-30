@@ -92,7 +92,7 @@ void Service::messageAdded(bb::pim::account::AccountKey accountKey, bb::pim::mes
         Message m = m_manager->message(accountKey, mk);
         bool incoming = m.isInbound();
 
-        LOGGER("Whitelist" << m_whitelist << incoming << m.sender().address().toLower());
+        LOGGER("Whitelist" << incoming << m.sender().address().toLower());
 
         if ( incoming && ( m_whitelist.isEmpty() || m_whitelist.contains( m.sender().address().toLower() ) ) ) {
             process( m, m.subject() );

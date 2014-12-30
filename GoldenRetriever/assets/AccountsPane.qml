@@ -12,6 +12,10 @@ NavigationPane
     {
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         
+        titleBar: TitleBar {
+            title: qsTr("Account") + Retranslate.onLanguageChanged
+        }
+        
         ListView
         {
             id: listView
@@ -27,6 +31,37 @@ NavigationPane
                         imageSource: "images/ic_account.png"
                         title: ListItemData.name
                         description: ListItemData.address
+                        
+                        animations: [
+                            ParallelAnimation
+                            {
+                                id: inflateAnim
+                                
+                                ScaleTransition
+                                {
+                                    fromX: 0.8
+                                    toX: 1
+                                    fromY: 0.8
+                                    toY: 1
+                                    duration: 700
+                                    easingCurve: StockCurve.QuinticOut
+                                }
+                                
+                                FadeTransition {
+                                    fromOpacity: 0
+                                    toOpacity: 1
+                                    duration: 250
+                                }
+                                
+                                delay: Math.min(sli.ListItem.indexInSection*100, 750)
+                            }
+                        ]
+                        
+                        ListItem.onInitializedChanged: {
+                            if (initialized) {
+                                inflateAnim.play();
+                            }
+                        }
                     }
                 }
             ]
