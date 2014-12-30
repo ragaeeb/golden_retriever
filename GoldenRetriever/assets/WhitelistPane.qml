@@ -11,6 +11,8 @@ NavigationPane
     
     Page
     {
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        
         titleBar: TitleBar {
             title: qsTr("Whitelist") + Retranslate.onLanguageChanged
         }
@@ -20,7 +22,7 @@ NavigationPane
                 id: addEmailAction
                 title: qsTr("Add Email") + Retranslate.onLanguageChanged
                 imageSource: "images/ic_add_email.png"
-                ActionBar.placement: ActionBarPlacement.OnBar
+                ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                 
                 onTriggered: {
                     prompt.show();

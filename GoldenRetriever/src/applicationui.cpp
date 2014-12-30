@@ -15,12 +15,70 @@
 #include "QueryId.h"
 #include "PimUtil.h"
 
+#include <bb/device/HardwareInfo>
+
+using namespace bb::platform;
+using namespace canadainc;
+
+namespace {
+
+QVariantMap generate(QString const& message, QString const& icon)
+{
+    QVariantMap qvm;
+    qvm["message"] = message;
+    qvm["icon"] = icon;
+
+    return qvm;
+}
+
+QVariantList validatePermissions()
+{
+    QVariantList result;
+
+    if ( !Persistance::hasEmailSmsAccess() ) {
+        result << generate( QObject::tr("Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and emails to be able to reply to them with the appropriate information."), "images/toast/no_email_permission.png" );
+    }
+
+    if ( !Persistance::hasSharedFolderAccess() ) {
+        result << generate( QObject::tr("Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played and sent. If you leave this permission off, some features may not work properly."), "images/toast/no_shared_permission.png" );
+    }
+
+    if ( !Persistance::hasLocationAccess() ) {
+        result << generate( QObject::tr("Warning: It seems like the app does not have access to access your device's location. This permission is needed to detect your GPS location so that the 'location' command can be processed. If you keep this permission off, the app may not work properly."), "images/toast/no_location_permission.png" );
+    }
+
+    if ( !PimUtil::hasCalendarAccess() ) {
+        result << generate( QObject::tr("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly."), "images/toast/no_calendar_permission.png" );
+    }
+
+    if ( !PimUtil::hasContactsAccess() ) {
+        result << generate( QObject::tr("Warning: It seems like the app does not have access to your Contacts. This permission is needed for the app to respond to 'contact' commands if you want to ever fetch your address book information remotely. If you leave this permission off, some features may not work properly."), "images/toast/no_contacts_permission.png" );
+    }
+
+    NotificationGlobalSettings ngs;
+    NotificationMode::Type current = ngs.mode();
+
+    NotificationSettingsError::Type nse = ngs.setMode(NotificationMode::AlertsOff);
+
+    if (nse == NotificationSettingsError::InsufficientPermissions) {
+        result << generate( QObject::tr("Warning: It seems like the app does not have access to your device's notification profile settings. This permission is needed to process the 'profile' commands if you ever want to remotely set or fetch the device's notification profile. If you keep this permission off, the app may not work properly."), "images/toast/no_profile_permission.png" );
+    } else {
+        ngs.setMode(current);
+    }
+
+    if ( bb::device::HardwareInfo().pin().isEmpty() ) {
+        result << generate( QObject::tr("Warning: It seems like the app does not have access to your device's identifying information. This permission is needed to process the 'sim' command if you ever want to remotely access the SIM card information as well its network operator information. If you keep this permission off, the app may not work properly."), "images/toast/no_device_permission.png" );
+    }
+
+    return result;
+}
+
+}
+
 namespace golden {
 
 using namespace bb::cascades;
 using namespace bb::pim::message;
-using namespace bb::platform;
-using namespace canadainc;
 
 ApplicationUI::ApplicationUI(bb::cascades::Application* app) :
 		QObject(app), m_cover("Cover.qml"),
@@ -65,42 +123,6 @@ void ApplicationUI::lazyInit()
 
 	invokeService();
 
-	/*
-	bool ok = Persistance::hasEmailSmsAccess( tr("Warning: It seems like the app does not have access to your Email/SMS messages Folder. This permission is needed for the app to access the SMS and email services it needs to validate messages and reply to them with the content you desire. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.") );
-
-	if (ok)
-	{
-		ok = InvocationUtils::validateSharedFolderAccess( tr("Warning: It seems like the app does not have access to your Shared Folder. This permission is needed for the app to access the media files so they can be played and sent. If you leave this permission off, some features may not work properly.") );
-
-		if (ok)
-		{
-			ok = PimUtil::validateCalendarAccess( tr("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly.") );
-
-			if (ok)
-			{
-				ok = InvocationUtils::validateLocationAccess( tr("Warning: It seems like the app does not have access to access your device's location. This permission is needed to detect your GPS location so that the 'location' command can be processed. If you keep this permission off, the app may not work properly.\n\nPress OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission.") );
-
-				if (ok)
-				{
-				    NotificationGlobalSettings ngs;
-				    NotificationMode::Type current = ngs.mode();
-
-				    NotificationSettingsError::Type nse = ngs.setMode(NotificationMode::AlertsOff);
-                    LOGGER("NSE Permissions" << nse);
-
-				    if ( nse == NotificationSettingsError::InsufficientPermissions )
-				    {
-				        LOGGER("No permissions");
-				        m_persistance.showToast( tr("Warning: It seems like the app does not have access to your device's notification profile settings. This permission is needed to process the 'profile' commands if you ever want to remotely set or fetch the device's notification profile. If you keep this permission off, the app may not work properly.\n\nPress OK to launch the application permissions, then go to Golden Retriever and please enable the Location permission."), tr("OK"), "asset:///images/commands/ic_change_profile.png" );
-				        InvocationUtils::launchAppPermissionSettings();
-				    } else {
-				        ngs.setMode(current);
-				    }
-				}
-			}
-		}
-	} */
-
 	INIT_SETTING("subject", "golden");
 	INIT_SETTING("delRequest", 1);
 	INIT_SETTING("delResponse", 1);
@@ -108,6 +130,33 @@ void ApplicationUI::lazyInit()
     AppLogFetcher::create( &m_persistance, new GoldenCollector(), this );
     connect( &m_persistance, SIGNAL( settingChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
     connect( &m_updateWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( databaseUpdated(QString const&) ) );
+    connect( &m_permissions, SIGNAL( finished() ), this, SLOT( onPermissionsValidated() ) );
+
+    emit lazyInitComplete();
+}
+
+
+void ApplicationUI::startValidation()
+{
+    QFuture<QVariantList> future = QtConcurrent::run(validatePermissions);
+    m_permissions.setFuture(future);
+}
+
+
+void ApplicationUI::onPermissionsValidated()
+{
+    QVariantList result = m_permissions.result();
+    QVariantList messages;
+    QVariantList icons;
+
+    foreach (QVariant const& q, result)
+    {
+        QVariantMap current = q.toMap();
+        messages << current["message"].toString();
+        icons << current["icon"].toString();
+    }
+
+    emit permissionsReady(messages, icons);
 }
 
 

@@ -3,6 +3,8 @@ import bb 1.0
 
 Page
 {
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    
     titleBar: AboutTitleBar {
         id: atb
     }
