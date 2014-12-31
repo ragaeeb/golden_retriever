@@ -88,7 +88,7 @@ Page
                             id: button
                             text: ListItemData.title
                             preferredWidth: Infinity
-                            imageSource: bodyVisible ? "asset:///images/collapse.png" : "asset:///images/expand.png"
+                            imageSource: bodyVisible ? "images/collapse.png" : "images/expand.png"
 
                             onClicked: {
                                 bodyVisible = !bodyVisible;
