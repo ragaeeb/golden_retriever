@@ -14,6 +14,7 @@
 #include "LogMonitor.h"
 #include "QueryId.h"
 #include "PimUtil.h"
+#include "SharedConstants.h"
 
 #include <bb/device/HardwareInfo>
 
@@ -47,11 +48,11 @@ QVariantList validatePermissions()
         result << generate( QObject::tr("Warning: It seems like the app does not have access to access your device's location. This permission is needed to detect your GPS location so that the 'location' command can be processed. If you keep this permission off, the app may not work properly."), "images/toast/no_location_permission.png" );
     }
 
-    if ( !PimUtil::hasCalendarAccess() ) {
+    if (NO_CALENDAR_ACCESS) {
         result << generate( QObject::tr("Warning: It seems like the app does not have access to your Calendar. This permission is needed for the app to respond to 'calendar' commands if you want to ever check your device's local calendar remotely. If you leave this permission off, some features may not work properly."), "images/toast/no_calendar_permission.png" );
     }
 
-    if ( !PimUtil::hasContactsAccess() ) {
+    if (NO_CONTACTS_ACCESS) {
         result << generate( QObject::tr("Warning: It seems like the app does not have access to your Contacts. This permission is needed for the app to respond to 'contact' commands if you want to ever fetch your address book information remotely. If you leave this permission off, some features may not work properly."), "images/toast/no_contacts_permission.png" );
     }
 
